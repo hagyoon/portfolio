@@ -5,7 +5,7 @@ domain: Markets · Automation · Data
 year: "2024"
 status: selected
 role: Builder
-summary: Daily 10am SGT market briefing delivered via Telegram. BTC, energy complex, systematic trading signals, key economic events — curated macro intelligence, every morning, before the market opens.
+summary: A daily 10am SGT market briefing delivered via Telegram. BTC, energy complex, systematic trading signals, key economic events. Curated macro intelligence, every morning, before the market opens.
 stack:
   - Python
   - Telegram Bot API
@@ -19,8 +19,8 @@ Institutional investors get a morning note. Individual investors get noise. Macr
 
 ## Approach
 
-Structured daily briefing at 10am SGT: BTC price and funding rates, energy complex moves, key economic events for the day, systematic signals from the personal trading framework. The format is opinionated — not a data dump, but a curated briefing that surfaces what matters and buries what doesn't.
+A structured briefing lands at 10am SGT. BTC price and funding rates, energy complex moves, key economic events for the day, systematic signals from the personal trading framework. The format is opinionated. Not a data dump, but a curated briefing that surfaces what matters and buries what doesn't.
 
 ## Outcome
 
-A daily ritual that has compressed what previously took an hour of tab-switching into four minutes of signal. The discipline of writing the brief forces a daily reckoning with the market regime.
+A daily ritual that compresses what used to take an hour of tab-switching into four minutes of signal. Writing the brief forces a daily reckoning with the market regime, which turns out to be more useful than the brief itself.
