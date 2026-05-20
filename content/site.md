@@ -1,42 +1,42 @@
 ---
 name: Hakyun Ryu
-tagline: Watch geek. Self-taught AI builder.
-description: The personal index of Hakyun Ryu — data practitioner, independent AI builder, watch collector, and writer based in Singapore.
+tagline: Builder. Watch geek. Exploring the edge of AI systems and human workflows.
+description: The personal index of Hakyun Ryu — data analyst, independent AI builder, watch collector, and writer based in Singapore.
 location: Singapore · 北緯1°
 intro: Same instinct that got me into watches got me into AI — find the thing before it's mainstream, figure it out, bring others with you.
 about: |
-  Watch geek. Self-taught AI builder.
+  Builder. Watch geek. Exploring the edge of AI systems and human workflows.
 
-  Same instinct that got me into watches got me into AI: find the thing before it's mainstream, figure it out, bring others with you.
+  I've always been drawn to systems — financial markets, independent watchmaking, automation, knowledge networks, and how humans think and operate. The same curiosity that pulled me into investing and independent horology eventually led me deep into AI agents and autonomous workflows: find what matters before it's mainstream, figure it out myself, then bring others along.
 
-  I share what I build and deploy in real time, in my own life. No theory, just what actually worked and what didn't.
+  My projects sit at the intersection of technology, finance, and design — focused less on hype, more on creating systems that are useful day-to-day. Currently exploring how autonomous AI systems, personal knowledge graphs, and intelligent workflows can reshape the way individuals and small teams operate — especially live data pipelines for non-technical SME owners.
 
   My own builds:
 
-  · SecondBrain — local-only personal AI memory system using a knowledge graph over Telegram, WhatsApp, Gmail and Calendar.
+  · AI-powered second-brain architectures built with Obsidian, Claude Code, and autonomous agents.
 
-  · Clawdbot — deployed multi-agent assistant for daily briefings across trading, calendar and fitness.
+  · Multi-agent Telegram assistants for daily briefings across calendars, trading, and personal hobbies.
 
-  · Autonomous agent systems and live data pipelines for non-technical SME owners.
+  · Research and strategy work across financial markets, cybersecurity, AI infrastructure, and emerging technologies.
 
-  By day the work is quantitative — pricing, modelling, building systems that make sense of markets and the businesses behind them. Off the desk, the attention turns to independent horology, macro investing as a personal practice, philosophy, and design.
+  Beyond technical systems, I'm deeply into independent watchmaking, thoughtful product design, and how philosophy shapes the way we interact with the world. I care about building things that compound over time: knowledge, systems, relationships, and ideas.
 
-  If you've got a problem worth digging into, or you're experimenting with AI and want to start — let's connect.
+  If you're working on ambitious systems, unconventional ideas, or thoughtful products — let's connect.
 manifesto:
   - Find the thing before it's mainstream. Figure it out. Bring others with you.
-  - Ship in real time, in your own life. No theory — just what worked and what didn't.
+  - Build systems that are useful day-to-day, not impressive in a pitch deck.
   - The interesting questions live one floor below the dashboard.
   - Aesthetics is not decoration; it is a form of clear thinking.
 marquee:
   - Watches
   - AI Builder
-  - Data
-  - SecondBrain
-  - Capital
+  - Data Analytics
+  - Second Brain
+  - Capital Markets
   - Horology
   - Autonomous Agents
-  - Markets
+  - Philosophy
 contact:
-  email: hello@hakyun.com
+  email: ryuhakyun@gmail.com
   linkedin: https://www.linkedin.com/in/hakyunryu
 ---
