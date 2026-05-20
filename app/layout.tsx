@@ -1,10 +1,20 @@
+/* ──────────────────────────────────────────────────────────────────────────
+ * Root Layout — fonts, metadata, nav, footer, smooth scroll.
+ *
+ * Site-wide metadata comes from /content/about.ts.
+ * Font setup uses next/font (Cormorant Garamond for display, Inter for body).
+ *
+ * You normally don't need to touch this file. To change fonts, edit the
+ * `serif` / `sans` configurations below.
+ * ────────────────────────────────────────────────────────────────────────── */
+
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
-import { getSite } from "@/lib/content";
+import { about } from "@/content/about";
 
 const serif = Cormorant_Garamond({
   subsets: ["latin"],
@@ -20,21 +30,18 @@ const sans = Inter({
   display: "swap",
 });
 
-export async function generateMetadata(): Promise<Metadata> {
-  const site = await getSite();
-  return {
-    title: {
-      default: `${site.name} — ${site.tagline}`,
-      template: `%s — ${site.name}`,
-    },
-    description: site.description,
-    openGraph: {
-      title: `${site.name} — ${site.tagline}`,
-      description: site.description,
-      type: "website",
-    },
-  };
-}
+export const metadata: Metadata = {
+  title: {
+    default: `${about.name} — ${about.tagline}`,
+    template: `%s — ${about.name}`,
+  },
+  description: `The personal index of ${about.name}. Builder, data analyst, watch collector, and writer based in ${about.location}.`,
+  openGraph: {
+    title: `${about.name} — ${about.tagline}`,
+    description: about.tagline,
+    type: "website",
+  },
+};
 
 export default function RootLayout({
   children,

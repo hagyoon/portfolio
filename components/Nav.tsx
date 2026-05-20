@@ -1,22 +1,31 @@
+/* ──────────────────────────────────────────────────────────────────────────
+ * Nav — minimal sticky header.
+ *
+ * Links scroll to anchor sections on the homepage. Sections are identified
+ * by their `id` attribute in /app/page.tsx.
+ *
+ * To change link labels or order: edit the `links` array below.
+ * To change the logo style: edit the JSX inside the <Link href="/"> tag.
+ * ────────────────────────────────────────────────────────────────────────── */
+
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import clsx from "clsx";
 
+// Edit nav labels and anchor targets here.
 const links = [
-  { href: "/", label: "Index" },
-  { href: "/projects", label: "Projects" },
-  { href: "/interests", label: "Interests" },
-  { href: "/writing", label: "Writing" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "#about",         label: "About" },
+  { href: "#projects",      label: "Projects" },
+  { href: "#explorations",  label: "Exploring" },
+  { href: "#gallery",       label: "Gallery" },
+  { href: "#writing",       label: "Writing" },
+  { href: "#contact",       label: "Contact" },
 ];
 
 export default function Nav() {
-  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -26,10 +35,6 @@ export default function Nav() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
 
   return (
     <>
@@ -42,6 +47,7 @@ export default function Nav() {
         )}
       >
         <div className="container-edge flex items-center justify-between">
+          {/* ── Logo ─────────────────────────────────────────────────────── */}
           <Link
             href="/"
             className="font-serif text-lg tracking-tight"
@@ -52,27 +58,20 @@ export default function Nav() {
             <span>Hakyun Ryu</span>
           </Link>
 
+          {/* ── Desktop links ────────────────────────────────────────────── */}
           <nav className="hidden md:flex items-center gap-9">
-            {links.slice(1).map((l) => {
-              const active =
-                l.href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(l.href);
-              return (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className={clsx(
-                    "label hover:text-ink transition-colors duration-500",
-                    active ? "text-ink" : "text-stone-500"
-                  )}
-                >
-                  <span className="underline-grow">{l.label}</span>
-                </Link>
-              );
-            })}
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                className="label text-stone-500 hover:text-ink transition-colors duration-500"
+              >
+                <span className="underline-grow">{l.label}</span>
+              </a>
+            ))}
           </nav>
 
+          {/* ── Mobile hamburger ─────────────────────────────────────────── */}
           <button
             aria-label="Menu"
             onClick={() => setOpen((v) => !v)}
@@ -94,6 +93,7 @@ export default function Nav() {
         </div>
       </header>
 
+      {/* ── Mobile drawer ────────────────────────────────────────────────── */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -115,12 +115,13 @@ export default function Nav() {
                     ease: [0.22, 1, 0.36, 1],
                   }}
                 >
-                  <Link
+                  <a
                     href={l.href}
-                    className="font-serif text-5xl tracking-tight"
+                    onClick={() => setOpen(false)}
+                    className="font-serif text-5xl tracking-tight block"
                   >
                     {l.label}
-                  </Link>
+                  </a>
                 </motion.div>
               ))}
             </div>
