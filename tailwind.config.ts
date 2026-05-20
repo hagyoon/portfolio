@@ -9,23 +9,32 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        paper: "#f4f1ec",
-        ivory: "#ece8e1",
+        // Base — warm paper, more clay-tinted
+        paper: "#efe7d6",       // warmer sand-cream (was #f4f1ec)
+        ivory: "#e3d9c3",       // deeper warm beige (was #ece8e1)
+        bone: "#ebe2cf",        // card / panel surface
+        sand: "#d3c4a6",        // section dividers, secondary surfaces
+        // Text — richer warm black
+        ink: "#1e1a13",         // warmer than pure black (was #16140f)
+        // Stones — shifted toward clay-tan across the scale
         stone: {
-          50: "#efece6",
-          100: "#e3ddd3",
-          200: "#cfc7b9",
-          300: "#aaa094",
-          400: "#857c72",
-          500: "#615a52",
-          600: "#46413b",
-          700: "#33302b",
-          800: "#26231f",
-          900: "#1a1816",
+          50: "#ede4d2",
+          100: "#dccfb1",
+          200: "#c3b48f",
+          300: "#a89878",       // was #aaa094 — warmer
+          400: "#857562",       // was #857c72
+          500: "#665849",       // was #615a52 — warmer
+          600: "#4b3f33",       // was #46413b
+          700: "#352c23",       // was #33302b
+          800: "#251e17",       // was #26231f
+          900: "#19140e",       // was #1a1816
         },
-        ink: "#16140f",
-        sage: "#9aa291",
-        terracotta: "#b07a5b",
+        // Earth accents — used sparingly
+        terracotta: "#a85f3d",  // deeper, more pigmented (was #b07a5b)
+        clay: "#c4825c",        // softer ember
+        moss: "#75836a",        // muted olive-moss
+        ochre: "#b1864a",       // warm yellow-brown
+        sage: "#8b9582",        // quieter sage (was #9aa291)
       },
       fontFamily: {
         serif: ["var(--font-serif)", "Cormorant Garamond", "serif"],

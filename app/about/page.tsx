@@ -34,7 +34,7 @@ export default async function AboutPage() {
           <Reveal>
             <p className="font-serif text-3xl md:text-5xl leading-[1.1] tracking-tighter">
               {site.name}.
-              <em className="text-stone-500"> {site.tagline}.</em>
+              <em className="text-clay"> {site.tagline}.</em>
             </p>
           </Reveal>
           <Reveal delay={0.1}>

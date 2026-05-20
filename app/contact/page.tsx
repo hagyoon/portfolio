@@ -27,7 +27,7 @@ export default async function ContactPage() {
           <Reveal>
             <p className="font-serif text-3xl md:text-5xl leading-[1.15] tracking-tighter text-stone-600 max-w-3xl">
               For{" "}
-              <em className="text-ink">considered work</em>, quieter
+              <em className="text-clay">considered work</em>, quieter
               collaborations, and conversations that don&rsquo;t need to be
               urgent.
             </p>

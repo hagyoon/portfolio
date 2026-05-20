@@ -87,7 +87,7 @@ export default function SelectedProjects({ projects }: { projects: Project[] }) 
         <div className="col-span-12 md:col-span-9">
           <Reveal>
             <h2 className="display-2">
-              Work treated as <em className="text-stone-500">considered</em>{" "}
+              Work treated as <em className="text-clay">considered</em>{" "}
               <br className="hidden md:block" />
               objects, not deliverables.
             </h2>

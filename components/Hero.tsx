@@ -62,7 +62,7 @@ export default function Hero({
                   delay: 0.25,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="block overflow-hidden italic text-stone-500"
+                className="block overflow-hidden italic text-clay"
               >
                 <span className="block">{last}.</span>
               </motion.span>

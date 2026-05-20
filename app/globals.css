@@ -3,12 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --paper: #f4f1ec;
-  --ivory: #ece8e1;
-  --ink: #16140f;
-  --stone-300: #aaa094;
-  --stone-500: #615a52;
-  --stone-700: #33302b;
+  /* Base — warm paper */
+  --paper: #efe7d6;
+  --ivory: #e3d9c3;
+  --bone: #ebe2cf;
+  --sand: #d3c4a6;
+  --ink: #1e1a13;
+  /* Stones */
+  --stone-300: #a89878;
+  --stone-500: #665849;
+  --stone-700: #352c23;
+  /* Earth accents */
+  --terracotta: #a85f3d;
+  --clay: #c4825c;
+  --moss: #75836a;
+  --ochre: #b1864a;
 }
 
 html,
@@ -39,8 +48,8 @@ html.lenis body {
 }
 
 ::selection {
-  background: #16140f;
-  color: #f4f1ec;
+  background: var(--terracotta);
+  color: var(--paper);
 }
 
 @layer base {

@@ -87,7 +87,7 @@ export default async function HomePage() {
             <div className="col-span-12 md:col-span-9">
               <Reveal>
                 <h2 className="display-2">
-                  Interests carried <em className="text-stone-500">over</em>{" "}
+                  Interests carried <em className="text-clay">over</em>{" "}
                   from <br className="hidden md:block" />
                   rooms beyond the studio.
                 </h2>
@@ -141,7 +141,7 @@ export default async function HomePage() {
             <div className="col-span-12 md:col-span-9">
               <Reveal>
                 <h2 className="display-2">
-                  Thinking, in <em className="text-stone-500">long form</em>.
+                  Thinking, in <em className="text-clay">long form</em>.
                 </h2>
               </Reveal>
             </div>
@@ -190,7 +190,7 @@ export default async function HomePage() {
         <Reveal>
           <p className="label text-stone-500 mb-8">Contact</p>
           <h2 className="display-1 max-w-5xl">
-            Begin a <em className="text-stone-400">conversation</em>.
+            Begin a <em className="text-clay">conversation</em>.
           </h2>
           <p className="mt-10 max-w-xl text-stone-600 text-base md:text-lg leading-relaxed">
             For projects, considered collaborations, or quieter exchanges of
