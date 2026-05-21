@@ -2,7 +2,7 @@
 title: Second Brain
 client: Independent
 domain: AI · Knowledge · Infrastructure
-year: "2023"
+year: "2026"
 status: selected
 role: Architect
 summary: An LLM-maintained Obsidian knowledge system. Three layers (raw sources, synthesised wiki, context schema) designed to get more useful as it grows, not more unwieldy. This portfolio pulls content from it directly.

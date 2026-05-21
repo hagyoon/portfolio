@@ -29,10 +29,10 @@ export const projects: Project[] = [
   {
     slug: "openclaw",
     title: "OpenClaw",
-    year: "2024",
+    year: "2026",
     domain: "AI · Agents · Systems",
     summary: "A production multi-agent AI system running on a Berlin VPS. A manager agent coordinates specialist agents through Telegram. Different bots, different employees.",
-    image: "/images/projects/openclaw.jpg",   // Drop your image here
+    image: "/images/projects/openclaw.jpg",
     imageAspect: "landscape",
   },
 
@@ -40,7 +40,7 @@ export const projects: Project[] = [
   {
     slug: "watch-roll",
     title: "Watch-Roll",
-    year: "2024",
+    year: "2026",
     domain: "Product · Mobile · B2B",
     summary: "Swipe-based watch discovery with taste profiling and B2B dealer intelligence. Tinder mechanics applied to horological connoisseurship.",
     image: "/images/projects/watch-roll.jpg",
@@ -51,7 +51,7 @@ export const projects: Project[] = [
   {
     slug: "second-brain",
     title: "Second Brain",
-    year: "2023",
+    year: "2026",
     domain: "AI · Knowledge · Infrastructure",
     summary: "An LLM-maintained Obsidian knowledge system. Three layers (raw sources, synthesised wiki, context schema) designed to get more useful as it grows.",
     image: "/images/projects/second-brain.jpg",
@@ -62,7 +62,7 @@ export const projects: Project[] = [
   {
     slug: "finance-os",
     title: "Finance OS",
-    year: "2024",
+    year: "2026",
     domain: "Finance · Analytics · Personal",
     summary: "A personal financial dashboard with the rigour of a small company's FP&A function. Net worth, portfolio performance, scenario modelling, all in one place.",
     image: "/images/projects/finance-os.jpg",
@@ -73,22 +73,11 @@ export const projects: Project[] = [
   {
     slug: "macro-monitor",
     title: "Macro Monitor",
-    year: "2024",
+    year: "2026",
     domain: "Markets · Automation · Data",
     summary: "A daily 10am SGT market briefing delivered via Telegram. BTC, energy complex, systematic trading signals, key economic events. Curated, not a data dump.",
     image: "/images/projects/macro-monitor.jpg",
     imageAspect: "portrait",
-  },
-
-  // ── 06 ──────────────────────────────────────────────────────────────────
-  {
-    slug: "company-secretary-bot",
-    title: "Company Secretary Bot",
-    year: "2025",
-    domain: "AI · Legal · Singapore",
-    summary: "An AI compliance assistant for Singapore company secretarial work. Statutory deadlines, ACRA filings, AGM resolutions. Deployed as an OpenClaw skill.",
-    image: "/images/projects/company-secretary-bot.jpg",
-    imageAspect: "landscape",
   },
 
 ];

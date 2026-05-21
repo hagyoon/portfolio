@@ -2,7 +2,7 @@
 title: Finance OS
 client: Independent
 domain: Finance · Analytics · Personal
-year: "2024"
+year: "2026"
 status: selected
 role: Builder & Analyst
 summary: A personal financial dashboard built with the rigour of a small company's FP&A function. Net worth across asset classes, portfolio benchmarked against the right indices, cash flow at category level.
