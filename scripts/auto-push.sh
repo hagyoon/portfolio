@@ -1,40 +1,59 @@
 #!/bin/bash
 # ─────────────────────────────────────────────────────────────────────────────
-# auto-push.sh — watches /content/ for unsaved edits and pushes to GitHub.
-# Vercel deploys automatically on every push to main (~2 min to live).
+# auto-push.sh — auto-deploys edits to /content/ only.
 #
-# Run via cron every 5 minutes:
-#   */5 * * * * /Users/ryu/Desktop/portfolio/scripts/auto-push.sh
+# STRICT SCOPE: This script will ONLY ever touch files inside content/.
+# It will hard-abort if anything outside content/ is somehow staged.
+# No other files, folders, env vars, or sensitive data are ever committed.
 # ─────────────────────────────────────────────────────────────────────────────
 
 REPO="/Users/ryu/Desktop/portfolio"
+ALLOWED_DIR="content"        # ← ONLY this folder is ever touched
 LOG="$REPO/scripts/auto-push.log"
+TIMESTAMP=$(date '+%Y-%m-%d %H:%M')
 
 cd "$REPO" || exit 1
 
-# Only run on main — never auto-push from a feature branch
+# ── Guard 1: main branch only ─────────────────────────────────────────────
 BRANCH=$(git branch --show-current 2>/dev/null)
-[ "$BRANCH" = "main" ] || exit 0
+if [ "$BRANCH" != "main" ]; then
+  echo "[$TIMESTAMP] SKIP: not on main (on $BRANCH)" >> "$LOG"
+  exit 0
+fi
 
-# Check for any unstaged or untracked changes inside content/
-HAS_CHANGES=$(git diff --name-only content/ && git ls-files --others --exclude-standard content/)
-[ -n "$HAS_CHANGES" ] || exit 0
+# ── Guard 2: reset any staged files before we touch anything ─────────────
+# Ensures nothing accidentally pre-staged from outside content/ gets in
+git reset HEAD --quiet 2>/dev/null
 
-# Pull latest first so we don't create a conflict
+# ── Guard 3: check for actual changes inside content/ only ────────────────
+HAS_CHANGES=$(git diff --name-only "$ALLOWED_DIR/" && git ls-files --others --exclude-standard "$ALLOWED_DIR/")
+if [ -z "$HAS_CHANGES" ]; then
+  exit 0
+fi
+
+# ── Stage ONLY the content/ directory — nothing else ─────────────────────
+git add "$ALLOWED_DIR/"
+
+# ── Guard 4: verify every staged file is inside content/ — hard abort if not
+STAGED=$(git diff --cached --name-only)
+if [ -z "$STAGED" ]; then
+  exit 0
+fi
+
+OUTSIDE=$(echo "$STAGED" | grep -v "^$ALLOWED_DIR/")
+if [ -n "$OUTSIDE" ]; then
+  echo "[$TIMESTAMP] ABORTED: staged file(s) outside $ALLOWED_DIR/ detected — $OUTSIDE" >> "$LOG"
+  git reset HEAD --quiet   # unstage everything, touch nothing
+  exit 1
+fi
+
+# ── Pull latest to avoid conflicts ────────────────────────────────────────
 git pull origin main --rebase --quiet 2>>"$LOG"
 
-# Stage everything in content/
-git add content/
+# ── Commit and push ────────────────────────────────────────────────────────
+FILES=$(echo "$STAGED" | sed "s|$ALLOWED_DIR/||g" | tr '\n' '  ')
 
-# Bail if nothing actually staged (e.g. only whitespace diff)
-STAGED=$(git diff --cached --name-only)
-[ -n "$STAGED" ] || exit 0
-
-# Build a readable commit message
-FILES=$(echo "$STAGED" | sed 's|content/||g' | tr '\n' '  ')
-TIMESTAMP=$(date '+%Y-%m-%d %H:%M')
-
-git commit -m "auto: update content — $TIMESTAMP
+git commit -m "auto: content update — $TIMESTAMP
 
 Files: $FILES" --quiet
 
