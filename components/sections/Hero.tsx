@@ -1,7 +1,7 @@
 /* ──────────────────────────────────────────────────────────────────────────
  * Hero — first viewport.
  *
- * Pulls name, descriptor, location, credentials from /content/about.ts.
+ * Pulls name, descriptor, location from /content/about.ts.
  * The italic last-name treatment is hardcoded for typographic effect.
  * ────────────────────────────────────────────────────────────────────────── */
 
@@ -65,18 +65,14 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ── Bottom strip: credentials left, scroll cue right ─────────────── */}
+      {/* ── Bottom strip: scroll cue ─────────────────────────────────────── */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.9, delay: 0.9 }}
-        className="container-edge mt-10 flex items-end justify-between"
+        className="container-edge mt-10 flex items-end justify-end"
       >
-        <div className="label text-stone-500 flex items-center gap-3">
-          <span className="block h-px w-12 bg-stone-300" />
-          <span>{about.credentials}</span>
-        </div>
-        <div className="hidden md:flex items-center gap-3 label text-stone-500">
+        <div className="flex items-center gap-3 label text-stone-500">
           <span>Scroll</span>
           <span className="inline-block">↓</span>
         </div>
