@@ -60,9 +60,6 @@ export const about = {
     github: "https://github.com/hagyoon",
   },
 
-  // ── Credentials (small footer-style line in hero or about) ──────────────
-  credentials: "NTU Singapore  ·  Singapore Airlines  ·  Delugs",
-
 };
 
 export type About = typeof about;
