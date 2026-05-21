@@ -21,52 +21,6 @@ export type GalleryItem = {
   aspect: "portrait" | "landscape" | "square";
 };
 
-export const gallery: GalleryItem[] = [
-
-  // ── Sample slots. Replace `src` values with your own images. ────────────
-  // To hide an entry, comment it out or delete it.
-
-  {
-    src: "/images/watches/cartier-tank-must.jpg",
-    alt: "Cartier Tank Must Black Lacquer",
-    caption: "Cartier Tank Must, black lacquer",
-    size: "medium",
-    aspect: "portrait",
-  },
-  {
-    src: "/images/workspace/desk-overview.jpg",
-    alt: "Workspace overview",
-    caption: "The desk, late afternoon",
-    size: "large",
-    aspect: "landscape",
-  },
-  {
-    src: "/images/watches/baltic-aquascaphe.jpg",
-    alt: "Baltic Aquascaphe blue gilt",
-    caption: "Baltic Aquascaphe, blue gilt",
-    size: "small",
-    aspect: "square",
-  },
-  {
-    src: "/images/workspace/obsidian-graph.jpg",
-    alt: "Second brain graph view",
-    caption: "Second brain · graph view",
-    size: "medium",
-    aspect: "landscape",
-  },
-  {
-    src: "/images/watches/universal-geneve.jpg",
-    alt: "Universal Genève White Shadow",
-    caption: "Universal Genève, vintage",
-    size: "small",
-    aspect: "portrait",
-  },
-  {
-    src: "/images/workspace/terminal.jpg",
-    alt: "Terminal — OpenClaw running",
-    caption: "OpenClaw · running",
-    size: "medium",
-    aspect: "landscape",
-  },
-
-];
+// Empty — gallery section is hidden until the media reel is ready.
+// To restore: add GalleryItem entries here and the section reappears automatically.
+export const gallery: GalleryItem[] = [];
