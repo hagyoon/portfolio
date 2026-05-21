@@ -47,15 +47,15 @@ export default function Nav() {
         )}
       >
         <div className="container-edge flex items-center justify-between">
-          {/* ── Logo ─────────────────────────────────────────────────────── */}
-          <Link
-            href="/"
-            className="font-serif text-lg tracking-tight"
-            aria-label="Home"
-          >
-            <span className="italic">Index</span>
-            <span className="mx-2 text-stone-300">/</span>
-            <span>Hakyun Ryu</span>
+          {/* ── Logo — two-tone serif wordmark ──────────────────────────── */}
+          <Link href="/" aria-label="Home" className="group">
+            <span
+              className="font-serif tracking-tight select-none"
+              style={{ fontSize: "1.05rem", letterSpacing: "-0.02em" }}
+            >
+              <span className="italic text-clay transition-opacity duration-500 group-hover:opacity-70">H</span>
+              <span className="text-ink   transition-opacity duration-500 group-hover:opacity-70">Ryu</span>
+            </span>
           </Link>
 
           {/* ── Desktop links ────────────────────────────────────────────── */}
