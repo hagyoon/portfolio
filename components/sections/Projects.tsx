@@ -30,9 +30,9 @@ export default function Projects() {
         <div className="col-span-12 md:col-span-9">
           <Reveal>
             <h2 className="display-2">
-              Work treated as <em className="text-clay">considered</em>{" "}
+              Projects treated with <em className="text-clay">intention</em>,{" "}
               <br className="hidden md:block" />
-              objects, not deliverables.
+              with people and ideas I believe in.
             </h2>
           </Reveal>
         </div>

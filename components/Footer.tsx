@@ -18,10 +18,12 @@ export default function Footer() {
         {/* ── Closing statement ──────────────────────────────────────── */}
         <div className="md:col-span-5">
           <div className="font-serif text-4xl md:text-5xl tracking-tightest leading-[0.95]">
-            <span className="italic">Available for</span>{" "}
-            <span>considered work</span>
+            <span className="italic">If something resonates,</span>
             <br />
-            <span>and collaboration.</span>
+            <span>let's build something</span>
+            <br />
+            <span className="italic text-clay">meaningful</span>
+            <span> together.</span>
           </div>
           <Link
             href="#contact"
