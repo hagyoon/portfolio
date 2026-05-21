@@ -2,14 +2,14 @@
 name: Hakyun Ryu
 tagline: Builder. Watch geek. Exploring the edge of AI systems and human workflows.
 description: The personal index of Hakyun Ryu. Data analyst, independent AI builder, watch collector, and writer based in Singapore.
-location: Singapore · 北緯1°
+location: Singapore · °
 intro: Same instinct that got me into watches got me into AI. Find the thing before it's mainstream, figure it out, bring others with you.
 about: |
   Builder. Watch geek. Exploring the edge of AI systems and human workflows.
 
-  I've always been drawn to systems. Financial markets, independent watchmaking, automation, knowledge networks, the way humans think and operate. The same curiosity that pulled me into investing and independent horology eventually led me deep into AI agents and autonomous workflows. Find what matters before it's mainstream, figure it out myself, then bring others along.
+  I've always been drawn to systems. Financial markets, independent watchmaking, automation, knowledge networks: the way humans fundamentally think and operate. The same curiosity that pulled me into investing and independent horology eventually led me deep into AI agents and autonomous workflows. Find what matters before it's mainstream, figure it out myself, then bring others along.
 
-  My projects sit at the intersection of technology, finance, and design. Less hype, more about systems that are useful day to day. I'm currently exploring how autonomous AI agents, personal knowledge graphs, and intelligent workflows can reshape the way individuals and small teams operate. Especially live data pipelines for non-technical SME owners.
+  My projects sit at the intersection of technology, finance, and design. Systems that are useful day to day. I'm currently exploring how autonomous AI agents and intelligent workflows reshape the way individual builders and small teams operate, especially non-technical SME business owners. 
 
   My own builds:
 
@@ -28,15 +28,14 @@ manifesto:
   - The interesting questions live one floor below the dashboard.
   - Aesthetics isn't decoration. It's a form of clear thinking.
 marquee:
-  - Watches
   - AI Builder
-  - Data Analytics
   - Second Brain
-  - Capital Markets
+  - Finance
   - Horology
-  - Autonomous Agents
+  - Agentic Systems
   - Philosophy
 contact:
   email: ryuhakyun@gmail.com
+  telegram: @hagy00n
   linkedin: https://www.linkedin.com/in/hakyunryu
 ---
