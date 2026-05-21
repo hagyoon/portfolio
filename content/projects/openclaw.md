@@ -1,17 +1,18 @@
 ---
 title: OpenClaw
-client: Independent
+client: Independent Project
 domain: AI · Agents · Systems
-year: "2024"
+year: "2026"
 status: selected
 role: Architect & Builder
-summary: A production multi-agent AI system running on a Berlin VPS. A manager agent coordinates specialist agents through a Telegram interface. Different bots, different employees.
+summary: A production multi-agent AI system running on a VPS. A single agent coordinates multiple sub agents through a Telegram interface. Different bots, different employees.
 stack:
   - Claude API
-  - OpenAI API
+  - OpenAI Codex API
   - Python
   - Telegram Bot API
   - Contabo VPS
+  - Zo Computer (Experimental Stage)
 ---
 
 ## Premise
