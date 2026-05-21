@@ -23,6 +23,8 @@ The bot knows the Companies Act and the ACRA filing calendar. It tracks statutor
 
 Architecturally, it sits as one of several agents inside the OpenClaw multi-agent system. The manager agent routes incoming requests. The secretarial agent picks up Singapore compliance work and synthesises responses. The system runs on a Contabo VPS via systemd, with Telegram as the primary interface.
 
+The knowledge base was built from ACRA's published regulations, the Companies Act (Cap. 50), and a structured set of filing templates for the most common corporate actions. The bot does not file anything itself. It surfaces the right information, drafts the right documents, and tells you exactly what to submit and where.
+
 ## Outcome
 
 Compliance work for one small entity has gone from roughly four hours per quarter down to about twenty minutes of review. The next stage is opening this up as a service for founders and small business owners who currently retain corporate secretaries mostly for the calendar discipline, which is the part the bot does best.

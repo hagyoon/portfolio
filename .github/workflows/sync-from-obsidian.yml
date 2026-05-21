@@ -1,0 +1,66 @@
+name: Sync from Obsidian
+
+on:
+  # Run every hour at minute 7 (offset to avoid hitting GitHub at xx:00 with everyone else)
+  schedule:
+    - cron: '7 * * * *'
+  # Allow manual triggering from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout portfolio repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Clone obsidian vault (shallow)
+        run: |
+          git clone --depth=1 https://github.com/hagyoon/obsidian-secondbrain.git /tmp/obsidian-vault
+
+      - name: Check Portfolio/content exists in vault
+        id: check
+        run: |
+          if [ -d "/tmp/obsidian-vault/Portfolio/content" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "Found Portfolio/content/ in vault"
+            ls /tmp/obsidian-vault/Portfolio/content/
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "No Portfolio/content/ in vault — skipping sync"
+          fi
+
+      - name: Mirror content from vault into portfolio
+        if: steps.check.outputs.exists == 'true'
+        run: |
+          rsync -av --delete \
+            /tmp/obsidian-vault/Portfolio/content/ \
+            content/
+
+      - name: Detect changes
+        if: steps.check.outputs.exists == 'true'
+        id: diff
+        run: |
+          git config user.name "Obsidian Sync"
+          git config user.email "sync@hakyun.com"
+          git add content/
+          if git diff --staged --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No content changes — site is up to date"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Content changes detected:"
+            git diff --staged --stat
+          fi
+
+      - name: Commit and push
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git commit -m "sync: pull content from Obsidian vault"
+          git push

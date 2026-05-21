@@ -1,10 +1,34 @@
 # Portfolio — Hakyun Ryu
 
-A personal portfolio site built as an editorial object: minimal, architectural, Seoul-inflected. Stack is Next.js 15 + Tailwind + Framer Motion + Lenis smooth scrolling. Content lives in plain markdown files — no CMS to log into, no database, no deploy ceremony.
+A personal portfolio site built as an editorial object: minimal, architectural, Seoul-inflected. Stack is Next.js 15 + Tailwind + Framer Motion + Lenis smooth scrolling. Content lives in plain markdown files, sourced from the Obsidian second brain.
+
+## How content flows
+
+```
+Edit in Obsidian → Obsidian Git auto-pushes (60 min)
+       │
+       ▼
+hagyoon/obsidian-secondbrain @ main → Portfolio/content/
+       │
+       ▼
+GitHub Action on this repo polls hourly (.github/workflows/sync-from-obsidian.yml)
+       │
+       ▼
+Pulls Portfolio/content/ → content/
+       │
+       ▼
+Commits & pushes → Vercel auto-deploys
+```
+
+**Source of truth:** the `Portfolio/content/` folder inside the [obsidian-secondbrain](https://github.com/hagyoon/obsidian-secondbrain) repo.
+
+**Direct edits to this repo's `content/` folder will be overwritten** on the next sync cycle. Edit in Obsidian.
+
+To trigger a sync immediately, go to the [Actions tab](https://github.com/hagyoon/portfolio/actions) and run the *Sync from Obsidian* workflow manually.
 
 ## Editing content (no code required)
 
-All editable content lives under `content/`. Edit any file, save, and the change shows up after the next dev reload or deploy.
+All editable content lives under `content/` (canonical copy in `Portfolio/content/` in the Obsidian vault). Edit any file, save, and the change shows up after the next dev reload or deploy.
 
 ```
 content/
