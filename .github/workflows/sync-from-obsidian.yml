@@ -22,7 +22,7 @@ jobs:
 
       - name: Clone obsidian vault (shallow)
         run: |
-          git clone --depth=1 https://github.com/hagyoon/obsidian-secondbrain.git /tmp/obsidian-vault
+          git clone --depth=1 https://${{ secrets.OBSIDIAN_PAT }}@github.com/hagyoon/obsidian-secondbrain.git /tmp/obsidian-vault
 
       - name: Check Portfolio/content exists in vault
         id: check
