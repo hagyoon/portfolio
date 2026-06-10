@@ -5,7 +5,7 @@
  */
 
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter, IBM_Plex_Mono } from "next/font/google";
+import { Cormorant_Garamond, Inter, Courier_Prime } from "next/font/google";
 import "./globals.css";
 import { getSite } from "@/lib/content";
 
@@ -23,10 +23,10 @@ const sans = Inter({
   display: "swap",
 });
 
-const mono = IBM_Plex_Mono({
+const mono = Courier_Prime({
   subsets: ["latin"],
   variable: "--font-mono",
-  weight: ["400", "500"],
+  weight: ["400", "700"],
   display: "swap",
 });
 

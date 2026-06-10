@@ -174,7 +174,7 @@ export default function EntryEditor({
           </div>
           {preview !== null ? (
             <div
-              className="prose-editorial bg-white border border-ink/15 px-5 py-4 min-h-[20rem]"
+              className="prose-editorial bg-bone border border-ink/15 px-5 py-4 min-h-[20rem]"
               dangerouslySetInnerHTML={{ __html: preview }}
             />
           ) : (

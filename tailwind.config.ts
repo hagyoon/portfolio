@@ -9,38 +9,38 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Base — aged parchment over concrete, manuscript-meets-workshop
-        paper: "#e8e5dc",       // parchment
-        ivory: "#dfdcd1",       // worn vellum
-        bone: "#d8d4c7",        // card / panel surface
-        sand: "#c7c2b1",        // section dividers, secondary surfaces
-        // Text — near-black iron-gall ink
-        ink: "#161613",
-        // Stones — warm graphite scale
+        // Base — warm noir, old film over ember (after Hermes #170d02)
+        paper: "#15100a",       // noir ground
+        ivory: "#1d1610",       // raised panel
+        bone: "#251c12",        // card surface
+        sand: "#38301f",        // dividers, secondary surfaces
+        // Text — warm parchment, never pure white
+        ink: "#ede4d2",
+        // Stones — inverted warm ramp: same class = same hierarchy, now on dark
         stone: {
-          50: "#e9e6dd",
-          100: "#dad6ca",
-          200: "#bdb9ab",
-          300: "#9b9789",
-          400: "#7b776a",
-          500: "#5f5b50",
-          600: "#47443b",
-          700: "#34322b",
-          800: "#23211c",
-          900: "#15140f",
+          50: "#1a140c",
+          100: "#241c11",
+          200: "#3a3022",
+          300: "#5c5240",
+          400: "#7e7560",
+          500: "#a39a82",
+          600: "#c2b9a0",
+          700: "#d9d1bb",
+          800: "#e8e1ce",
+          900: "#f2ecdc",
         },
-        // Industrial / Hermes accents — patina, oxide, brass, steel
-        mist: "#76838a",        // steel grey-blue
-        blush: "#9a5e40",       // oxide rust
-        sage: "#5e7a64",        // verdigris green
-        lavender: "#6d6878",    // slate violet
-        butter: "#97793f",      // tarnished brass
-        forest: "#2f4636",      // deep Hermes green
+        // Noir sci-fi accents — amber phosphor leads, terminal green seconds
+        butter: "#ffac02",      // hermes amber
+        sage: "#5fb778",        // terminal green
+        blush: "#e06a4e",       // warning ember
+        mist: "#7d8fa3",        // steel
+        lavender: "#9a8fb8",    // violet static
+        forest: "#2f4636",      // kept for back-compat
         // Legacy accent names, re-tinted to match
-        terracotta: "#8a4f33",
-        clay: "#5e7a64",
-        moss: "#5e7a64",
-        ochre: "#97793f",
+        terracotta: "#d96a4a",
+        clay: "#ffac02",
+        moss: "#5fb778",
+        ochre: "#cf9b3e",
       },
       fontFamily: {
         serif: ["var(--font-serif)", "Cormorant Garamond", "serif"],
