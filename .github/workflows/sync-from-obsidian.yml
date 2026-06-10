@@ -1,7 +1,11 @@
 name: Sync from Obsidian
 
 on:
-  # Run every hour at minute 7 (offset to avoid hitting GitHub at xx:00 with everyone else)
+  # Fired by the obsidian-secondbrain repo the moment Portfolio/** changes
+  # (see notify-portfolio.yml over there) — this is the instant-publish path.
+  repository_dispatch:
+    types: [obsidian-sync]
+  # Hourly safety net in case a dispatch is ever missed
   schedule:
     - cron: '7 * * * *'
   # Allow manual triggering from the Actions tab

@@ -1,36 +1,35 @@
-/* ──────────────────────────────────────────────────────────────────────────
- * Projects — editorial grid of selected work.
- *
- * Reads from /content/projects.ts.
- * Each project has an image (optional) and links to /projects/<slug>
- * for the full case study (markdown file in /content/projects/<slug>.md).
- *
- * Layout: alternating asymmetric editorial blocks. Not uniform cards.
- * ────────────────────────────────────────────────────────────────────────── */
+"use client";
+
+/*
+ * Projects — alternating editorial rows. Covers parallax inside their frame
+ * and scale on hover; rows reveal with a soft clip as they enter.
+ */
 
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import { ParallaxInner } from "@/components/motion/Parallax";
 import SafeImage from "@/components/ui/SafeImage";
-import { projects } from "@/content/projects";
+import type { Project } from "@/lib/content";
 
-export default function Projects() {
+export default function Projects({ projects }: { projects: Project[] }) {
+  const selected = projects.filter((p) => p.status !== "archive");
+
   return (
-    <section id="projects" className="container-edge pt-32 md:pt-48">
-
-      {/* ── Section header ─────────────────────────────────────────────── */}
+    <section id="projects" className="container-edge pt-32 md:pt-44">
+      {/* Section header */}
       <div className="grid grid-cols-12 gap-6 mb-16 md:mb-24">
         <div className="col-span-12 md:col-span-3">
           <Reveal>
             <div className="label">Selected Work</div>
             <div className="mt-3 text-stone-500 text-sm">
-              ({String(projects.length).padStart(2, "0")})
+              ({String(selected.length).padStart(2, "0")})
             </div>
           </Reveal>
         </div>
         <div className="col-span-12 md:col-span-9">
           <Reveal>
             <h2 className="display-2">
-              Projects treated with <em className="text-clay">intention</em>,{" "}
+              Projects treated with <em className="text-blush">intention</em>,{" "}
               <br className="hidden md:block" />
               with people and ideas I believe in.
             </h2>
@@ -38,10 +37,10 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* ── Project list ───────────────────────────────────────────────── */}
+      {/* Project rows */}
       <div className="border-t border-ink/15">
-        {projects.map((project, index) => {
-          const flip = index % 2 === 1; // alternate the image side
+        {selected.map((project, index) => {
+          const flip = index % 2 === 1;
 
           return (
             <Reveal key={project.slug}>
@@ -50,49 +49,32 @@ export default function Projects() {
                 className="group block border-b border-ink/15 py-12 md:py-20"
               >
                 <div className="grid grid-cols-12 gap-6 md:gap-10 items-center">
-
-                  {/* ── Number ────────────────────────────────────────── */}
                   <div className="col-span-2 md:col-span-1 label text-stone-400 tabular-nums">
                     {String(index + 1).padStart(2, "0")}
                   </div>
 
-                  {/* ── Image (flips side based on index) ─────────────── */}
-                  {project.image && (
-                    <div
-                      className={`col-span-10 md:col-span-5 ${
-                        flip ? "md:order-3" : ""
-                      }`}
-                    >
-                      <div
-                        className={`relative w-full overflow-hidden ${
-                          project.imageAspect === "portrait"
-                            ? "aspect-[4/5]"
-                            : project.imageAspect === "square"
-                            ? "aspect-square"
-                            : "aspect-[16/10]"
-                        }`}
-                      >
-                        <SafeImage
-                          src={project.image}
-                          alt={project.title}
-                          sizes="(min-width: 768px) 40vw, 100vw"
-                          className="transition-transform duration-1000 ease-editorial group-hover:scale-[1.02]"
-                        />
+                  {project.cover && (
+                    <div className={`col-span-10 md:col-span-5 ${flip ? "md:order-3" : ""}`}>
+                      <div className="relative w-full overflow-hidden aspect-[16/10]">
+                        <div className="absolute inset-0 transition-transform duration-1000 ease-editorial group-hover:scale-[1.04]">
+                          <ParallaxInner amount={6}>
+                            <div className="relative w-full h-[112%]">
+                              <SafeImage
+                                src={project.cover}
+                                alt={project.title}
+                                sizes="(min-width: 768px) 40vw, 100vw"
+                              />
+                            </div>
+                          </ParallaxInner>
+                        </div>
                       </div>
                     </div>
                   )}
 
-                  {/* ── Text block ────────────────────────────────────── */}
-                  <div
-                    className={`col-span-12 md:col-span-6 ${
-                      project.image && !flip ? "" : ""
-                    }`}
-                  >
-                    <div className="flex items-baseline gap-4 mb-3">
-                      <h3 className="font-serif text-3xl md:text-5xl tracking-tightest leading-[1.05]">
-                        {project.title}
-                      </h3>
-                    </div>
+                  <div className="col-span-12 md:col-span-6">
+                    <h3 className="font-serif text-3xl md:text-5xl tracking-tightest leading-[1.05] mb-3">
+                      {project.title}
+                    </h3>
                     <div className="flex items-center gap-4 mb-5">
                       <span className="label text-stone-500">{project.domain}</span>
                       <span className="label text-stone-400 tabular-nums">{project.year}</span>

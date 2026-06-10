@@ -7,6 +7,11 @@ import remarkGfm from "remark-gfm";
 
 const ROOT = path.join(process.cwd(), "content");
 
+export type GalleryImage = {
+  src: string;
+  caption?: string;
+};
+
 export type Site = {
   name: string;
   tagline: string;
@@ -16,9 +21,12 @@ export type Site = {
   about: string;
   manifesto: string[];
   marquee: string[];
+  gallery: GalleryImage[];
   contact: {
     email?: string;
     linkedin?: string;
+    github?: string;
+    telegram?: string;
     x?: string;
   };
 };
@@ -82,6 +90,9 @@ export async function getSite(): Promise<Site> {
     about: data.about ?? "",
     manifesto: data.manifesto ?? [],
     marquee: data.marquee ?? [],
+    gallery: (data.gallery ?? []).map((g: any) =>
+      typeof g === "string" ? { src: g } : { src: g.src, caption: g.caption }
+    ),
     contact: data.contact ?? {},
   };
 }
