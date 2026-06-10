@@ -1,4 +1,4 @@
-import { scryptSync, timingSafeEqual, randomBytes } from "node:crypto";
+import { scryptSync, timingSafeEqual, randomBytes, createHash } from "node:crypto";
 import { SignJWT, jwtVerify } from "jose";
 
 export const SESSION_COOKIE = "portfolio_admin";
@@ -52,6 +52,31 @@ export async function verifySessionToken(token: string): Promise<boolean> {
   try {
     await jwtVerify(token, secret());
     return true;
+  } catch {
+    return false;
+  }
+}
+
+/* Password-reset tokens — short-lived, purpose-tagged, and bound to a
+ * fingerprint of the current hash so a link dies once the password changes. */
+
+function pwFingerprint(): string {
+  const hash = process.env.ADMIN_PASSWORD_HASH ?? "";
+  return createHash("sha256").update(hash).digest("hex").slice(0, 12);
+}
+
+export async function createResetToken(): Promise<string> {
+  return new SignJWT({ purpose: "pw-reset", pwv: pwFingerprint() })
+    .setProtectedHeader({ alg: "HS256" })
+    .setIssuedAt()
+    .setExpirationTime("15m")
+    .sign(secret());
+}
+
+export async function verifyResetToken(token: string): Promise<boolean> {
+  try {
+    const { payload } = await jwtVerify(token, secret());
+    return payload.purpose === "pw-reset" && payload.pwv === pwFingerprint();
   } catch {
     return false;
   }

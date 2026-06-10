@@ -23,8 +23,16 @@ export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   const isLoginPage = pathname === "/admin/login";
-  const isLoginApi = pathname === "/api/admin/auth/login";
-  if (isLoginApi) return NextResponse.next();
+  // Public auth surface: login, forgot-password, reset (pages + APIs)
+  if (
+    pathname === "/api/admin/auth/login" ||
+    pathname === "/api/admin/auth/forgot" ||
+    pathname === "/api/admin/auth/reset" ||
+    pathname === "/admin/forgot" ||
+    pathname === "/admin/reset"
+  ) {
+    return NextResponse.next();
+  }
 
   const authed = await hasValidSession(req);
 
