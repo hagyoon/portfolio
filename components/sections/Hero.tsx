@@ -40,7 +40,8 @@ export default function Hero({ site }: { site: Site }) {
   return (
     <div ref={ref} className="relative h-[170svh]">
       <section className="sticky top-0 h-[100svh] flex flex-col overflow-hidden">
-        {/* Drifting pastel wash */}
+        {/* Blueprint grid + drifting patina wash */}
+        <div aria-hidden className="absolute inset-0 pointer-events-none grid-lines" />
         <motion.div
           aria-hidden
           style={{ y: washY }}
@@ -50,14 +51,14 @@ export default function Hero({ site }: { site: Site }) {
             className="absolute -top-1/4 right-[-15%] w-[70vw] h-[70vw] rounded-full opacity-50"
             style={{
               background:
-                "radial-gradient(circle at center, rgba(169,191,204,0.5) 0%, transparent 65%)",
+                "radial-gradient(circle at center, rgba(118,131,138,0.28) 0%, transparent 65%)",
             }}
           />
           <div
             className="absolute bottom-[-30%] left-[-10%] w-[55vw] h-[55vw] rounded-full opacity-45"
             style={{
               background:
-                "radial-gradient(circle at center, rgba(217,185,174,0.45) 0%, transparent 65%)",
+                "radial-gradient(circle at center, rgba(47,70,54,0.22) 0%, transparent 65%)",
             }}
           />
         </motion.div>
@@ -67,7 +68,7 @@ export default function Hero({ site }: { site: Site }) {
           style={{ scale, opacity, y: lift }}
           className="flex-1 flex flex-col justify-center origin-center"
         >
-          <div className="container-edge">
+          <div className="container-edge w-full">
             <h1 aria-label={site.name} className="display-1 select-none">
               <span className="block overflow-hidden pb-[0.06em]">
                 <motion.span {...rise(0.15)} className="block text-ink">
@@ -75,7 +76,7 @@ export default function Hero({ site }: { site: Site }) {
                 </motion.span>
               </span>
               <span className="block overflow-hidden pb-[0.06em]">
-                <motion.span {...rise(0.28)} className="block italic text-stone-400">
+                <motion.span {...rise(0.28)} className="block italic text-sage">
                   {last}.
                 </motion.span>
               </span>
@@ -90,7 +91,7 @@ export default function Hero({ site }: { site: Site }) {
         </motion.div>
 
         {/* Bottom strip */}
-        <motion.div style={{ opacity }} className="container-edge pb-10 md:pb-12">
+        <motion.div style={{ opacity }} className="container-edge w-full pb-10 md:pb-12">
           <motion.div
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}

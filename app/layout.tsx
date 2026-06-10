@@ -5,7 +5,7 @@
  */
 
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Cormorant_Garamond, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { getSite } from "@/lib/content";
 
@@ -20,6 +20,13 @@ const sans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
   weight: ["300", "400", "500"],
+  display: "swap",
+});
+
+const mono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -45,7 +52,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${serif.variable} ${sans.variable}`}>
+    <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable}`}>
       <body className="bg-paper text-ink antialiased">{children}</body>
     </html>
   );

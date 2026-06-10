@@ -9,37 +9,38 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Base — neutral porcelain, cooler and quieter than the old clay
-        paper: "#f7f5f1",       // porcelain
-        ivory: "#efece6",       // fog
-        bone: "#e9e5dd",        // card / panel surface
-        sand: "#ddd8ce",        // section dividers, secondary surfaces
-        // Text — soft graphite, never pure black
-        ink: "#21201c",
-        // Stones — neutral warm-grey scale
+        // Base — aged parchment over concrete, manuscript-meets-workshop
+        paper: "#e8e5dc",       // parchment
+        ivory: "#dfdcd1",       // worn vellum
+        bone: "#d8d4c7",        // card / panel surface
+        sand: "#c7c2b1",        // section dividers, secondary surfaces
+        // Text — near-black iron-gall ink
+        ink: "#161613",
+        // Stones — warm graphite scale
         stone: {
-          50: "#f2f0eb",
-          100: "#e6e3db",
-          200: "#cfcbc0",
-          300: "#afaaa0",
-          400: "#8e897f",
-          500: "#6f6a61",
-          600: "#55514a",
-          700: "#3e3b35",
-          800: "#2b2925",
-          900: "#1b1a17",
+          50: "#e9e6dd",
+          100: "#dad6ca",
+          200: "#bdb9ab",
+          300: "#9b9789",
+          400: "#7b776a",
+          500: "#5f5b50",
+          600: "#47443b",
+          700: "#34322b",
+          800: "#23211c",
+          900: "#15140f",
         },
-        // Pastel accents — used sparingly, one per section at most
-        mist: "#a9bfcc",        // powder blue
-        blush: "#d9b9ae",       // muted rose
-        sage: "#a9b4a0",        // quiet green
-        lavender: "#b6afc6",    // grey violet
-        butter: "#decfa8",      // pale straw
-        // Legacy accent names, re-tinted pastel so older pages keep working
-        terracotta: "#b98a72",
-        clay: "#c4a18a",
-        moss: "#99a68f",
-        ochre: "#c2a878",
+        // Industrial / Hermes accents — patina, oxide, brass, steel
+        mist: "#76838a",        // steel grey-blue
+        blush: "#9a5e40",       // oxide rust
+        sage: "#5e7a64",        // verdigris green
+        lavender: "#6d6878",    // slate violet
+        butter: "#97793f",      // tarnished brass
+        forest: "#2f4636",      // deep Hermes green
+        // Legacy accent names, re-tinted to match
+        terracotta: "#8a4f33",
+        clay: "#5e7a64",
+        moss: "#5e7a64",
+        ochre: "#97793f",
       },
       fontFamily: {
         serif: ["var(--font-serif)", "Cormorant Garamond", "serif"],
