@@ -7,7 +7,13 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import Terminal from "@/components/motion/Terminal";
 import type { Site } from "@/lib/content";
+
+const TERMINAL_LINES = [
+  { cmd: "whoami", out: "builder · collector · systems thinker" },
+  { cmd: "ls ~/current", out: "agentic-systems  markets  horology  second-brain" },
+];
 
 const rise = (delay: number) => ({
   initial: { y: "110%" },
@@ -49,17 +55,19 @@ export default function Hero({ site }: { site: Site }) {
           className="absolute inset-0 pointer-events-none"
         >
           <div
-            className="absolute -top-1/4 right-[-15%] w-[70vw] h-[70vw] rounded-full opacity-60"
+            className="glow-drift absolute -top-1/4 right-[-15%] w-[70vw] h-[70vw] rounded-full opacity-60"
             style={{
               background:
                 "radial-gradient(circle at center, rgba(255,172,2,0.10) 0%, transparent 65%)",
             }}
           />
           <div
-            className="absolute bottom-[-30%] left-[-10%] w-[55vw] h-[55vw] rounded-full opacity-50"
+            className="glow-drift absolute bottom-[-30%] left-[-10%] w-[55vw] h-[55vw] rounded-full opacity-50"
             style={{
               background:
                 "radial-gradient(circle at center, rgba(95,183,120,0.08) 0%, transparent 65%)",
+              animationDelay: "-16s",
+              animationDirection: "alternate-reverse",
             }}
           />
         </motion.div>
@@ -92,6 +100,13 @@ export default function Hero({ site }: { site: Site }) {
             >
               {site.tagline}
             </motion.p>
+            <motion.div {...fade(1.0)}>
+              <Terminal
+                host="ryu@hkryu.space"
+                lines={TERMINAL_LINES}
+                className="mt-10 max-w-md"
+              />
+            </motion.div>
           </div>
         </motion.div>
 

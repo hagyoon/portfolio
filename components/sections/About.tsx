@@ -23,7 +23,7 @@ export default function About({ site }: { site: Site }) {
       <div className="grid grid-cols-12 gap-6 mb-20 md:mb-28">
         <div className="col-span-12 md:col-span-3">
           <Reveal>
-            <div className="label">Note 01</div>
+            <div className="eyebrow">Note 01</div>
             <div className="mt-3 text-stone-500 text-sm">Philosophy</div>
           </Reveal>
         </div>

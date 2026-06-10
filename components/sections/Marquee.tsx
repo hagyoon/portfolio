@@ -31,7 +31,7 @@ export default function Marquee({ words }: { words: string[] }) {
             {items.map((w, i) => (
               <span
                 key={`${copy}-${i}`}
-                className="font-serif italic text-3xl md:text-5xl text-stone-500 mx-6 md:mx-10"
+                className="font-condensed text-3xl md:text-5xl text-stone-500 mx-6 md:mx-10"
               >
                 {w}
                 <span className="not-italic text-stone-300 ml-12 md:ml-20">·</span>

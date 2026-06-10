@@ -24,7 +24,7 @@ export default function Gallery({ images }: { images: GalleryImage[] }) {
     <section id="gallery" className="pt-32 md:pt-44">
       <div className="container-edge mb-12 md:mb-16">
         <Reveal>
-          <div className="label">Note 03 — Atmosphere</div>
+          <div className="eyebrow">Note 03 — Atmosphere</div>
         </Reveal>
       </div>
 

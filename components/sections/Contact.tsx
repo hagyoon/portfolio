@@ -21,7 +21,7 @@ export default function Contact({ site }: { site: Site }) {
       <div className="wash-blush py-24 md:py-36">
         <div className="container-edge text-center">
           <Reveal>
-            <div className="label mb-8">Get in touch</div>
+            <div className="eyebrow mb-8">Get in touch</div>
           </Reveal>
           <Reveal delay={0.08}>
             <h2 className="display-2 max-w-4xl mx-auto">
