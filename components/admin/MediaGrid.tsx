@@ -106,7 +106,7 @@ export default function MediaGrid({
           }`}
         >
           {items.map((item) => (
-            <figure key={item.name} className="group border border-ink/10 bg-white">
+            <figure key={item.name} className="group border border-ink/10 bg-bone">
               <button
                 type="button"
                 onClick={() => (onSelect ? onSelect(item.path) : copy(item.path))}

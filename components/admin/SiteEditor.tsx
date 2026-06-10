@@ -133,7 +133,7 @@ export default function SiteEditor() {
           {gallery.map((g, i) => (
             <div key={i} className="flex gap-2 items-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={g.src} alt="" className="w-12 h-12 object-cover border border-ink/10 bg-white" />
+              <img src={g.src} alt="" className="w-12 h-12 object-cover border border-ink/10 bg-bone" />
               <input
                 className="admin-input font-mono text-[13px]"
                 value={g.src}
