@@ -4,27 +4,48 @@ A personal portfolio site built as an editorial object: minimal, architectural, 
 
 ## How content flows
 
+Two edit surfaces, one source of truth:
+
 ```
-Edit in Obsidian → Obsidian Git auto-pushes (60 min)
-       │
-       ▼
-hagyoon/obsidian-secondbrain @ main → Portfolio/content/
-       │
-       ▼
-GitHub Action on this repo polls hourly (.github/workflows/sync-from-obsidian.yml)
-       │
-       ▼
-Pulls Portfolio/content/ → content/
-       │
-       ▼
-Commits & pushes → Vercel auto-deploys
+A. Edit in Obsidian (Portfolio/content/)
+   Obsidian Git commits ~2 min after you stop typing, pushes to main
+        │
+        ▼
+   notify-portfolio.yml (vault repo) fires a repository_dispatch
+        │
+        ▼
+   sync-from-obsidian.yml (this repo) mirrors Portfolio/content/ → content/
+        │
+        ▼
+   Commit & push → Vercel deploys           (hourly poll remains as fallback)
+
+B. Edit in the browser at /admin (login required)
+   Every save commits via the GitHub API to BOTH repos at once:
+     1. vault  Portfolio/content/…   ← source of truth, flows back into Obsidian
+     2. this repo  content/…         ← triggers an immediate Vercel deploy
+   Media uploads commit to public/uploads/ in this repo only.
 ```
 
 **Source of truth:** the `Portfolio/content/` folder inside the [obsidian-secondbrain](https://github.com/hagyoon/obsidian-secondbrain) repo.
 
-**Direct edits to this repo's `content/` folder will be overwritten** on the next sync cycle. Edit in Obsidian.
+**Direct edits to this repo's `content/` folder will be overwritten** on the next sync cycle. Edit in Obsidian or at `/admin`.
 
-To trigger a sync immediately, go to the [Actions tab](https://github.com/hagyoon/portfolio/actions) and run the *Sync from Obsidian* workflow manually.
+To trigger a sync manually, go to the [Actions tab](https://github.com/hagyoon/portfolio/actions) and run the *Sync from Obsidian* workflow.
+
+## The admin studio (/admin)
+
+Log in at `/admin/login` with your personal credentials and you can edit every
+piece of content — site copy, projects, essays, interests, the gallery — and
+upload/delete images (jpg · png · webp · gif · svg · avif) without touching
+code. Saves publish immediately (commit → deploy, live in ~1–2 minutes).
+
+Setup (Vercel env vars, see `.env.local.example`):
+
+- `ADMIN_EMAIL` — your login email
+- `ADMIN_PASSWORD_HASH` — generate with `node scripts/hash-password.mjs "your-password"`
+- `SESSION_SECRET` — any long random string (`openssl rand -hex 32`)
+- `GITHUB_TOKEN` — PAT with contents read/write on both repos; without it the
+  CMS falls back to writing the local filesystem (dev mode)
 
 ## Editing content (no code required)
 

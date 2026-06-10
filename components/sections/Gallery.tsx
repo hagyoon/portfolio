@@ -1,83 +1,57 @@
-/* ──────────────────────────────────────────────────────────────────────────
- * Gallery — visual atmosphere section.
- *
- * Reads from /content/gallery.ts.
- * Asymmetric editorial grid. Size and aspect set per image.
- *
- * Drop images into /public/images/<category>/ then reference them in
- * /content/gallery.ts. If gallery array is empty, the section is hidden.
- * ────────────────────────────────────────────────────────────────────────── */
+"use client";
 
+/*
+ * Gallery — pinned horizontal glide. The section holds while the image
+ * strip slides across, scrubbed by scroll. Hidden when no images are set
+ * (manage the list in site.md `gallery:` or via /admin).
+ */
+
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Reveal from "@/components/Reveal";
 import SafeImage from "@/components/ui/SafeImage";
-import { gallery } from "@/content/gallery";
+import type { GalleryImage } from "@/lib/content";
 
-const sizeClasses: Record<string, string> = {
-  small: "col-span-12 sm:col-span-6 md:col-span-3",
-  medium: "col-span-12 md:col-span-6",
-  large: "col-span-12 md:col-span-9",
-};
+export default function Gallery({ images }: { images: GalleryImage[] }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+  const progress = useSpring(scrollYProgress, { stiffness: 90, damping: 26 });
+  const x = useTransform(progress, [0, 1], ["2%", "-62%"]);
 
-const aspectClasses: Record<string, string> = {
-  portrait: "aspect-[4/5]",
-  landscape: "aspect-[16/10]",
-  square: "aspect-square",
-};
-
-export default function Gallery() {
-  if (gallery.length === 0) return null;
+  if (!images.length) return null;
 
   return (
-    <section id="gallery" className="container-edge pt-32 md:pt-48">
-
-      {/* ── Section header ─────────────────────────────────────────────── */}
-      <div className="grid grid-cols-12 gap-6 mb-16 md:mb-24">
-        <div className="col-span-12 md:col-span-3">
-          <Reveal>
-            <div className="label">Atmosphere</div>
-            <div className="mt-3 text-stone-500 text-sm">
-              ({String(gallery.length).padStart(2, "0")})
-            </div>
-          </Reveal>
-        </div>
-        <div className="col-span-12 md:col-span-9">
-          <Reveal>
-            <h2 className="display-2 max-w-3xl">
-              The <em className="text-clay">objects</em>,
-              tools, and rooms<br className="hidden md:block" />
-              the work happens inside.
-            </h2>
-          </Reveal>
-        </div>
+    <section id="gallery" className="pt-32 md:pt-44">
+      <div className="container-edge mb-12 md:mb-16">
+        <Reveal>
+          <div className="label">Note 03 — Atmosphere</div>
+        </Reveal>
       </div>
 
-      {/* ── Asymmetric grid ────────────────────────────────────────────── */}
-      <div className="grid grid-cols-12 gap-4 md:gap-6">
-        {gallery.map((item, i) => (
-          <Reveal
-            key={i}
-            delay={(i % 3) * 0.05}
-            className={sizeClasses[item.size]}
-          >
-            <figure className="group">
-              <div
-                className={`relative w-full overflow-hidden ${aspectClasses[item.aspect]}`}
+      <div ref={ref} className="relative h-[280svh]">
+        <div className="sticky top-0 h-[100svh] flex items-center overflow-hidden wash-lavender">
+          <motion.div style={{ x }} className="flex gap-6 md:gap-10 pl-6 md:pl-16 will-change-transform">
+            {images.map((img, i) => (
+              <figure
+                key={`${img.src}-${i}`}
+                className={`relative shrink-0 overflow-hidden bg-ivory ${
+                  i % 3 === 1 ? "w-[58vw] md:w-[34vw] aspect-[4/5]" : "w-[70vw] md:w-[44vw] aspect-[16/11]"
+                }`}
               >
                 <SafeImage
-                  src={item.src}
-                  alt={item.alt}
-                  sizes="(min-width: 768px) 40vw, 100vw"
-                  className="transition-transform duration-1000 ease-editorial group-hover:scale-[1.03]"
+                  src={img.src}
+                  alt={img.caption ?? `Gallery image ${i + 1}`}
+                  sizes="(min-width: 768px) 44vw, 70vw"
                 />
-              </div>
-              {item.caption && (
-                <figcaption className="mt-3 label text-stone-500 italic font-serif text-sm tracking-normal normal-case">
-                  {item.caption}
-                </figcaption>
-              )}
-            </figure>
-          </Reveal>
-        ))}
+                {img.caption && (
+                  <figcaption className="absolute bottom-0 left-0 right-0 px-4 py-3 text-[11px] uppercase tracking-widest text-paper bg-ink/35 backdrop-blur-sm">
+                    {img.caption}
+                  </figcaption>
+                )}
+              </figure>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );

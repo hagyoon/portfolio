@@ -2,7 +2,7 @@
 name: Hakyun Ryu
 tagline: Builder. Watch geek. Exploring the edge of AI systems and human workflows.
 description: The personal index of Hakyun Ryu. Data analyst, independent AI builder, watch collector, and writer based in Singapore.
-location: Singapore · °
+location: Singapore · 1°N
 intro: Same instinct that got me into watches got me into AI. Find the thing before it's mainstream, figure it out, bring others with you.
 about: |
   Builder. Watch geek. Exploring the edge of AI systems and human workflows.
@@ -36,6 +36,6 @@ marquee:
   - Philosophy
 contact:
   email: ryuhakyun@gmail.com
-  telegram: @hagy00n
+  telegram: "@hagy00n"
   linkedin: https://www.linkedin.com/in/hakyunryu
 ---

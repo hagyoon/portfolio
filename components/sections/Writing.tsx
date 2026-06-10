@@ -1,78 +1,72 @@
-/* ──────────────────────────────────────────────────────────────────────────
- * Writing — list of recent essays (server component).
- *
- * Reads markdown files from /content/writing/ via the existing helpers
- * in /lib/content.ts. Shows the 5 most recent. Links to /writing/<slug>
- * for the full essay.
- *
- * To add new essays: create a new .md file in /content/writing/
- * with frontmatter (title, date, tag, excerpt). The list updates
- * automatically on next build.
- * ────────────────────────────────────────────────────────────────────────── */
+"use client";
+
+/*
+ * Writing — editorial index of essays. Rows reveal in sequence; hovering a
+ * row dims its siblings to spotlight the active line.
+ */
 
 import Link from "next/link";
+import { useState } from "react";
+import clsx from "clsx";
 import Reveal from "@/components/Reveal";
-import { getEssays } from "@/lib/content";
+import type { Essay } from "@/lib/content";
 
-export default async function Writing() {
-  const essays = await getEssays();
-  const recent = essays.slice(0, 5);
+export default function Writing({ essays }: { essays: Essay[] }) {
+  const [active, setActive] = useState<string | null>(null);
+  const list = essays.slice(0, 8);
 
-  if (recent.length === 0) return null;
+  if (!list.length) return null;
 
   return (
-    <section id="writing" className="container-edge pt-32 md:pt-48">
-
-      {/* ── Section header ─────────────────────────────────────────────── */}
-      <div className="grid grid-cols-12 gap-6 mb-16">
+    <section id="writing" className="container-edge pt-32 md:pt-44">
+      <div className="grid grid-cols-12 gap-6 mb-14 md:mb-20">
         <div className="col-span-12 md:col-span-3">
           <Reveal>
-            <div className="label">Writing</div>
-            <div className="mt-3 text-stone-500 text-sm">Long-form notes</div>
+            <div className="label">Note 04</div>
+            <div className="mt-3 text-stone-500 text-sm">Writing</div>
           </Reveal>
         </div>
         <div className="col-span-12 md:col-span-9">
           <Reveal>
-            <h2 className="display-2">
-              Thinking, in <em className="text-clay">long form</em>.
+            <h2 className="display-2 max-w-3xl">
+              Thinking, <em className="text-lavender">slowly</em>, in public.
             </h2>
           </Reveal>
         </div>
       </div>
 
-      {/* ── Essay list ─────────────────────────────────────────────────── */}
-      <ul>
-        {recent.map((e, i) => (
-          <li key={e.slug} className="border-t border-ink/15">
-            <Reveal>
-              <Link
-                href={`/writing/${e.slug}`}
-                className="grid grid-cols-12 gap-6 py-8 md:py-10 group items-baseline"
-              >
-                <div className="col-span-2 md:col-span-1 label text-stone-400 tabular-nums">
-                  {String(i + 1).padStart(2, "0")}
-                </div>
-                <div className="col-span-10 md:col-span-8">
-                  <div className="font-serif text-2xl md:text-4xl tracking-tighter group-hover:italic transition-all duration-500 ease-editorial">
-                    {e.title}
-                  </div>
-                  {e.excerpt && (
-                    <p className="mt-3 text-stone-600 text-sm md:text-base max-w-xl">
-                      {e.excerpt}
-                    </p>
-                  )}
-                </div>
-                <div className="hidden md:block md:col-span-2 label text-stone-500">
-                  {e.tag}
-                </div>
-                <div className="col-span-12 md:col-span-1 label text-stone-500 tabular-nums text-right">
-                  {e.date?.slice(0, 4)}
-                </div>
-              </Link>
-            </Reveal>
-          </li>
+      <div className="border-t border-ink/15" onPointerLeave={() => setActive(null)}>
+        {list.map((essay, i) => (
+          <Reveal key={essay.slug} delay={i * 0.04}>
+            <Link
+              href={`/writing/${essay.slug}`}
+              onPointerEnter={() => setActive(essay.slug)}
+              className={clsx(
+                "group grid grid-cols-12 gap-4 items-baseline border-b border-ink/15 py-7 md:py-9 transition-opacity duration-500",
+                active && active !== essay.slug ? "opacity-35" : "opacity-100"
+              )}
+            >
+              <div className="col-span-3 md:col-span-2 label text-stone-400 tabular-nums">
+                {essay.date}
+              </div>
+              <div className="col-span-9 md:col-span-7">
+                <h3 className="font-serif text-2xl md:text-4xl tracking-tight leading-tight">
+                  {essay.title}
+                </h3>
+                <p className="mt-2 text-stone-500 text-sm max-w-xl hidden md:block">
+                  {essay.excerpt}
+                </p>
+              </div>
+              <div className="hidden md:flex col-span-3 justify-end items-center gap-6">
+                {essay.tag && <span className="label text-stone-400">{essay.tag}</span>}
+                <span className="text-stone-400 transition-transform duration-500 ease-editorial group-hover:translate-x-1.5">
+                  →
+                </span>
+              </div>
+            </Link>
+          </Reveal>
         ))}
-      </ul>
+      </div>
     </section>
   );
 }

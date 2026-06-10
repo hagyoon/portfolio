@@ -1,58 +1,60 @@
-/* ──────────────────────────────────────────────────────────────────────────
- * Explorations — "Currently Exploring" section.
- *
- * Reads from /content/explorations.ts.
- * Layout: 2-column grid on desktop, single column on mobile.
- * No images, pure typography.
- * ────────────────────────────────────────────────────────────────────────── */
+"use client";
 
+/*
+ * Explorations — current threads of thinking, sourced from the interests
+ * markdown collection. Cards stagger in and lift on hover.
+ */
+
+import { motion } from "framer-motion";
 import Reveal from "@/components/Reveal";
-import { explorations } from "@/content/explorations";
+import type { Interest } from "@/lib/content";
 
-export default function Explorations() {
+const accents = ["bg-mist/30", "bg-blush/30", "bg-sage/30", "bg-lavender/30", "bg-butter/30"];
+
+export default function Explorations({ interests }: { interests: Interest[] }) {
+  if (!interests.length) return null;
+
   return (
-    <section id="explorations" className="container-edge pt-32 md:pt-48">
-
-      {/* ── Section header ─────────────────────────────────────────────── */}
-      <div className="grid grid-cols-12 gap-6 mb-16 md:mb-24">
-        <div className="col-span-12 md:col-span-3">
-          <Reveal>
-            <div className="label">Currently Exploring</div>
-            <div className="mt-3 text-stone-500 text-sm">Threads of thinking</div>
-          </Reveal>
+    <section id="explorations" className="pt-32 md:pt-44">
+      <div className="container-edge">
+        <div className="grid grid-cols-12 gap-6 mb-14 md:mb-20">
+          <div className="col-span-12 md:col-span-3">
+            <Reveal>
+              <div className="label">Note 02</div>
+              <div className="mt-3 text-stone-500 text-sm">Currently Exploring</div>
+            </Reveal>
+          </div>
+          <div className="col-span-12 md:col-span-9">
+            <Reveal>
+              <h2 className="display-2 max-w-3xl">
+                Open questions, <em className="text-sage">active</em> threads.
+              </h2>
+            </Reveal>
+          </div>
         </div>
-        <div className="col-span-12 md:col-span-9">
-          <Reveal>
-            <h2 className="display-2">
-              Questions I&rsquo;m{" "}
-              <em className="text-clay">turning over</em>,
-              <br className="hidden md:block" />
-              not yet answers.
-            </h2>
-          </Reveal>
-        </div>
-      </div>
 
-      {/* ── Grid of explorations ───────────────────────────────────────── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12 md:gap-y-20">
-        {explorations.map((item, i) => (
-          <Reveal key={item.title} delay={(i % 2) * 0.08}>
-            <article className="border-t border-ink/15 pt-6">
-              <div className="flex items-baseline justify-between mb-4">
-                <span className="label text-stone-400 tabular-nums">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-ink/10 border border-ink/10">
+          {interests.map((item, i) => (
+            <Reveal key={item.slug} delay={(i % 3) * 0.08} className="bg-paper">
+              <motion.div
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="h-full p-8 md:p-10 group cursor-default"
+              >
+                <div
+                  className={`w-8 h-8 rounded-full mb-8 transition-transform duration-700 ease-editorial group-hover:scale-125 ${
+                    accents[i % accents.length]
+                  }`}
+                />
+                <div className="label text-stone-400 mb-3 tabular-nums">
                   {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="label text-stone-400">In progress</span>
-              </div>
-              <h3 className="font-serif text-2xl md:text-3xl tracking-tighter mb-4 leading-[1.15]">
-                {item.title}
-              </h3>
-              <p className="text-stone-600 text-sm md:text-base leading-relaxed max-w-md">
-                {item.description}
-              </p>
-            </article>
-          </Reveal>
-        ))}
+                </div>
+                <h3 className="font-serif text-2xl tracking-tight mb-3">{item.title}</h3>
+                <p className="text-stone-600 text-sm leading-relaxed">{item.caption}</p>
+              </motion.div>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );

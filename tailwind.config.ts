@@ -9,32 +9,37 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Base — warm paper, more clay-tinted
-        paper: "#efe7d6",       // warmer sand-cream (was #f4f1ec)
-        ivory: "#e3d9c3",       // deeper warm beige (was #ece8e1)
-        bone: "#ebe2cf",        // card / panel surface
-        sand: "#d3c4a6",        // section dividers, secondary surfaces
-        // Text — richer warm black
-        ink: "#1e1a13",         // warmer than pure black (was #16140f)
-        // Stones — shifted toward clay-tan across the scale
+        // Base — neutral porcelain, cooler and quieter than the old clay
+        paper: "#f7f5f1",       // porcelain
+        ivory: "#efece6",       // fog
+        bone: "#e9e5dd",        // card / panel surface
+        sand: "#ddd8ce",        // section dividers, secondary surfaces
+        // Text — soft graphite, never pure black
+        ink: "#21201c",
+        // Stones — neutral warm-grey scale
         stone: {
-          50: "#ede4d2",
-          100: "#dccfb1",
-          200: "#c3b48f",
-          300: "#a89878",       // was #aaa094 — warmer
-          400: "#857562",       // was #857c72
-          500: "#665849",       // was #615a52 — warmer
-          600: "#4b3f33",       // was #46413b
-          700: "#352c23",       // was #33302b
-          800: "#251e17",       // was #26231f
-          900: "#19140e",       // was #1a1816
+          50: "#f2f0eb",
+          100: "#e6e3db",
+          200: "#cfcbc0",
+          300: "#afaaa0",
+          400: "#8e897f",
+          500: "#6f6a61",
+          600: "#55514a",
+          700: "#3e3b35",
+          800: "#2b2925",
+          900: "#1b1a17",
         },
-        // Earth accents — used sparingly
-        terracotta: "#a85f3d",  // deeper, more pigmented (was #b07a5b)
-        clay: "#c4825c",        // softer ember
-        moss: "#75836a",        // muted olive-moss
-        ochre: "#b1864a",       // warm yellow-brown
-        sage: "#8b9582",        // quieter sage (was #9aa291)
+        // Pastel accents — used sparingly, one per section at most
+        mist: "#a9bfcc",        // powder blue
+        blush: "#d9b9ae",       // muted rose
+        sage: "#a9b4a0",        // quiet green
+        lavender: "#b6afc6",    // grey violet
+        butter: "#decfa8",      // pale straw
+        // Legacy accent names, re-tinted pastel so older pages keep working
+        terracotta: "#b98a72",
+        clay: "#c4a18a",
+        moss: "#99a68f",
+        ochre: "#c2a878",
       },
       fontFamily: {
         serif: ["var(--font-serif)", "Cormorant Garamond", "serif"],

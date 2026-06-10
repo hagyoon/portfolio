@@ -1,37 +1,61 @@
-/* ──────────────────────────────────────────────────────────────────────────
- * Marquee — sliding ticker strip of italic phrases.
- *
- * Edit the phrases in /content/about.ts → marquee array.
- * Edit speed by changing the `duration` prop here (lower = faster).
- * ────────────────────────────────────────────────────────────────────────── */
-
 "use client";
 
-import { motion } from "framer-motion";
-import { about } from "@/content/about";
+/*
+ * Marquee — velocity-reactive ticker. Scroll speed feeds the drift, so the
+ * band accelerates with the page and settles when you stop.
+ */
 
-export default function Marquee() {
-  const items = [...about.marquee, ...about.marquee]; // duplicate for seamless loop
+import { useRef } from "react";
+import {
+  motion,
+  useAnimationFrame,
+  useMotionValue,
+  useScroll,
+  useSpring,
+  useTransform,
+  useVelocity,
+} from "framer-motion";
+
+export default function Marquee({ words }: { words: string[] }) {
+  const baseX = useMotionValue(0);
+  const { scrollY } = useScroll();
+  const velocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(velocity, { damping: 50, stiffness: 380 });
+  const factor = useTransform(smoothVelocity, [-2500, 0, 2500], [-4, 1, 4], {
+    clamp: false,
+  });
+  const direction = useRef(1);
+
+  useAnimationFrame((_, delta) => {
+    const f = factor.get();
+    if (f < 0) direction.current = -1;
+    else if (f > 0) direction.current = 1;
+    const move = direction.current * 2.4 * Math.abs(f) * (delta / 100);
+    let next = baseX.get() - move;
+    // one list-width = 25% of the strip (it renders 4 copies)
+    if (next <= -25) next += 25;
+    if (next > 0) next -= 25;
+    baseX.set(next);
+  });
+
+  const x = useTransform(baseX, (v) => `${v}%`);
+  const items = words.length ? words : ["Portfolio"];
 
   return (
-    <section className="border-y border-ink/10 py-6 md:py-7 overflow-hidden">
-      <motion.div
-        className="flex gap-16 whitespace-nowrap will-change-transform"
-        animate={{ x: ["0%", "-50%"] }}
-        transition={{
-          duration: 48,
-          ease: "linear",
-          repeat: Infinity,
-        }}
-      >
-        {items.map((word, i) => (
-          <span
-            key={i}
-            className="font-serif italic text-2xl md:text-3xl text-stone-500 tracking-tight"
-          >
-            {word}
-            <span className="mx-10 text-stone-300">◦</span>
-          </span>
+    <section aria-hidden className="py-10 md:py-14 border-y border-ink/10 overflow-hidden wash-mist">
+      <motion.div style={{ x }} className="flex whitespace-nowrap will-change-transform">
+        {[0, 1, 2, 3].map((copy) => (
+          <div key={copy} className="flex shrink-0">
+            {items.map((w, i) => (
+              <span
+                key={`${copy}-${i}`}
+                className="font-serif italic text-3xl md:text-5xl text-stone-500 mx-6 md:mx-10"
+              >
+                {w}
+                <span className="not-italic text-stone-300 ml-12 md:ml-20">·</span>
+              </span>
+            ))}
+          </div>
         ))}
       </motion.div>
     </section>

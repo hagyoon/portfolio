@@ -1,24 +1,13 @@
-/* ──────────────────────────────────────────────────────────────────────────
- * Hero — editorial opener with reserved media zone.
- *
- * Name sits top-left as a small byline identifier.
- * The large empty field below is reserved for scrolling images / video —
- * drop a MediaReel component here when ready.
- * Bottom strip: location left · disciplines centre · scroll right.
- *
- * Pulls name, location from /content/about.ts.
- * ────────────────────────────────────────────────────────────────────────── */
-
 "use client";
 
-import { motion } from "framer-motion";
-import { about } from "@/content/about";
+/*
+ * Hero — pinned opener. The viewport holds while the name scales down and
+ * lifts away, Apple-product-page style. A slow pastel wash drifts behind.
+ */
 
-const fade = (delay: number) => ({
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  transition: { duration: 1.1, delay, ease: "easeOut" },
-});
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import type { Site } from "@/lib/content";
 
 const rise = (delay: number) => ({
   initial: { y: "110%" },
@@ -26,72 +15,108 @@ const rise = (delay: number) => ({
   transition: { duration: 1.4, delay, ease: [0.16, 1, 0.3, 1] as const },
 });
 
-export default function Hero() {
+const fade = (delay: number) => ({
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { duration: 1.1, delay, ease: "easeOut" as const },
+});
+
+export default function Hero({ site }: { site: Site }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const progress = useSpring(scrollYProgress, { stiffness: 90, damping: 24 });
+
+  const scale = useTransform(progress, [0, 1], [1, 0.86]);
+  const opacity = useTransform(progress, [0, 0.75], [1, 0]);
+  const lift = useTransform(progress, [0, 1], ["0%", "-12%"]);
+  const washY = useTransform(progress, [0, 1], ["0%", "30%"]);
+
+  const [first, ...rest] = site.name.split(" ");
+  const last = rest.join(" ");
+
   return (
-    <section className="relative min-h-[100svh] flex flex-col overflow-hidden">
-
-      {/* ── Name — small byline, top-left ────────────────────────────────── */}
-      <div className="container-edge pt-28 md:pt-32">
-        <h1
-          aria-label={about.name}
-          className="font-serif leading-[0.9] select-none"
-          style={{ fontSize: "clamp(1.6rem, 2.8vw, 2.75rem)", letterSpacing: "-0.02em" }}
-        >
-          <span className="block overflow-hidden">
-            <motion.span {...rise(0.2)} className="block text-ink">
-              Hakyun
-            </motion.span>
-          </span>
-          <span className="block overflow-hidden">
-            <motion.span {...rise(0.33)} className="block italic text-clay">
-              Ryu.
-            </motion.span>
-          </span>
-        </h1>
-      </div>
-
-      {/* ── Media zone — reserved for future scrolling images / video ──────
-           To populate: drop a <MediaReel /> or <HeroCarousel /> here.
-           Currently an open field with the site's grain texture.          ── */}
-      <div className="flex-1" />
-
-      {/* ── Bottom strip ─────────────────────────────────────────────────── */}
-      <div className="container-edge pb-10 md:pb-14">
-
-        {/* Rule — expands left to right on load */}
+    <div ref={ref} className="relative h-[170svh]">
+      <section className="sticky top-0 h-[100svh] flex flex-col overflow-hidden">
+        {/* Drifting pastel wash */}
         <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          style={{ transformOrigin: "left" }}
-          className="h-px bg-ink/20 mb-7"
-        />
-
-        <motion.div {...fade(0.75)} className="flex items-center justify-between">
-
-          {/* Location */}
-          <div className="label text-stone-400 flex items-center gap-3">
-            <span>{about.location}</span>
-            <span className="text-stone-300">·</span>
-            <span className="hidden sm:inline text-stone-300">{about.coordinates}</span>
-          </div>
-
-          {/* Disciplines — hidden on mobile, centred on desktop */}
-          <div className="hidden md:flex gap-10 label text-stone-500">
-            <span>Builder</span>
-            <span>Collector</span>
-            <span>Systems Thinker</span>
-          </div>
-
-          {/* Scroll cue */}
-          <div className="label text-stone-400 flex items-center gap-2">
-            <span>Scroll</span>
-            <span>↓</span>
-          </div>
-
+          aria-hidden
+          style={{ y: washY }}
+          className="absolute inset-0 pointer-events-none"
+        >
+          <div
+            className="absolute -top-1/4 right-[-15%] w-[70vw] h-[70vw] rounded-full opacity-50"
+            style={{
+              background:
+                "radial-gradient(circle at center, rgba(169,191,204,0.5) 0%, transparent 65%)",
+            }}
+          />
+          <div
+            className="absolute bottom-[-30%] left-[-10%] w-[55vw] h-[55vw] rounded-full opacity-45"
+            style={{
+              background:
+                "radial-gradient(circle at center, rgba(217,185,174,0.45) 0%, transparent 65%)",
+            }}
+          />
         </motion.div>
-      </div>
 
-    </section>
+        {/* Name — scales and lifts away as you scroll */}
+        <motion.div
+          style={{ scale, opacity, y: lift }}
+          className="flex-1 flex flex-col justify-center origin-center"
+        >
+          <div className="container-edge">
+            <h1 aria-label={site.name} className="display-1 select-none">
+              <span className="block overflow-hidden pb-[0.06em]">
+                <motion.span {...rise(0.15)} className="block text-ink">
+                  {first}
+                </motion.span>
+              </span>
+              <span className="block overflow-hidden pb-[0.06em]">
+                <motion.span {...rise(0.28)} className="block italic text-stone-400">
+                  {last}.
+                </motion.span>
+              </span>
+            </h1>
+            <motion.p
+              {...fade(0.7)}
+              className="mt-8 max-w-md text-stone-600 text-base md:text-lg leading-relaxed"
+            >
+              {site.tagline}
+            </motion.p>
+          </div>
+        </motion.div>
+
+        {/* Bottom strip */}
+        <motion.div style={{ opacity }} className="container-edge pb-10 md:pb-12">
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            style={{ transformOrigin: "left" }}
+            className="h-px bg-ink/20 mb-7"
+          />
+          <motion.div {...fade(0.85)} className="flex items-center justify-between">
+            <div className="label text-stone-400">{site.location}</div>
+            <div className="hidden md:flex gap-10 label text-stone-500">
+              <span>Builder</span>
+              <span>Collector</span>
+              <span>Systems Thinker</span>
+            </div>
+            <div className="label text-stone-400 flex items-center gap-2">
+              <span>Scroll</span>
+              <motion.span
+                animate={{ y: [0, 5, 0] }}
+                transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+              >
+                ↓
+              </motion.span>
+            </div>
+          </motion.div>
+        </motion.div>
+      </section>
+    </div>
   );
 }
