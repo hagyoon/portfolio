@@ -64,6 +64,12 @@ function LoginForm() {
       >
         {busy ? "Signing in…" : "Sign in"}
       </button>
+      <a
+        href="/admin/forgot"
+        className="block mt-6 text-sm text-stone-500 hover:text-ink transition-colors"
+      >
+        Forgot password?
+      </a>
     </form>
   );
 }

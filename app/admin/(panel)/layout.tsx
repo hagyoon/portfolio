@@ -36,6 +36,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <Link href="/admin/media" className="py-1.5 text-sm hover:opacity-60 transition-opacity">
           Media library
         </Link>
+        <div className="admin-label mt-6">Account</div>
+        <Link href="/admin/settings" className="py-1.5 text-sm hover:opacity-60 transition-opacity">
+          Settings
+        </Link>
         <div className="mt-auto space-y-3">
           <a
             href="/"
