@@ -1,40 +1,22 @@
 "use client";
 
 /*
- * Marquee — velocity-reactive ticker. Scroll speed feeds the drift, so the
- * band accelerates with the page and settles when you stop.
+ * Marquee — steady slow drift. Constant speed, one direction; the strip
+ * renders four identical copies and wraps at one copy-width (25%) so the
+ * loop is seamless.
  */
 
-import { useRef } from "react";
-import {
-  motion,
-  useAnimationFrame,
-  useMotionValue,
-  useScroll,
-  useSpring,
-  useTransform,
-  useVelocity,
-} from "framer-motion";
+import { motion, useAnimationFrame, useMotionValue, useTransform } from "framer-motion";
+
+// Percent of the strip per second — one full loop (25%) every ~45 s.
+const SPEED = 0.55;
 
 export default function Marquee({ words }: { words: string[] }) {
   const baseX = useMotionValue(0);
-  const { scrollY } = useScroll();
-  const velocity = useVelocity(scrollY);
-  const smoothVelocity = useSpring(velocity, { damping: 50, stiffness: 380 });
-  const factor = useTransform(smoothVelocity, [-2500, 0, 2500], [-4, 1, 4], {
-    clamp: false,
-  });
-  const direction = useRef(1);
 
   useAnimationFrame((_, delta) => {
-    const f = factor.get();
-    if (f < 0) direction.current = -1;
-    else if (f > 0) direction.current = 1;
-    const move = direction.current * 2.4 * Math.abs(f) * (delta / 100);
-    let next = baseX.get() - move;
-    // one list-width = 25% of the strip (it renders 4 copies)
+    let next = baseX.get() - SPEED * (delta / 1000);
     if (next <= -25) next += 25;
-    if (next > 0) next -= 25;
     baseX.set(next);
   });
 

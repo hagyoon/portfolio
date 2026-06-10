@@ -75,9 +75,8 @@ export default function Footer({ site }: { site: Site }) {
           </div>
         </div>
 
-        <div className="container-edge border-t border-ink/10 py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-stone-500 text-xs uppercase tracking-widest">
+        <div className="container-edge border-t border-ink/10 py-6 text-stone-500 text-xs uppercase tracking-widest">
           <div>© {year} {site.name}. All rights reserved.</div>
-          <div>{site.location} · {site.tagline}</div>
         </div>
       </footer>
     </>
