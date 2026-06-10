@@ -43,9 +43,13 @@ const config: Config = {
         ochre: "#cf9b3e",
       },
       fontFamily: {
-        serif: ["var(--font-serif)", "Cormorant Garamond", "serif"],
-        sans: ["var(--font-sans)", "Inter", "system-ui", "sans-serif"],
-        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
+        // Mondwest leads the display stack; Cormorant holds until the file lands
+        serif: ["Mondwest", "var(--font-serif)", "Cormorant Garamond", "serif"],
+        // Body is typewriter mono, Hermes-style
+        sans: ["var(--font-mono)", "Courier Prime", "ui-monospace", "monospace"],
+        mono: ["var(--font-mono)", "Courier Prime", "ui-monospace", "monospace"],
+        condensed: ["Collapse", "var(--font-serif)", "serif"],
+        wide: ["Rules Expanded", "var(--font-mono)", "ui-monospace", "monospace"],
       },
       letterSpacing: {
         tightest: "-0.04em",

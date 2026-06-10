@@ -5,7 +5,7 @@
  */
 
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter, Courier_Prime } from "next/font/google";
+import { Cormorant_Garamond, Courier_Prime } from "next/font/google";
 import "./globals.css";
 import { getSite } from "@/lib/content";
 
@@ -13,13 +13,6 @@ const serif = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-serif",
   weight: ["300", "400", "500", "600"],
-  display: "swap",
-});
-
-const sans = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  weight: ["300", "400", "500"],
   display: "swap",
 });
 
@@ -52,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable}`}>
+    <html lang="en" className={`${serif.variable} ${mono.variable}`}>
       <body className="bg-paper text-ink antialiased">{children}</body>
     </html>
   );

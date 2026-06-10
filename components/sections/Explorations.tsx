@@ -20,7 +20,7 @@ export default function Explorations({ interests }: { interests: Interest[] }) {
         <div className="grid grid-cols-12 gap-6 mb-14 md:mb-20">
           <div className="col-span-12 md:col-span-3">
             <Reveal>
-              <div className="label">Note 02</div>
+              <div className="eyebrow">Note 02</div>
               <div className="mt-3 text-stone-500 text-sm">Currently Exploring</div>
             </Reveal>
           </div>

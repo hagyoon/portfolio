@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Local display faces — drop the woff2 files into public/fonts/ to activate.
+   Until then each stack falls back gracefully (Cormorant / Courier Prime).
+   Mondwest: PP Mondwest (Pangram Pangram, free personal license).
+   Collapse / Rules: Nous Research's licensed faces — requires the files. */
+@font-face {
+  font-family: "Mondwest";
+  src: url("/fonts/Mondwest-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Collapse";
+  src: url("/fonts/Collapse-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Rules Expanded";
+  src: url("/fonts/RulesExpanded-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Base — warm noir */
   --paper: #15100a;
@@ -61,17 +87,19 @@ html.lenis body {
 
 @layer base {
   body {
-    font-family: var(--font-sans), system-ui, sans-serif;
+    /* Typewriter body, Hermes-style */
+    font-family: var(--font-mono), "Courier Prime", ui-monospace, monospace;
     font-weight: 400;
     font-size: 15px;
-    line-height: 1.6;
+    line-height: 1.65;
   }
   h1,
   h2,
   h3,
   h4,
   h5 {
-    font-family: var(--font-serif), serif;
+    /* Mondwest pixel-serif when present, Cormorant until then */
+    font-family: "Mondwest", var(--font-serif), serif;
     font-weight: 400;
     letter-spacing: -0.02em;
   }
@@ -88,7 +116,11 @@ html.lenis body {
     @apply border-t border-ink/15;
   }
   .label {
-    @apply font-mono uppercase tracking-widest text-[10.5px] text-stone-500;
+    @apply font-wide uppercase tracking-widest text-[10.5px] text-stone-500;
+  }
+  /* Odysseus-style eyebrow — accent-coloured section tag */
+  .eyebrow {
+    @apply font-wide uppercase tracking-widest text-[10.5px] text-butter;
   }
   .display-1 {
     @apply font-serif text-display-xl leading-[0.92] tracking-tightest;
@@ -174,6 +206,16 @@ html.lenis body {
   56%, 100% { opacity: 0; }
 }
 
+/* Slow ambient drift for the hero glows (after Odysseus' bg-drift) */
+.glow-drift {
+  animation: glow-drift 32s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes glow-drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(-4%, 3%, 0) scale(1.08); }
+}
+
 /* Contact form — minimal underline inputs */
 .input-line {
   width: 100%;
@@ -253,7 +295,7 @@ html.lenis body {
   background: var(--bone);
   border: 1px solid rgba(237, 228, 210, 0.18);
   padding: 10px 12px;
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.875rem;
   color: var(--ink);
   outline: none;

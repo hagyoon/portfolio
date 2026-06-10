@@ -20,7 +20,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
       <div className="grid grid-cols-12 gap-6 mb-16 md:mb-24">
         <div className="col-span-12 md:col-span-3">
           <Reveal>
-            <div className="label">Selected Work</div>
+            <div className="eyebrow">Selected Work</div>
             <div className="mt-3 text-stone-500 text-sm">
               ({String(selected.length).padStart(2, "0")})
             </div>
