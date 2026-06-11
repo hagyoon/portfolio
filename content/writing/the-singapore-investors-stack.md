@@ -1,8 +1,13 @@
 ---
 title: The Singapore Investor's Stack
-date: 2026-04-24
+date: 2026-04-24T00:00:00.000Z
 tag: Markets
-excerpt: Most personal finance writing is U.S.-centric. The decisions a Singaporean makes in the first five years of working life compound for forty. They aren't the same decisions.
+excerpt: >-
+  Most personal finance writing is U.S.-centric. The decisions a Singaporean
+  makes in the first five years of working life compound for forty. They aren't
+  the same decisions.
+status: archived
+updated: '2026-06-11T18:28:25.458Z'
 ---
 
 The thing I notice about personal finance writing in 2026 is that almost all of it is U.S.-centric. The Fed, the Treasury curve, the S&P 500, the 401(k). Most of it is good. None of it is mine.
