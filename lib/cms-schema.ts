@@ -79,8 +79,31 @@ export const COLLECTIONS: Collection[] = [
     hasBody: true,
     fields: [
       { key: "title", label: "Title", type: "text" },
-      { key: "topic", label: "Topic", type: "text", hint: "Groups the note on the Notes page" },
+      { key: "topic", label: "Topic", type: "text", hint: "Groups the note in the Library" },
       { key: "summary", label: "Summary", type: "textarea", hint: "Shown as the quick preview" },
+    ],
+  },
+  {
+    key: "field-notes",
+    label: "Field Notes",
+    dir: "field-notes",
+    hasBody: true,
+    fields: [
+      { key: "title", label: "Title", type: "text" },
+      { key: "topic", label: "Topic", type: "text", hint: "Groups the note in the Library" },
+      { key: "summary", label: "Summary", type: "textarea", hint: "Shown as the quick preview" },
+    ],
+  },
+  {
+    key: "reading",
+    label: "Reading",
+    dir: "reading",
+    hasBody: false,
+    fields: [
+      { key: "title", label: "Title", type: "text" },
+      { key: "source", label: "Source URL", type: "text", hint: "Link the card opens" },
+      { key: "topic", label: "Topic", type: "text", hint: "Groups the item in the Library" },
+      { key: "summary", label: "Summary", type: "textarea", hint: "Why it's worth reading" },
     ],
   },
 ];

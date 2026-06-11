@@ -209,6 +209,55 @@ export async function getNote(slug: string): Promise<Note | null> {
   return notes.find((n) => n.slug === slug) ?? null;
 }
 
+export async function getFieldNotes(): Promise<Note[]> {
+  const dir = path.join(ROOT, "field-notes");
+  const files = await listMd(dir);
+  const all = await Promise.all(
+    files.map(async (f) => {
+      const { data, bodyHtml } = await readMd(path.join(dir, f));
+      return {
+        slug: f.replace(/\.md$/, ""),
+        title: data.title ?? "Untitled",
+        topic: data.topic ?? "Notes",
+        summary: data.summary ?? "",
+        bodyHtml,
+      } as Note;
+    })
+  );
+  return all.sort((a, b) => a.title.localeCompare(b.title));
+}
+
+export async function getFieldNote(slug: string): Promise<Note | null> {
+  const notes = await getFieldNotes();
+  return notes.find((n) => n.slug === slug) ?? null;
+}
+
+export type ReadingItem = {
+  slug: string;
+  title: string;
+  source: string;
+  topic: string;
+  summary: string;
+};
+
+export async function getReading(): Promise<ReadingItem[]> {
+  const dir = path.join(ROOT, "reading");
+  const files = await listMd(dir);
+  const all = await Promise.all(
+    files.map(async (f) => {
+      const { data } = await readMd(path.join(dir, f));
+      return {
+        slug: f.replace(/\.md$/, ""),
+        title: data.title ?? "Untitled",
+        source: data.source ?? "",
+        topic: data.topic ?? "General",
+        summary: data.summary ?? "",
+      } as ReadingItem;
+    })
+  );
+  return all.filter((r) => r.source).sort((a, b) => a.title.localeCompare(b.title));
+}
+
 export async function getInterests(): Promise<Interest[]> {
   const dir = path.join(ROOT, "interests");
   const files = await listMd(dir);
