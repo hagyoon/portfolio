@@ -32,8 +32,22 @@ export default async function EssayPage({
   const idx = essays.findIndex((e) => e.slug === essay.slug);
   const next = essays[(idx + 1) % essays.length];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: essay.title,
+    description: essay.excerpt,
+    datePublished: essay.date,
+    url: `https://hkryu.space/writing/${essay.slug}`,
+    author: { "@type": "Person", name: "Hakyun Ryu", url: "https://hkryu.space" },
+  };
+
   return (
     <article className="pt-40 md:pt-48 pb-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header className="container-edge mb-20 md:mb-28">
         <Reveal>
           <Link href="/writing" className="label text-stone-500 underline-grow">

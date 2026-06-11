@@ -11,7 +11,7 @@ import Terminal from "@/components/motion/Terminal";
 import type { Site } from "@/lib/content";
 
 const TERMINAL_LINES = [
-  { cmd: "whoami", out: "builder · collector · systems thinker" },
+  { cmd: "cat role.txt", out: "ai & systems builder — data · agents · markets" },
   { cmd: "ls ~/current", out: "agentic-systems  markets  horology  second-brain" },
   { cmd: "studio --unlock", out: "→ sign in to the studio", href: "/admin" },
 ];
@@ -45,8 +45,10 @@ export default function Hero({ site }: { site: Site }) {
   const last = rest.join(" ");
 
   return (
-    <div ref={ref} className="relative h-[170svh]">
-      <section className="sticky top-0 h-[100svh] flex flex-col overflow-hidden">
+    // The scroll-pin is desktop-only; on smaller screens the hero flows
+    // normally so name + CTAs + terminal never clip on short viewports.
+    <div ref={ref} className="relative lg:h-[170svh]">
+      <section className="lg:sticky top-0 min-h-[100svh] lg:h-[100svh] flex flex-col overflow-hidden pt-28 lg:pt-0">
         {/* Blueprint grid + scanlines + drifting phosphor glow */}
         <div aria-hidden className="absolute inset-0 pointer-events-none grid-lines" />
         <div aria-hidden className="absolute inset-0 pointer-events-none scanlines" />
@@ -79,7 +81,11 @@ export default function Hero({ site }: { site: Site }) {
           className="flex-1 flex flex-col justify-center origin-center"
         >
           <div className="container-edge w-full">
-            <h1 aria-label={site.name} className="display-1 select-none">
+            <h1
+              aria-label={site.name}
+              className="font-serif leading-[0.92] tracking-tightest select-none"
+              style={{ fontSize: "clamp(3.25rem, 8.5vw, 8rem)" }}
+            >
               <span className="block overflow-hidden pb-[0.06em]">
                 <motion.span {...rise(0.15)} className="block text-ink">
                   {first}
@@ -96,16 +102,37 @@ export default function Hero({ site }: { site: Site }) {
               </span>
             </h1>
             <motion.p
+              {...fade(0.6)}
+              className="mt-8 font-mono text-lg md:text-xl text-stone-700"
+            >
+              AI &amp; Systems Builder — Singapore
+            </motion.p>
+            <motion.p
               {...fade(0.7)}
-              className="mt-8 max-w-md text-stone-600 text-base md:text-lg leading-relaxed"
+              className="mt-3 max-w-md text-stone-600 text-base md:text-lg leading-relaxed"
             >
               {site.tagline}
             </motion.p>
-            <motion.div {...fade(1.0)}>
+            {/* Primary calls to action */}
+            <motion.div {...fade(0.85)} className="mt-8 flex flex-wrap gap-4">
+              <a
+                href="/#projects"
+                className="inline-flex items-center gap-2 bg-ink text-paper px-7 py-3.5 label !text-paper hover:opacity-85 active:opacity-70 transition-opacity"
+              >
+                View my work <span aria-hidden>↓</span>
+              </a>
+              <a
+                href="/#contact"
+                className="inline-flex items-center gap-2 border border-ink/30 px-7 py-3.5 label hover:bg-ink hover:!text-paper active:opacity-70 transition-colors"
+              >
+                Contact me <span aria-hidden>→</span>
+              </a>
+            </motion.div>
+            <motion.div {...fade(1.05)}>
               <Terminal
                 host="ryu@hkryu.space"
                 lines={TERMINAL_LINES}
-                className="mt-10 max-w-md"
+                className="mt-10 max-w-md hidden lg:block"
               />
             </motion.div>
           </div>

@@ -12,6 +12,12 @@ export type GalleryImage = {
   caption?: string;
 };
 
+export type TimelineEntry = {
+  period: string;
+  title: string;
+  detail?: string;
+};
+
 export type Site = {
   name: string;
   tagline: string;
@@ -21,6 +27,7 @@ export type Site = {
   about: string;
   manifesto: string[];
   marquee: string[];
+  timeline: TimelineEntry[];
   gallery: GalleryImage[];
   contact: {
     email?: string;
@@ -43,6 +50,12 @@ export type Project = {
   role?: string;
   stack?: string[];
   links?: { label: string; href: string }[];
+  // Case-study structure — all optional, rendered when present
+  problem?: string;
+  outcome?: string;
+  metrics?: string[];
+  testimonial?: { quote: string; by?: string };
+  images?: string[];
   bodyHtml: string;
 };
 
@@ -90,6 +103,11 @@ export async function getSite(): Promise<Site> {
     about: data.about ?? "",
     manifesto: data.manifesto ?? [],
     marquee: data.marquee ?? [],
+    timeline: (data.timeline ?? []).map((t: any) => ({
+      period: String(t.period ?? ""),
+      title: String(t.title ?? ""),
+      detail: t.detail ? String(t.detail) : undefined,
+    })),
     gallery: (data.gallery ?? []).map((g: any) =>
       typeof g === "string" ? { src: g } : { src: g.src, caption: g.caption }
     ),
@@ -115,6 +133,13 @@ export async function getProjects(): Promise<Project[]> {
         role: data.role,
         stack: data.stack ?? [],
         links: data.links ?? [],
+        problem: data.problem,
+        outcome: data.outcome,
+        metrics: data.metrics ?? [],
+        testimonial: data.testimonial_quote
+          ? { quote: data.testimonial_quote, by: data.testimonial_by }
+          : undefined,
+        images: data.images ?? [],
         bodyHtml,
       } as Project;
     })

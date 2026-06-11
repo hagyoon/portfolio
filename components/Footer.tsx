@@ -39,11 +39,11 @@ export default function Footer({ site }: { site: Site }) {
           <div className="md:col-span-3 md:col-start-7 space-y-3">
             <div className="label">Index</div>
             <ul className="space-y-2 text-sm">
-              <li><a href="/#about" className="underline-grow">About</a></li>
-              <li><a href="/#projects" className="underline-grow">Projects</a></li>
-              <li><a href="/#explorations" className="underline-grow">Exploring</a></li>
-              <li><a href="/#gallery" className="underline-grow">Gallery</a></li>
-              <li><a href="/#writing" className="underline-grow">Writing</a></li>
+              <li><a href="/#about" className="link-inline">About</a></li>
+              <li><a href="/#projects" className="link-inline">Projects</a></li>
+              <li><a href="/#explorations" className="link-inline">Exploring</a></li>
+              <li><a href="/#gallery" className="link-inline">Gallery</a></li>
+              <li><a href="/#writing" className="link-inline">Writing</a></li>
             </ul>
           </div>
 
@@ -52,21 +52,21 @@ export default function Footer({ site }: { site: Site }) {
             <ul className="space-y-2 text-sm">
               {site.contact.email && (
                 <li>
-                  <a href={`mailto:${site.contact.email}`} className="underline-grow">
+                  <a href={`mailto:${site.contact.email}`} className="link-inline">
                     {site.contact.email}
                   </a>
                 </li>
               )}
               {site.contact.linkedin && (
                 <li>
-                  <a href={site.contact.linkedin} target="_blank" rel="noreferrer" className="underline-grow">
+                  <a href={site.contact.linkedin} target="_blank" rel="noreferrer" className="link-inline">
                     LinkedIn
                   </a>
                 </li>
               )}
               {site.contact.github && (
                 <li>
-                  <a href={site.contact.github} target="_blank" rel="noreferrer" className="underline-grow">
+                  <a href={site.contact.github} target="_blank" rel="noreferrer" className="link-inline">
                     GitHub
                   </a>
                 </li>

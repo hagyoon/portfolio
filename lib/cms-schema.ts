@@ -41,6 +41,12 @@ export const COLLECTIONS: Collection[] = [
       { key: "summary", label: "Summary", type: "textarea" },
       { key: "cover", label: "Cover image", type: "image" },
       { key: "stack", label: "Stack", type: "list", hint: "One per line" },
+      { key: "problem", label: "Problem", type: "textarea", hint: "Case-study lead — what needed solving" },
+      { key: "outcome", label: "Outcome", type: "textarea", hint: "What shipped / what changed" },
+      { key: "metrics", label: "Metrics", type: "list", hint: "One per line, e.g. 40% — time saved weekly" },
+      { key: "testimonial_quote", label: "Testimonial quote", type: "textarea" },
+      { key: "testimonial_by", label: "Testimonial attribution", type: "text" },
+      { key: "images", label: "Carousel images", type: "list", hint: "One /uploads/… path per line" },
     ],
   },
   {

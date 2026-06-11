@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Reveal from "@/components/Reveal";
+import ImageCarousel from "@/components/motion/ImageCarousel";
 import { getProject, getProjects } from "@/lib/content";
 
 export async function generateStaticParams() {
@@ -35,8 +36,23 @@ export default async function ProjectPage({
   const idx = projects.findIndex((p) => p.slug === project.slug);
   const next = projects[(idx + 1) % projects.length];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: project.title,
+    description: project.summary,
+    url: `https://hkryu.space/projects/${project.slug}`,
+    author: { "@type": "Person", name: "Hakyun Ryu", url: "https://hkryu.space" },
+    dateCreated: project.year,
+    ...(project.cover ? { image: `https://hkryu.space${project.cover}` } : {}),
+  };
+
   return (
     <article className="pt-40 md:pt-48 pb-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header className="container-edge mb-20 md:mb-32">
         <Reveal>
           <Link
@@ -129,12 +145,79 @@ export default async function ProjectPage({
         <div className="grid grid-cols-12 gap-6">
           <div className="hidden md:block md:col-span-3" />
           <div className="col-span-12 md:col-span-7">
+            {project.problem && (
+              <Reveal>
+                <div className="mb-14">
+                  <h2 className="label mb-4">The problem</h2>
+                  <p className="font-serif text-2xl md:text-3xl leading-snug tracking-tight text-stone-700">
+                    {project.problem}
+                  </p>
+                </div>
+              </Reveal>
+            )}
+
             <Reveal>
               <div
                 className="prose-editorial"
                 dangerouslySetInnerHTML={{ __html: project.bodyHtml }}
               />
             </Reveal>
+
+            {project.images && project.images.length > 0 && (
+              <Reveal>
+                <ImageCarousel images={project.images} title={project.title} />
+              </Reveal>
+            )}
+
+            {project.outcome && (
+              <Reveal>
+                <div className="mt-14 border-l-2 border-butter pl-6">
+                  <h2 className="label mb-3">Outcome</h2>
+                  <p className="text-stone-700 text-lg leading-relaxed">{project.outcome}</p>
+                </div>
+              </Reveal>
+            )}
+
+            {project.metrics && project.metrics.length > 0 && (
+              <Reveal>
+                <div className="mt-14">
+                  <h2 className="label mb-5">By the numbers</h2>
+                  <dl className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-ink/10 border border-ink/10">
+                    {project.metrics.map((m) => {
+                      const [value, ...rest] = m.split("—").map((s) => s.trim());
+                      return (
+                        <div key={m} className="bg-paper p-6">
+                          <dt className="sr-only">{rest.join(" — ") || value}</dt>
+                          <dd>
+                            <span className="font-serif text-4xl block">{value}</span>
+                            {rest.length > 0 && (
+                              <span className="text-stone-600 text-sm mt-1 block">
+                                {rest.join(" — ")}
+                              </span>
+                            )}
+                          </dd>
+                        </div>
+                      );
+                    })}
+                  </dl>
+                </div>
+              </Reveal>
+            )}
+
+            {project.testimonial && (
+              <Reveal>
+                <blockquote className="mt-14 border border-ink/15 bg-ivory p-8">
+                  <p className="font-serif text-2xl italic leading-snug">
+                    “{project.testimonial.quote}”
+                  </p>
+                  {project.testimonial.by && (
+                    <cite className="block mt-4 not-italic font-mono text-sm text-stone-500">
+                      — {project.testimonial.by}
+                    </cite>
+                  )}
+                </blockquote>
+              </Reveal>
+            )}
 
             {project.links && project.links.length > 0 && (
               <div className="mt-16 pt-8 border-t border-ink/15">

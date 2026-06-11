@@ -3,6 +3,7 @@
 import { useRef, type ReactNode } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import clsx from "clsx";
+import { useMotionPref } from "@/components/Preferences";
 
 /**
  * Wraps children in a container that drifts vertically as it crosses the
@@ -24,10 +25,11 @@ export default function Parallax({
     offset: ["start end", "end start"],
   });
   const y = useTransform(scrollYProgress, [0, 1], [amount, -amount]);
+  const reduced = useMotionPref();
 
   return (
     <div ref={ref} className={clsx("overflow-hidden", className)}>
-      <motion.div style={{ y }} className="h-full w-full">
+      <motion.div style={reduced ? undefined : { y }} className="h-full w-full">
         {children}
       </motion.div>
     </div>
@@ -53,11 +55,12 @@ export function ParallaxInner({
     offset: ["start end", "end start"],
   });
   const y = useTransform(scrollYProgress, [0, 1], [`-${amount}%`, `${amount}%`]);
+  const reduced = useMotionPref();
 
   return (
     <div ref={ref} className={clsx("absolute inset-0 overflow-hidden", className)}>
       <motion.div
-        style={{ y, top: `-${amount}%`, bottom: `-${amount}%` }}
+        style={reduced ? { top: 0, bottom: 0 } : { y, top: `-${amount}%`, bottom: `-${amount}%` }}
         className="absolute left-0 right-0"
       >
         {children}

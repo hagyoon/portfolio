@@ -7,6 +7,7 @@
  */
 
 import { useEffect, useRef, useState } from "react";
+import { prefersReducedMotion } from "@/components/Preferences";
 
 type Line = { cmd: string; out: string; href?: string };
 
@@ -30,6 +31,11 @@ export default function Terminal({
 
   useEffect(() => {
     let cancelled = false;
+    // Under reduced motion, print everything at once — no typing animation
+    if (prefersReducedMotion()) {
+      setDone(lines);
+      return;
+    }
     const queue = async () => {
       const wait = (ms: number) =>
         new Promise<void>((r) => {

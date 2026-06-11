@@ -53,23 +53,33 @@ export default function Projects({ projects }: { projects: Project[] }) {
                     {String(index + 1).padStart(2, "0")}
                   </div>
 
-                  {project.cover && (
-                    <div className={`col-span-10 md:col-span-5 ${flip ? "md:order-3" : ""}`}>
-                      <div className="relative w-full overflow-hidden aspect-[16/10]">
+                  <div className={`col-span-10 md:col-span-5 ${flip ? "md:order-3" : ""}`}>
+                    <div className="relative w-full overflow-hidden aspect-[16/10] border border-ink/10">
+                      {project.cover ? (
                         <div className="absolute inset-0 transition-transform duration-1000 ease-editorial group-hover:scale-[1.04]">
                           <ParallaxInner amount={6}>
                             <div className="relative w-full h-[112%]">
                               <SafeImage
                                 src={project.cover}
-                                alt={project.title}
+                                alt={`${project.title} cover`}
                                 sizes="(min-width: 768px) 40vw, 100vw"
                               />
                             </div>
                           </ParallaxInner>
                         </div>
-                      </div>
+                      ) : (
+                        /* Monogram placeholder until a cover is uploaded via /admin */
+                        <div
+                          aria-hidden
+                          className="absolute inset-0 grid place-items-center wash-sage bg-ivory transition-transform duration-1000 ease-editorial group-hover:scale-[1.03]"
+                        >
+                          <span className="font-serif text-8xl text-stone-300 select-none">
+                            {project.title.charAt(0)}
+                          </span>
+                        </div>
+                      )}
                     </div>
-                  )}
+                  </div>
 
                   <div className="col-span-12 md:col-span-6">
                     <h3 className="font-serif text-3xl md:text-5xl tracking-tightest leading-[1.05] mb-3">

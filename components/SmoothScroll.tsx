@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { prefersReducedMotion } from "@/components/Preferences";
 
 export default function SmoothScroll() {
   useEffect(() => {
@@ -8,9 +9,12 @@ export default function SmoothScroll() {
     let raf: number;
     let cancelled = false;
 
+    // Native scrolling when the user prefers reduced motion
+    if (prefersReducedMotion()) return;
+
     (async () => {
       const { default: Lenis } = await import("lenis");
-      if (cancelled) return;
+      if (cancelled || prefersReducedMotion()) return;
       lenis = new Lenis({
         duration: 1.15,
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -19,6 +23,10 @@ export default function SmoothScroll() {
         touchMultiplier: 1.4,
       });
       const loop = (time: number) => {
+        if (prefersReducedMotion()) {
+          lenis.destroy();
+          return;
+        }
         lenis.raf(time);
         raf = requestAnimationFrame(loop);
       };

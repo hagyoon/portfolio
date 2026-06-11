@@ -7,14 +7,17 @@
  */
 
 import { motion, useAnimationFrame, useMotionValue, useTransform } from "framer-motion";
+import { useMotionPref } from "@/components/Preferences";
 
 // Percent of the strip per second — one full loop (25%) every ~45 s.
 const SPEED = 0.55;
 
 export default function Marquee({ words }: { words: string[] }) {
   const baseX = useMotionValue(0);
+  const reduced = useMotionPref();
 
   useAnimationFrame((_, delta) => {
+    if (reduced) return; // hold still under reduced motion
     let next = baseX.get() - SPEED * (delta / 1000);
     if (next <= -25) next += 25;
     baseX.set(next);

@@ -1,12 +1,10 @@
-/* ──────────────────────────────────────────────────────────────────────────
+/*
  * Nav — minimal sticky header.
  *
- * Links scroll to anchor sections on the homepage. Sections are identified
- * by their `id` attribute in /app/page.tsx.
- *
- * To change link labels or order: edit the `links` array below.
- * To change the logo style: edit the JSX inside the <Link href="/"> tag.
- * ────────────────────────────────────────────────────────────────────────── */
+ * Five anchor links (Exploring + Gallery merged under "Interests") plus
+ * theme and motion toggles. All interactive elements have visible
+ * keyboard-focus states (global :focus-visible in globals.css).
+ */
 
 "use client";
 
@@ -14,15 +12,15 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import clsx from "clsx";
+import { ThemeToggle, MotionToggle } from "@/components/Preferences";
 
-// Edit nav labels and anchor targets here.
+// Edit nav labels and anchor targets here. Keep it to six or fewer.
 const links = [
-  { href: "#about",         label: "About" },
-  { href: "#projects",      label: "Projects" },
-  { href: "#explorations",  label: "Exploring" },
-  { href: "#gallery",       label: "Gallery" },
-  { href: "#writing",       label: "Writing" },
-  { href: "#contact",       label: "Contact" },
+  { href: "/#about", label: "About" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#explorations", label: "Interests" },
+  { href: "/writing", label: "Writing" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export default function Nav() {
@@ -47,19 +45,19 @@ export default function Nav() {
         )}
       >
         <div className="container-edge flex items-center justify-between">
-          {/* ── Logo — two-tone serif wordmark ──────────────────────────── */}
+          {/* Logo — two-tone serif wordmark */}
           <Link href="/" aria-label="Home" className="group">
             <span
               className="font-serif tracking-tight select-none"
               style={{ fontSize: "1.05rem", letterSpacing: "-0.02em" }}
             >
               <span className="italic text-clay transition-opacity duration-500 group-hover:opacity-70">H</span>
-              <span className="text-ink   transition-opacity duration-500 group-hover:opacity-70">Ryu</span>
+              <span className="text-ink transition-opacity duration-500 group-hover:opacity-70">Ryu</span>
             </span>
           </Link>
 
-          {/* ── Desktop links ────────────────────────────────────────────── */}
-          <nav className="hidden md:flex items-center gap-9">
+          {/* Desktop links + preference toggles */}
+          <nav aria-label="Primary" className="hidden md:flex items-center gap-8">
             {links.map((l) => (
               <a
                 key={l.href}
@@ -69,11 +67,15 @@ export default function Nav() {
                 <span className="underline-grow">{l.label}</span>
               </a>
             ))}
+            <span aria-hidden className="h-4 w-px bg-ink/15" />
+            <ThemeToggle />
+            <MotionToggle />
           </nav>
 
-          {/* ── Mobile hamburger ─────────────────────────────────────────── */}
+          {/* Mobile hamburger */}
           <button
-            aria-label="Menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
             className="md:hidden flex flex-col gap-1.5 p-2 -mr-2"
           >
@@ -93,7 +95,7 @@ export default function Nav() {
         </div>
       </header>
 
-      {/* ── Mobile drawer ────────────────────────────────────────────────── */}
+      {/* Mobile drawer */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -103,7 +105,10 @@ export default function Nav() {
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-0 z-40 bg-paper md:hidden"
           >
-            <div className="container-edge h-full flex flex-col justify-center gap-8 py-24">
+            <nav
+              aria-label="Primary"
+              className="container-edge h-full flex flex-col justify-center gap-8 py-24"
+            >
               {links.map((l, i) => (
                 <motion.div
                   key={l.href}
@@ -124,7 +129,11 @@ export default function Nav() {
                   </a>
                 </motion.div>
               ))}
-            </div>
+              <div className="flex gap-8 pt-6 border-t border-ink/10">
+                <ThemeToggle />
+                <MotionToggle />
+              </div>
+            </nav>
           </motion.div>
         )}
       </AnimatePresence>
