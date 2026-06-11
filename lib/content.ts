@@ -76,6 +76,14 @@ export type Interest = {
   cover?: string;
 };
 
+export type Note = {
+  slug: string;
+  title: string;
+  topic: string;
+  summary: string;
+  bodyHtml: string;
+};
+
 async function readMd(filePath: string) {
   const raw = await fs.readFile(filePath, "utf8");
   const { data, content } = matter(raw);
@@ -176,6 +184,29 @@ export async function getEssays(): Promise<Essay[]> {
 export async function getEssay(slug: string): Promise<Essay | null> {
   const essays = await getEssays();
   return essays.find((e) => e.slug === slug) ?? null;
+}
+
+export async function getNotes(): Promise<Note[]> {
+  const dir = path.join(ROOT, "notes");
+  const files = await listMd(dir);
+  const all = await Promise.all(
+    files.map(async (f) => {
+      const { data, bodyHtml } = await readMd(path.join(dir, f));
+      return {
+        slug: f.replace(/\.md$/, ""),
+        title: data.title ?? "Untitled",
+        topic: data.topic ?? "Notes",
+        summary: data.summary ?? "",
+        bodyHtml,
+      } as Note;
+    })
+  );
+  return all.sort((a, b) => a.title.localeCompare(b.title));
+}
+
+export async function getNote(slug: string): Promise<Note | null> {
+  const notes = await getNotes();
+  return notes.find((n) => n.slug === slug) ?? null;
 }
 
 export async function getInterests(): Promise<Interest[]> {

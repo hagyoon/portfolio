@@ -72,6 +72,17 @@ export const COLLECTIONS: Collection[] = [
       { key: "cover", label: "Cover image", type: "image" },
     ],
   },
+  {
+    key: "notes",
+    label: "Notes",
+    dir: "notes",
+    hasBody: true,
+    fields: [
+      { key: "title", label: "Title", type: "text" },
+      { key: "topic", label: "Topic", type: "text", hint: "Groups the note on the Notes page" },
+      { key: "summary", label: "Summary", type: "textarea", hint: "Shown as the quick preview" },
+    ],
+  },
 ];
 
 export function getCollection(key: string): Collection | undefined {
