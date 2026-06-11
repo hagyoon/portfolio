@@ -5,6 +5,7 @@
 
 import Link from "next/link";
 import LogoutButton from "@/components/admin/LogoutButton";
+import CommandPalette from "@/components/admin/CommandPalette";
 import { COLLECTIONS } from "@/lib/cms-schema";
 
 export const metadata = { title: "Studio", robots: { index: false } };
@@ -16,9 +17,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <div className="min-h-svh bg-ivory flex">
       <aside className="w-56 shrink-0 border-r border-ink/10 bg-paper px-6 py-8 flex flex-col gap-1 sticky top-0 h-svh">
-        <Link href="/admin" className="font-serif text-2xl tracking-tight mb-8 block">
+        <Link href="/admin" className="font-serif text-2xl tracking-tight mb-6 block">
           Studio
         </Link>
+        <div className="mb-6">
+          <CommandPalette />
+        </div>
         <div className="admin-label">Content</div>
         <Link href="/admin/site" className="py-1.5 text-sm hover:opacity-60 transition-opacity">
           Site copy

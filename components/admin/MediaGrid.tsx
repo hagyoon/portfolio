@@ -10,6 +10,32 @@ import { IMAGE_EXTENSIONS } from "@/lib/cms-schema";
 
 export type MediaItem = { name: string; path: string; size: number };
 
+// Client-side compression — big JPEG/PNGs are downscaled to ≤2400px and
+// re-encoded as WebP before they ever leave the browser, so the repo (and
+// every visitor) gets a lean file. GIF/SVG/AVIF/WebP pass through as-is.
+const COMPRESS_THRESHOLD = 600 * 1024;
+const MAX_DIMENSION = 2400;
+
+async function compressIfWorthIt(file: File): Promise<File> {
+  if (!/\.(jpe?g|png)$/i.test(file.name) || file.size < COMPRESS_THRESHOLD) return file;
+  try {
+    const bitmap = await createImageBitmap(file);
+    const scale = Math.min(1, MAX_DIMENSION / Math.max(bitmap.width, bitmap.height));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(bitmap.width * scale);
+    canvas.height = Math.round(bitmap.height * scale);
+    canvas.getContext("2d")!.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    const blob = await new Promise<Blob | null>((resolve) =>
+      canvas.toBlob(resolve, "image/webp", 0.84)
+    );
+    if (!blob || blob.size >= file.size) return file;
+    const name = file.name.replace(/\.[a-z]+$/i, ".webp");
+    return new File([blob], name, { type: "image/webp" });
+  } catch {
+    return file; // decode failed — upload the original
+  }
+}
+
 export default function MediaGrid({
   onSelect,
   compact = false,
@@ -38,7 +64,7 @@ export default function MediaGrid({
     setBusy(true);
     setError(null);
     const form = new FormData();
-    for (const f of Array.from(files)) form.append("file", f);
+    for (const f of Array.from(files)) form.append("file", await compressIfWorthIt(f));
     const res = await fetch("/api/admin/media", { method: "POST", body: form });
     const json = await res.json().catch(() => ({}));
     if (!res.ok) setError(json.error ?? "Upload failed.");

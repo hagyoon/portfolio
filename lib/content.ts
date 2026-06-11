@@ -7,6 +7,13 @@ import remarkGfm from "remark-gfm";
 
 const ROOT = path.join(process.cwd(), "content");
 
+// Public visibility — anything marked draft/archived/private stays off the site.
+const HIDDEN = new Set(["draft", "archived", "archive", "private"]);
+export function isPublic(status: unknown): boolean {
+  return !HIDDEN.has(String(status ?? "published"));
+}
+
+
 export type GalleryImage = {
   src: string;
   caption?: string;
@@ -65,6 +72,9 @@ export type Essay = {
   date: string;
   excerpt: string;
   tag?: string;
+  cover?: string;
+  status?: string;
+  readingMins?: number;
   bodyHtml: string;
 };
 
@@ -74,6 +84,7 @@ export type Interest = {
   caption: string;
   bodyHtml: string;
   cover?: string;
+  status?: string;
 };
 
 export type Note = {
@@ -81,6 +92,7 @@ export type Note = {
   title: string;
   topic: string;
   summary: string;
+  status?: string;
   bodyHtml: string;
 };
 
@@ -152,7 +164,7 @@ export async function getProjects(): Promise<Project[]> {
       } as Project;
     })
   );
-  return all.sort((a, b) => (a.year > b.year ? -1 : 1));
+  return all.filter((p) => isPublic(p.status)).sort((a, b) => (a.year > b.year ? -1 : 1));
 }
 
 export async function getProject(slug: string): Promise<Project | null> {
@@ -174,11 +186,14 @@ export async function getEssays(): Promise<Essay[]> {
           : "",
         excerpt: data.excerpt ?? "",
         tag: data.tag,
+        cover: data.cover,
+        status: data.status,
+        readingMins: Math.max(1, Math.round(bodyHtml.split(/\s+/).length / 220)),
         bodyHtml,
       } as Essay;
     })
   );
-  return all.sort((a, b) => (a.date > b.date ? -1 : 1));
+  return all.filter((e) => isPublic(e.status)).sort((a, b) => (a.date > b.date ? -1 : 1));
 }
 
 export async function getEssay(slug: string): Promise<Essay | null> {
@@ -197,11 +212,12 @@ export async function getNotes(): Promise<Note[]> {
         title: data.title ?? "Untitled",
         topic: data.topic ?? "Notes",
         summary: data.summary ?? "",
+        status: data.status,
         bodyHtml,
       } as Note;
     })
   );
-  return all.sort((a, b) => a.title.localeCompare(b.title));
+  return all.filter((n) => isPublic(n.status)).sort((a, b) => a.title.localeCompare(b.title));
 }
 
 export async function getNote(slug: string): Promise<Note | null> {
@@ -220,11 +236,12 @@ export async function getFieldNotes(): Promise<Note[]> {
         title: data.title ?? "Untitled",
         topic: data.topic ?? "Notes",
         summary: data.summary ?? "",
+        status: data.status,
         bodyHtml,
       } as Note;
     })
   );
-  return all.sort((a, b) => a.title.localeCompare(b.title));
+  return all.filter((n) => isPublic(n.status)).sort((a, b) => a.title.localeCompare(b.title));
 }
 
 export async function getFieldNote(slug: string): Promise<Note | null> {
@@ -238,6 +255,7 @@ export type ReadingItem = {
   source: string;
   topic: string;
   summary: string;
+  status?: string;
 };
 
 export async function getReading(): Promise<ReadingItem[]> {
@@ -252,10 +270,11 @@ export async function getReading(): Promise<ReadingItem[]> {
         source: data.source ?? "",
         topic: data.topic ?? "General",
         summary: data.summary ?? "",
+        status: data.status,
       } as ReadingItem;
     })
   );
-  return all.filter((r) => r.source).sort((a, b) => a.title.localeCompare(b.title));
+  return all.filter((r) => r.source && isPublic(r.status)).sort((a, b) => a.title.localeCompare(b.title));
 }
 
 export async function getInterests(): Promise<Interest[]> {
@@ -269,9 +288,10 @@ export async function getInterests(): Promise<Interest[]> {
         title: data.title ?? "Untitled",
         caption: data.caption ?? "",
         cover: data.cover,
+        status: data.status,
         bodyHtml,
       } as Interest;
     })
   );
-  return all;
+  return all.filter((i) => isPublic(i.status));
 }

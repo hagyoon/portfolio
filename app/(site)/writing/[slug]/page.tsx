@@ -40,6 +40,7 @@ export default async function EssayPage({
     datePublished: essay.date,
     url: `https://hkryu.space/writing/${essay.slug}`,
     author: { "@type": "Person", name: "Hakyun Ryu", url: "https://hkryu.space" },
+    ...(essay.cover ? { image: `https://hkryu.space${essay.cover}` } : {}),
   };
 
   return (
@@ -84,6 +85,21 @@ export default async function EssayPage({
           </div>
         </div>
       </header>
+
+      {essay.cover && (
+        <div className="container-edge mb-20 md:mb-28">
+          <Reveal>
+            <div
+              className="w-full aspect-[16/9] bg-stone-100"
+              style={{
+                backgroundImage: `url(${essay.cover})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            />
+          </Reveal>
+        </div>
+      )}
 
       <div className="container-edge">
         <div className="grid grid-cols-12 gap-6">
