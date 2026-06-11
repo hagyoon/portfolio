@@ -34,8 +34,8 @@ export const COLLECTIONS: Collection[] = [
         key: "status",
         label: "Status",
         type: "select",
-        options: ["selected", "archive"],
-        hint: "archive hides it from the homepage",
+        options: ["selected", "draft", "private", "archive"],
+        hint: "only selected is public — draft/private/archive stay hidden",
       },
       { key: "role", label: "Role", type: "text" },
       { key: "summary", label: "Summary", type: "textarea" },
@@ -55,10 +55,12 @@ export const COLLECTIONS: Collection[] = [
     dir: "writing",
     hasBody: true,
     fields: [
+      { key: "status", label: "Status", type: "select", options: ["published", "draft", "private", "archived"], hint: "Only published shows on the site" },
       { key: "title", label: "Title", type: "text" },
       { key: "date", label: "Date", type: "date" },
       { key: "tag", label: "Tag", type: "text", hint: "e.g. Essay" },
       { key: "excerpt", label: "Excerpt", type: "textarea" },
+      { key: "cover", label: "Hero image", type: "image", hint: "Optional — shown full-width above the essay" },
     ],
   },
   {
@@ -67,6 +69,7 @@ export const COLLECTIONS: Collection[] = [
     dir: "interests",
     hasBody: true,
     fields: [
+      { key: "status", label: "Status", type: "select", options: ["published", "draft", "private", "archived"], hint: "Only published shows on the site" },
       { key: "title", label: "Title", type: "text" },
       { key: "caption", label: "Caption", type: "textarea" },
       { key: "cover", label: "Cover image", type: "image" },
@@ -78,6 +81,7 @@ export const COLLECTIONS: Collection[] = [
     dir: "notes",
     hasBody: true,
     fields: [
+      { key: "status", label: "Status", type: "select", options: ["published", "draft", "private", "archived"], hint: "Only published shows on the site" },
       { key: "title", label: "Title", type: "text" },
       { key: "topic", label: "Topic", type: "text", hint: "Groups the note in the Library" },
       { key: "summary", label: "Summary", type: "textarea", hint: "Shown as the quick preview" },
@@ -89,6 +93,7 @@ export const COLLECTIONS: Collection[] = [
     dir: "field-notes",
     hasBody: true,
     fields: [
+      { key: "status", label: "Status", type: "select", options: ["published", "draft", "private", "archived"], hint: "Only published shows on the site" },
       { key: "title", label: "Title", type: "text" },
       { key: "topic", label: "Topic", type: "text", hint: "Groups the note in the Library" },
       { key: "summary", label: "Summary", type: "textarea", hint: "Shown as the quick preview" },
@@ -100,6 +105,7 @@ export const COLLECTIONS: Collection[] = [
     dir: "reading",
     hasBody: false,
     fields: [
+      { key: "status", label: "Status", type: "select", options: ["published", "draft", "private", "archived"], hint: "Only published shows on the site" },
       { key: "title", label: "Title", type: "text" },
       { key: "source", label: "Source URL", type: "text", hint: "Link the card opens" },
       { key: "topic", label: "Topic", type: "text", hint: "Groups the item in the Library" },
