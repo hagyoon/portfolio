@@ -5,7 +5,7 @@ summary: >-
   Collection, wishlist, strap philosophy, and the Watch-Roll app project. See
   active-projects for Watch-Roll build status
 status: draft
-updated: '2026-06-11T18:31:15.469Z'
+updated: '2026-06-11T18:32:08.955Z'
 ---
 
 # Watches
@@ -31,11 +31,9 @@ updated: '2026-06-11T18:31:15.469Z'
 ## Grail / Aspirational List
 
 ### Ultra-High-End Independents
-| Brand/Model                     | Notes                                   |
+| Brand/Model                     |                                    |
 | ------------------------------- | --------------------------------------- |
-| **Berneron**                    | Current grail                           |
-| **FP Journe**                   | Multiple references of interest         |
-| **De Bethune**                  | Avant-garde microtechnology             |
+         
 | **Rexhep Rexhepi (Akrivia)**    | Geneva independent, masterful finishing |
 | **Naoya Hida**                  | Japanese independent                    |
 | **Hajime Asaoka**               | Tokyo-based master                      |
@@ -45,7 +43,7 @@ updated: '2026-06-11T18:31:15.469Z'
 
 
 ### Independents (Next Tier)
-| Brand/Model | Notes |
+| Brand/Model | |
 |-------------|-------|
 | **Ming** | Malaysian-based independent, cult following |
 | **Kudoke** | German independent |
@@ -85,7 +83,7 @@ updated: '2026-06-11T18:31:15.469Z'
 
 The watch secondary market has grown significantly. Platforms like Chrono24, Bob's Watches, and WatchCharts dominate.
 
-**Current Gap in market:**
+**CurrentGap in market:**
 - Discovery (not search) — most people don't always know what they want. Most spend lots of time and money before they actually arrive at the choices they love in their collecting journey.
 - Taste profiling — no platform learns your aesthetic
 - Dealer intelligence — no aggregated preference data sold B2B
