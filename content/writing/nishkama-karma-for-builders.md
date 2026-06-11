@@ -1,8 +1,13 @@
 ---
 title: Nishkama Karma for Builders
-date: 2026-02-09
+date: 2026-02-09T00:00:00.000Z
 tag: Philosophy
-excerpt: The Bhagavad Gita's instruction (act fully, surrender attachment to outcome) isn't detachment. It's the only sustainable operating mode for high-variance work.
+excerpt: >-
+  The Bhagavad Gita's instruction (act fully, surrender attachment to outcome)
+  isn't detachment. It's the only sustainable operating mode for high-variance
+  work.
+status: archived
+updated: '2026-06-11T18:28:26.915Z'
 ---
 
 Arjuna's crisis at Kurukshetra is the Bhagavad Gita's opening problem, and it's the most recognisable problem in any builder's life. He has reasoned himself into a very sophisticated paralysis. He knows what duty asks. He's constructed a series of legitimate objections to doing it. Krishna's response isn't to validate the objections, which are real. Nor to dismiss them. The response is to reframe the relationship between action and outcome.
