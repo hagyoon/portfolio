@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Reveal from "@/components/Reveal";
+import SafeImage from "@/components/ui/SafeImage";
 import { getEssay, getEssays } from "@/lib/content";
 
 export async function generateStaticParams() {
@@ -89,14 +90,9 @@ export default async function EssayPage({
       {essay.cover && (
         <div className="container-edge mb-20 md:mb-28">
           <Reveal>
-            <div
-              className="w-full aspect-[16/9] bg-stone-100"
-              style={{
-                backgroundImage: `url(${essay.cover})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            />
+            <div className="relative w-full aspect-[16/9] bg-stone-100">
+              <SafeImage src={essay.cover} alt={essay.title} sizes="100vw" />
+            </div>
           </Reveal>
         </div>
       )}
