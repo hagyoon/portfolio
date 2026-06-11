@@ -37,12 +37,57 @@ export default function About({ site }: { site: Site }) {
 
       {/* Bio + portrait + manifesto */}
       <div className="grid grid-cols-12 gap-6 md:gap-12">
-        <div className="col-span-12 md:col-span-7 space-y-6 text-stone-700 text-base md:text-lg leading-relaxed">
-          {paragraphs.map((para, i) => (
-            <Reveal key={i} delay={i * 0.05}>
-              <p>{para}</p>
+        <div className="col-span-12 md:col-span-7">
+          <div className="space-y-6 text-stone-700 text-base md:text-lg leading-relaxed">
+            {paragraphs.map((para, i) => (
+              <Reveal key={i} delay={i * 0.05}>
+                <p>{para}</p>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Skills / focus areas */}
+          {site.marquee.length > 0 && (
+            <Reveal delay={0.1}>
+              <div className="mt-12">
+                <h3 className="label mb-4">Focus areas</h3>
+                <ul className="flex flex-wrap gap-2.5">
+                  {site.marquee.map((skill) => (
+                    <li
+                      key={skill}
+                      className="border border-ink/20 bg-ivory px-4 py-1.5 text-sm text-stone-700"
+                    >
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </Reveal>
-          ))}
+          )}
+
+          {/* Experience timeline — fill via /admin → Site copy → Timeline */}
+          {site.timeline.length > 0 && (
+            <Reveal delay={0.12}>
+              <div className="mt-14">
+                <h3 className="label mb-6">Timeline</h3>
+                <ol className="border-l border-ink/20 space-y-8 pl-6">
+                  {site.timeline.map((t, i) => (
+                    <li key={i} className="relative">
+                      <span
+                        aria-hidden
+                        className="absolute -left-[1.85rem] top-1.5 w-2.5 h-2.5 bg-butter"
+                      />
+                      <div className="font-mono text-sm text-stone-500">{t.period}</div>
+                      <div className="text-base md:text-lg text-ink mt-0.5">{t.title}</div>
+                      {t.detail && (
+                        <p className="text-stone-600 text-sm md:text-base mt-1">{t.detail}</p>
+                      )}
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </Reveal>
+          )}
         </div>
 
         <div className="col-span-12 md:col-span-5 md:pl-8 space-y-12">

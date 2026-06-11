@@ -125,7 +125,32 @@ export default function SiteEditor() {
       </div>
 
       {lines("manifesto", "Manifesto", "one line per credo")}
-      {lines("marquee", "Marquee", "one word/phrase per line")}
+      {lines("marquee", "Marquee", "one word/phrase per line — also shown as Focus areas chips")}
+
+      <div>
+        <label className="admin-label">
+          Timeline <span className="normal-case tracking-normal text-stone-400">— one entry per line: period | title | detail</span>
+        </label>
+        <textarea
+          className="admin-input min-h-[6rem] font-mono text-[13px]"
+          placeholder={"2024 — now | Independent AI builder | Agentic systems and data tooling"}
+          value={(Array.isArray(fm.timeline) ? fm.timeline : [])
+            .map((t: any) => [t.period, t.title, t.detail].filter(Boolean).join(" | "))
+            .join("\n")}
+          onChange={(e) =>
+            set(
+              "timeline",
+              e.target.value
+                .split("\n")
+                .filter((l) => l.trim() !== "")
+                .map((l) => {
+                  const [period, title, detail] = l.split("|").map((s) => s.trim());
+                  return { period: period ?? "", title: title ?? "", ...(detail ? { detail } : {}) };
+                })
+            )
+          }
+        />
+      </div>
 
       <div>
         <label className="admin-label">Gallery — images for the horizontal glide section</label>

@@ -15,9 +15,12 @@ export default async function SiteLayout({
   const site = await getSite();
   return (
     <div className="grain">
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
       <SmoothScroll />
       <Nav />
-      <main>{children}</main>
+      <main id="main">{children}</main>
       <Footer site={site} />
     </div>
   );

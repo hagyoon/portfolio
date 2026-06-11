@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import clsx from "clsx";
+import { useMotionPref } from "@/components/Preferences";
 
 function Word({
   word,
@@ -37,7 +38,12 @@ export default function ScrubWords({
     target: ref,
     offset: ["start 0.85", "end 0.45"],
   });
+  const reduced = useMotionPref();
   const words = text.split(/\s+/).filter(Boolean);
+
+  if (reduced) {
+    return <p className={className}>{text}</p>;
+  }
 
   return (
     <p ref={ref} className={clsx("flex flex-wrap", className)}>

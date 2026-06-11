@@ -28,9 +28,17 @@ export default function Writing({ essays }: { essays: Essay[] }) {
         </div>
         <div className="col-span-12 md:col-span-9">
           <Reveal>
-            <h2 className="display-2 max-w-3xl">
-              Thinking, <em className="text-lavender">slowly</em>, in public.
-            </h2>
+            <div className="flex flex-wrap items-end justify-between gap-6">
+              <h2 className="display-2 max-w-3xl">
+                Thinking, <em className="text-lavender">slowly</em>, in public.
+              </h2>
+              <Link
+                href="/writing"
+                className="link-inline font-mono text-sm text-stone-600 mb-2 shrink-0"
+              >
+                All writing — search &amp; topics →
+              </Link>
+            </div>
           </Reveal>
         </div>
       </div>

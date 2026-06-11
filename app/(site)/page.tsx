@@ -27,8 +27,23 @@ export default async function HomePage() {
     getEssays(),
   ]);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: site.name,
+    description: site.tagline,
+    url: "https://hkryu.space",
+    jobTitle: "AI & Systems Builder",
+    address: { "@type": "PostalAddress", addressLocality: "Singapore" },
+    sameAs: [site.contact.linkedin, site.contact.github].filter(Boolean),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Hero site={site} />
       <Marquee words={site.marquee} />
       <About site={site} />

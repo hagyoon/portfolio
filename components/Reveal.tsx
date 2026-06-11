@@ -3,6 +3,7 @@
 import { motion, useInView, type MotionProps } from "framer-motion";
 import { useRef, type ReactNode } from "react";
 import clsx from "clsx";
+import { useMotionPref } from "@/components/Preferences";
 
 type Props = {
   children: ReactNode;
@@ -24,7 +25,11 @@ export default function Reveal({
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once, margin: "-10% 0px -10% 0px" });
+  const reduced = useMotionPref();
   const Comp = (motion as any)[as];
+  if (reduced) {
+    return <div className={clsx(className)}>{children}</div>;
+  }
   return (
     <Comp
       ref={ref}
