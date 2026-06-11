@@ -29,28 +29,28 @@
 }
 
 :root {
-  /* Base — warm noir */
-  --paper: #15100a;
-  --ivory: #1d1610;
-  --bone: #251c12;
-  --sand: #38301f;
-  --ink: #ede4d2;
-  /* Stones (inverted ramp) */
-  --stone-300: #5c5240;
-  --stone-500: #a39a82;
-  --stone-700: #d9d1bb;
-  /* Noir sci-fi accents */
-  --butter: #ffac02;
-  --sage: #5fb778;
-  --blush: #e06a4e;
-  --mist: #7d8fa3;
-  --lavender: #9a8fb8;
-  --forest: #2f4636;
+  /* Base — soft warm beige */
+  --paper: #f6f3ec;
+  --ivory: #efebe0;
+  --bone: #e8e3d5;
+  --sand: #dad3c0;
+  --ink: #272a22;
+  /* Stones */
+  --stone-300: #aaa593;
+  --stone-500: #6d6a5b;
+  --stone-700: #3c3b32;
+  /* Soft modern accents */
+  --butter: #ec8e3f;
+  --sage: #85a87b;
+  --mist: #84a8c0;
+  --blush: #d98a6e;
+  --lavender: #a7a0c2;
+  --forest: #3d5745;
   /* Legacy names, re-tinted */
-  --terracotta: #d96a4a;
-  --clay: #ffac02;
-  --moss: #5fb778;
-  --ochre: #cf9b3e;
+  --terracotta: #c96f4a;
+  --clay: #ec8e3f;
+  --moss: #85a87b;
+  --ochre: #c89a4f;
 }
 
 html,
@@ -82,7 +82,7 @@ html.lenis body {
 
 ::selection {
   background: var(--butter);
-  color: var(--paper);
+  color: var(--ink);
 }
 
 @layer base {
@@ -161,36 +161,36 @@ html.lenis body {
     inset: 0;
     pointer-events: none;
     z-index: 60;
-    opacity: 0.05;
-    mix-blend-mode: screen;
+    opacity: 0.03;
+    mix-blend-mode: multiply;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   }
-  /* Faint phosphor washes for section transitions */
+  /* Soft tinted washes for section transitions */
   .wash-mist {
-    background: linear-gradient(180deg, transparent 0%, rgba(125, 143, 163, 0.07) 50%, transparent 100%);
+    background: linear-gradient(180deg, transparent 0%, rgba(132, 168, 192, 0.14) 50%, transparent 100%);
   }
   .wash-blush {
-    background: linear-gradient(180deg, transparent 0%, rgba(255, 172, 2, 0.05) 50%, transparent 100%);
+    background: linear-gradient(180deg, transparent 0%, rgba(236, 142, 63, 0.09) 50%, transparent 100%);
   }
   .wash-sage {
-    background: linear-gradient(180deg, transparent 0%, rgba(95, 183, 120, 0.05) 50%, transparent 100%);
+    background: linear-gradient(180deg, transparent 0%, rgba(133, 168, 123, 0.13) 50%, transparent 100%);
   }
   .wash-lavender {
-    background: linear-gradient(180deg, transparent 0%, rgba(154, 143, 184, 0.06) 50%, transparent 100%);
+    background: linear-gradient(180deg, transparent 0%, rgba(167, 160, 194, 0.12) 50%, transparent 100%);
   }
   /* Blueprint grid — hairline technical grid, used behind the hero */
   .grid-lines {
     background-image:
-      linear-gradient(to right, rgba(237, 228, 210, 0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(237, 228, 210, 0.04) 1px, transparent 1px);
+      linear-gradient(to right, rgba(39, 42, 34, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(39, 42, 34, 0.05) 1px, transparent 1px);
     background-size: 72px 72px;
   }
   /* CRT scanlines — extremely subtle, hero only */
   .scanlines {
     background-image: repeating-linear-gradient(
       to bottom,
-      rgba(237, 228, 210, 0.025) 0px,
-      rgba(237, 228, 210, 0.025) 1px,
+      rgba(39, 42, 34, 0.02) 0px,
+      rgba(39, 42, 34, 0.02) 1px,
       transparent 1px,
       transparent 4px
     );
@@ -221,7 +221,7 @@ html.lenis body {
   width: 100%;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(237, 228, 210, 0.25);
+  border-bottom: 1px solid rgba(39, 42, 34, 0.25);
   padding: 8px 0;
   font-family: var(--font-sans), system-ui, sans-serif;
   font-size: 0.9375rem;
@@ -230,7 +230,7 @@ html.lenis body {
   transition: border-color 400ms ease;
 }
 .input-line::placeholder {
-  color: #7e7560;
+  color: #aaa593;
 }
 .input-line:focus {
   border-bottom-color: var(--ink);
@@ -244,7 +244,7 @@ html.lenis body {
   margin-bottom: 1.4em;
   font-size: 1.0625rem;
   line-height: 1.75;
-  color: #d9d1bb;
+  color: #3c3b32;
 }
 .prose-editorial h2 {
   font-family: var(--font-serif), serif;
@@ -258,20 +258,20 @@ html.lenis body {
   margin: 2em 0 0.5em;
 }
 .prose-editorial blockquote {
-  border-left: 1px solid rgba(237, 228, 210, 0.3);
+  border-left: 1px solid rgba(39, 42, 34, 0.3);
   padding-left: 1.25rem;
   font-style: italic;
-  color: #c2b9a0;
+  color: #535145;
   margin: 1.6em 0;
 }
 .prose-editorial a {
   text-decoration: underline;
   text-underline-offset: 4px;
   text-decoration-thickness: 1px;
-  text-decoration-color: rgba(255, 172, 2, 0.5);
+  text-decoration-color: rgba(236, 142, 63, 0.6);
 }
 .prose-editorial a:hover {
-  text-decoration-color: rgba(255, 172, 2, 1);
+  text-decoration-color: rgba(236, 142, 63, 1);
 }
 .prose-editorial em {
   font-family: var(--font-serif), serif;
@@ -292,8 +292,8 @@ html.lenis body {
 /* Admin panel */
 .admin-input {
   width: 100%;
-  background: var(--bone);
-  border: 1px solid rgba(237, 228, 210, 0.18);
+  background: #fbfaf5;
+  border: 1px solid rgba(39, 42, 34, 0.16);
   padding: 10px 12px;
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.875rem;
@@ -310,6 +310,6 @@ html.lenis body {
   font-size: 10.5px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: #a39a82;
+  color: #6d6a5b;
   margin-bottom: 6px;
 }

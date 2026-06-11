@@ -9,38 +9,38 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Base — warm noir, old film over ember (after Hermes #170d02)
-        paper: "#15100a",       // noir ground
-        ivory: "#1d1610",       // raised panel
-        bone: "#251c12",        // card surface
-        sand: "#38301f",        // dividers, secondary surfaces
-        // Text — warm parchment, never pure white
-        ink: "#ede4d2",
-        // Stones — inverted warm ramp: same class = same hierarchy, now on dark
+        // Base — soft warm beige, light and airy
+        paper: "#f6f3ec",       // cream
+        ivory: "#efebe0",       // raised panel
+        bone: "#e8e3d5",        // card surface
+        sand: "#dad3c0",        // dividers, secondary surfaces
+        // Text — soft green-tinged charcoal, never pure black
+        ink: "#272a22",
+        // Stones — warm-grey ramp on light ground
         stone: {
-          50: "#1a140c",
-          100: "#241c11",
-          200: "#3a3022",
-          300: "#5c5240",
-          400: "#7e7560",
-          500: "#a39a82",
-          600: "#c2b9a0",
-          700: "#d9d1bb",
-          800: "#e8e1ce",
-          900: "#f2ecdc",
+          50: "#f1eee6",
+          100: "#e6e2d6",
+          200: "#d0cbbb",
+          300: "#aaa593",
+          400: "#8b8775",
+          500: "#6d6a5b",
+          600: "#535145",
+          700: "#3c3b32",
+          800: "#2a2a23",
+          900: "#1b1b16",
         },
-        // Noir sci-fi accents — amber phosphor leads, terminal green seconds
-        butter: "#ffac02",      // hermes amber
-        sage: "#5fb778",        // terminal green
-        blush: "#e06a4e",       // warning ember
-        mist: "#7d8fa3",        // steel
-        lavender: "#9a8fb8",    // violet static
-        forest: "#2f4636",      // kept for back-compat
+        // Soft modern accents — tangerine leads, sage seconds
+        butter: "#ec8e3f",      // soft tangerine
+        sage: "#85a87b",        // soft sage green
+        mist: "#84a8c0",        // light blue
+        blush: "#d98a6e",       // soft coral
+        lavender: "#a7a0c2",    // soft violet
+        forest: "#3d5745",      // grounded deep green
         // Legacy accent names, re-tinted to match
-        terracotta: "#d96a4a",
-        clay: "#ffac02",
-        moss: "#5fb778",
-        ochre: "#cf9b3e",
+        terracotta: "#c96f4a",
+        clay: "#ec8e3f",
+        moss: "#85a87b",
+        ochre: "#c89a4f",
       },
       fontFamily: {
         // Mondwest leads the display stack; Cormorant holds until the file lands

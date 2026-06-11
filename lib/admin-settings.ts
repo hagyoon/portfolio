@@ -107,13 +107,13 @@ export async function sendResetEmail(resetUrl: string): Promise<void> {
       to,
       subject: "[hkryu.space] Reset your studio password",
       html: `
-        <div style="font-family: 'Courier New', monospace; max-width: 520px; margin: 0 auto; padding: 40px; background: #15100a; color: #ede4d2;">
-          <p style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #a39a82; margin: 0 0 24px;">hkryu.space — studio</p>
+        <div style="font-family: 'Courier New', monospace; max-width: 520px; margin: 0 auto; padding: 40px; background: #f6f3ec; color: #272a22;">
+          <p style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #6d6a5b; margin: 0 0 24px;">hkryu.space — studio</p>
           <p>Someone (hopefully you) asked to reset the studio password.</p>
           <p style="margin: 28px 0;">
-            <a href="${resetUrl}" style="background: #ffac02; color: #15100a; padding: 12px 24px; text-decoration: none; font-weight: bold;">Reset password →</a>
+            <a href="${resetUrl}" style="background: #ec8e3f; color: #272a22; padding: 12px 24px; text-decoration: none; font-weight: bold;">Reset password →</a>
           </p>
-          <p style="color: #a39a82; font-size: 13px;">The link works for 15 minutes and dies after the password changes. If you didn't ask for this, ignore it — nothing happens without the link.</p>
+          <p style="color: #6d6a5b; font-size: 13px;">The link works for 15 minutes and dies after the password changes. If you didn't ask for this, ignore it — nothing happens without the link.</p>
         </div>`,
     }),
   });
