@@ -13,6 +13,7 @@ import type { Site } from "@/lib/content";
 const TERMINAL_LINES = [
   { cmd: "whoami", out: "builder · collector · systems thinker" },
   { cmd: "ls ~/current", out: "agentic-systems  markets  horology  second-brain" },
+  { cmd: "studio --unlock", out: "→ sign in to the studio", href: "/admin" },
 ];
 
 const rise = (delay: number) => ({
@@ -58,14 +59,14 @@ export default function Hero({ site }: { site: Site }) {
             className="glow-drift absolute -top-1/4 right-[-15%] w-[70vw] h-[70vw] rounded-full opacity-60"
             style={{
               background:
-                "radial-gradient(circle at center, rgba(255,172,2,0.10) 0%, transparent 65%)",
+                "radial-gradient(circle at center, rgba(236,142,63,0.16) 0%, transparent 65%)",
             }}
           />
           <div
-            className="glow-drift absolute bottom-[-30%] left-[-10%] w-[55vw] h-[55vw] rounded-full opacity-50"
+            className="glow-drift absolute bottom-[-30%] left-[-10%] w-[55vw] h-[55vw] rounded-full opacity-55"
             style={{
               background:
-                "radial-gradient(circle at center, rgba(95,183,120,0.08) 0%, transparent 65%)",
+                "radial-gradient(circle at center, rgba(132,168,192,0.18) 0%, transparent 65%)",
               animationDelay: "-16s",
               animationDirection: "alternate-reverse",
             }}

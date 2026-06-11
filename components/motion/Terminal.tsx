@@ -8,7 +8,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-type Line = { cmd: string; out: string };
+type Line = { cmd: string; out: string; href?: string };
 
 const TYPE_MS = 38;
 const PAUSE_AFTER_CMD = 260;
@@ -73,7 +73,16 @@ export default function Terminal({
               <span className="text-butter">$ </span>
               <span className="text-ink">{line.cmd}</span>
             </div>
-            <div className="text-stone-600 mb-1.5">{line.out}</div>
+            {line.href ? (
+              <a
+                href={line.href}
+                className="block text-butter underline underline-offset-4 decoration-1 hover:opacity-75 transition-opacity mb-1.5"
+              >
+                {line.out}
+              </a>
+            ) : (
+              <div className="text-stone-600 mb-1.5">{line.out}</div>
+            )}
           </div>
         ))}
         <div>
