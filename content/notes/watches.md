@@ -1,7 +1,11 @@
 ---
-title: "Watches"
-topic: "Identity & Personal"
-summary: "Collection, wishlist, strap philosophy, and the Watch-Roll app project. See active-projects for Watch-Roll build status"
+title: Watches
+topic: Identity & Personal
+summary: >-
+  Collection, wishlist, strap philosophy, and the Watch-Roll app project. See
+  active-projects for Watch-Roll build status
+status: draft
+updated: '2026-06-11T18:31:15.469Z'
 ---
 
 # Watches
@@ -11,13 +15,6 @@ summary: "Collection, wishlist, strap philosophy, and the Watch-Roll app project
 ---
 
 ## Current Collection
-
-| Watch                              | Notes                    |
-| ---------------------------------- | ------------------------ |
-| Baltic Aquascaphe Blue Gilt        | French microbrand, diver |
-| Kuoe Royal Smith Prototype         | Rare prototype           |
-| Universal Genève White Shadow Date | Vintage                  |
-| Cartier Tank Must Black Lacquer    | Icon                     |
 
 ---
 
@@ -46,13 +43,6 @@ summary: "Collection, wishlist, strap philosophy, and the Watch-Roll app project
 | **Laurent Ferrier**             | Geneva, classical elegance              |
 | **Romain Gauthier Logical One** | Under consideration                     |
 
-### High-End Swiss
-| Brand/Model             | Notes                                   |
-| ----------------------- | --------------------------------------- |
-| **A. Lange & Söhne**    | more refs of interest                   |
-| **Patek Philippe**      | Multiple references                     |
-| **Vacheron Constantin** | Particularly interested in independents |
-
 
 ### Independents (Next Tier)
 | Brand/Model | Notes |
@@ -67,12 +57,6 @@ summary: "Collection, wishlist, strap philosophy, and the Watch-Roll app project
 ## Strap Philosophy
 
 **Core principle:** Strap pairing is as important as the watch itself. Aesthetics must be considered as a system.
-
-**Materials:**
-- **Alligator** — formal, structured
-- **Chevre (goatskin)** — fine, elegant texture
-- **Rubber** — sport / tropical
-- **Sailcloth** — casual sport, nautical aesthetic
 
 **Singapore climate consideration:** High heat and humidity makes rubber viability important. Leather straps degrade faster in tropical conditions.
 
@@ -97,36 +81,12 @@ summary: "Collection, wishlist, strap philosophy, and the Watch-Roll app project
 
 **Microbrands:** Baltic, Folio, Farer, Furlan Marri, Yema, Christopher Ward, Timex, Seiko, Casio
 
-### Technical Stack
-- Fraunces + Geist fonts
-- Warm off-white palette
-- Vanilla HTML/CSS/JS, single `index.html`
-- Deployed on Vercel
-- Supabase backend (planned for user sessions + data)
-
-### Build Priorities
-1. Onboarding flow
-2. Real product images
-3. Expanded catalogue (100+ watches)
-4. User session persistence
-5. Backend integration (Supabase)
-6. Dealer dashboard (B2B analytics layer)
-
-### Earlier Vision (watchroll.com concept)
-- Real-time stock-like price feeds (like a watch stock exchange)
-- ML-based recommendation engine
-- Vault-backed ownership verification
-- AI concierge ("find me a De Bethune under $30k")
-- Reduced transaction fees vs Chrono24/WatchCharts
-
----
-
 ## Market Context
 
 The watch secondary market has grown significantly. Platforms like Chrono24, Bob's Watches, and WatchCharts dominate.
 
-**Gap in market:**
-- Discovery (not search) — most people don't know what they want
+**Current Gap in market:**
+- Discovery (not search) — most people don't always know what they want. Most spend lots of time and money before they actually arrive at the choices they love in their collecting journey.
 - Taste profiling — no platform learns your aesthetic
 - Dealer intelligence — no aggregated preference data sold B2B
 
