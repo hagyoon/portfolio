@@ -1,8 +1,13 @@
 ---
 title: Notes on Uranium
-date: 2026-02-15
+date: 2026-02-15T00:00:00.000Z
 tag: Markets
-excerpt: A small position in something most people refuse to think about. Why the supply-demand math, the policy direction, and the AI compute build-out converge on the same conclusion.
+excerpt: >-
+  A small position in something most people refuse to think about. Why the
+  supply-demand math, the policy direction, and the AI compute build-out
+  converge on the same conclusion.
+status: archived
+updated: '2026-06-11T18:28:20.518Z'
 ---
 
 There are a handful of investment positions I hold that I expect to argue about for years before I'm vindicated or proved wrong. Uranium is the one I most enjoy arguing about, because the people who think it's a stupid trade typically don't know the supply-demand arithmetic, and the people who think it's the next great trade typically haven't stress-tested the upside.
