@@ -1,8 +1,13 @@
 ---
 title: Lessons from 2025
-date: 2026-01-04
+date: 2026-01-04T00:00:00.000Z
 tag: Personal
-excerpt: A year that gave more than I could have imagined two years before, and irrevocably took some things away. What I want to remember about how the rupture left me.
+excerpt: >-
+  A year that gave more than I could have imagined two years before, and
+  irrevocably took some things away. What I want to remember about how the
+  rupture left me.
+status: archived
+updated: '2026-06-11T18:27:56.254Z'
 ---
 
 2025 gave me more than I could have imagined two or three years before. It also irrevocably took some things away. I'm writing this in the first week of 2026 partly to remember accurately, and partly because I've noticed that what I take from a difficult year is determined more by what I write down in the months after than by the year itself.
