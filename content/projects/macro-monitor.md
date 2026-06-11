@@ -1,11 +1,14 @@
 ---
 title: Macro Monitor
-client: Independent
+client: 'Personal '
 domain: Markets · Automation · Data
-year: "2026"
-status: selected
+year: '2026'
+status: archive
 role: Builder
-summary: A daily 10am SGT market briefing delivered via Telegram. BTC, energy complex, systematic trading signals, key economic events. Curated macro intelligence, every morning, before the market opens.
+summary: >-
+  A daily 10am SGT market briefing delivered via Telegram. BTC, energy complex,
+  systematic trading signals, key economic events. Curated macro intelligence,
+  every morning, before the market opens.
 stack:
   - Python
   - Telegram Bot API
