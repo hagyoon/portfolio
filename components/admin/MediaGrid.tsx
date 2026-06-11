@@ -139,10 +139,13 @@ export default function MediaGrid({
                 className="block w-full aspect-square overflow-hidden cursor-pointer"
                 title={onSelect ? "Use this image" : "Copy path"}
               >
-                {/* plain <img> — admin previews shouldn't go through the optimizer */}
+                {/* plain <img> — admin previews shouldn't go through the optimizer.
+                    lazy + async keeps a large library from downloading everything at once. */}
                 <img
                   src={item.path}
                   alt={item.name}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </button>
