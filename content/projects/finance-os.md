@@ -1,11 +1,14 @@
 ---
 title: Finance OS
-client: Independent
+client: 'Personal '
 domain: Finance · Analytics · Personal
-year: "2026"
-status: selected
+year: '2026'
+status: archive
 role: Builder & Analyst
-summary: A personal financial dashboard built with the rigour of a small company's FP&A function. Net worth across asset classes, portfolio benchmarked against the right indices, cash flow at category level.
+summary: >-
+  A personal financial dashboard built with the rigour of a small company's FP&A
+  function. Net worth across asset classes, portfolio benchmarked against the
+  right indices, cash flow at category level.
 stack:
   - Python
   - Supabase
@@ -14,7 +17,7 @@ stack:
   - Futu API
 links:
   - label: Futu API integration
-    href: https://www.futunn.com/openAPI
+    href: 'https://www.futunn.com/openAPI'
 ---
 
 ## Premise
