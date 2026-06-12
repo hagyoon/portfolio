@@ -41,6 +41,7 @@ export type Site = {
     linkedin?: string;
     github?: string;
     telegram?: string;
+    instagram?: string;
     x?: string;
   };
 };

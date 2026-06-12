@@ -1,40 +1,29 @@
 /* ──────────────────────────────────────────────────────────────────────────
- * ContactModal — full-screen editorial contact form.
+ * ContactModal — full-screen wrapper around the shared ContactForm.
  *
- * Opens when "Begin a conversation →" is clicked anywhere on the site.
- * Sends to /api/contact → Resend → ryuhakyun@gmail.com.
- * Success state shows "Appreciate you reaching out!"
+ * Opens when "Begin a conversation →" is clicked. The form itself (channel
+ * picker, validation, delivery, success state) lives in ContactForm so there
+ * is a single source of truth. This component only handles the overlay,
+ * focus trap, scroll lock, and Escape-to-close.
  *
- * Usage: <ContactModal open={open} onClose={() => setOpen(false)} />
+ * Usage: <ContactModal open={open} onClose={...} instagram={site.contact.instagram} />
  * ────────────────────────────────────────────────────────────────────────── */
 
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-
-type Field = {
-  name: string;
-  email: string;
-  phone: string;
-  topic: string;
-  message: string;
-};
-
-const EMPTY: Field = { name: "", email: "", phone: "", topic: "", message: "" };
+import ContactForm from "@/components/ContactForm";
 
 export default function ContactModal({
   open,
   onClose,
+  instagram,
 }: {
   open: boolean;
   onClose: () => void;
+  instagram?: string;
 }) {
-  const [fields, setFields] = useState<Field>(EMPTY);
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  const [errorMsg, setErrorMsg] = useState("");
-  const firstRef = useRef<HTMLInputElement>(null);
-
   // Close on Escape
   useEffect(() => {
     if (!open) return;
@@ -43,50 +32,13 @@ export default function ContactModal({
     return () => window.removeEventListener("keydown", handler);
   }, [open, onClose]);
 
-  // Focus first field on open, lock scroll
+  // Lock scroll while open
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-      setTimeout(() => firstRef.current?.focus(), 350);
-    } else {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
       document.body.style.overflow = "";
-    }
-    return () => { document.body.style.overflow = ""; };
+    };
   }, [open]);
-
-  // Reset form when closed
-  useEffect(() => {
-    if (!open) {
-      setTimeout(() => {
-        setFields(EMPTY);
-        setStatus("idle");
-        setErrorMsg("");
-      }, 400);
-    }
-  }, [open]);
-
-  const set = (k: keyof Field) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-    setFields((f) => ({ ...f, [k]: e.target.value }));
-
-  async function submit(e: React.FormEvent) {
-    e.preventDefault();
-    setStatus("sending");
-    setErrorMsg("");
-
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(fields),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Something went wrong.");
-      setStatus("sent");
-    } catch (err: unknown) {
-      setErrorMsg(err instanceof Error ? err.message : "Something went wrong.");
-      setStatus("error");
-    }
-  }
 
   return (
     <AnimatePresence>
@@ -99,7 +51,7 @@ export default function ContactModal({
           className="fixed inset-0 z-[100] bg-paper overflow-y-auto"
           onClick={(e) => e.target === e.currentTarget && onClose()}
         >
-          {/* ── Close button ──────────────────────────────────────────────── */}
+          {/* Close button */}
           <button
             onClick={onClose}
             aria-label="Close"
@@ -110,168 +62,26 @@ export default function ContactModal({
           </button>
 
           <div className="container-edge min-h-screen flex flex-col justify-center py-24">
-            <AnimatePresence mode="wait">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full max-w-2xl mx-auto"
+            >
+              <p className="label text-stone-400 mb-8">Get in touch</p>
+              <h2
+                className="font-serif italic leading-[0.92] tracking-tightest text-ink mb-12"
+                style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
+              >
+                Begin a conversation.
+              </h2>
 
-              {/* ── Success state ────────────────────────────────────────── */}
-              {status === "sent" ? (
-                <motion.div
-                  key="success"
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                  className="max-w-2xl"
-                >
-                  <p className="label text-stone-400 mb-8">Message sent</p>
-                  <h2
-                    className="font-serif leading-[0.92] tracking-tightest text-ink"
-                    style={{ fontSize: "clamp(2.5rem, 7vw, 6rem)" }}
-                  >
-                    Appreciate you<br />
-                    <em className="text-clay">reaching out!</em>
-                  </h2>
-                  <p className="mt-8 text-stone-500 text-base max-w-sm leading-relaxed">
-                    I&apos;ll be in touch soon. If it&apos;s urgent, email directly at{" "}
-                    <a href="mailto:ryuhakyun@gmail.com" className="underline-grow">
-                      ryuhakyun@gmail.com
-                    </a>
-                    .
-                  </p>
-                  <button
-                    onClick={onClose}
-                    className="mt-12 label underline-grow text-stone-500 hover:text-ink transition-colors duration-300"
-                  >
-                    Back to site →
-                  </button>
-                </motion.div>
-
-              ) : (
-
-                /* ── Form ─────────────────────────────────────────────────── */
-                <motion.form
-                  key="form"
-                  onSubmit={submit}
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  className="w-full max-w-2xl"
-                  noValidate
-                >
-                  <p className="label text-stone-400 mb-8">Get in touch</p>
-                  <h2
-                    className="font-serif italic leading-[0.92] tracking-tightest text-ink mb-14"
-                    style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
-                  >
-                    Begin a conversation.
-                  </h2>
-
-                  <div className="space-y-10">
-
-                    {/* Topic */}
-                    <FormField label="Topic" hint="optional">
-                      <input
-                        type="text"
-                        value={fields.topic}
-                        onChange={set("topic")}
-                        placeholder="What&apos;s this about?"
-                        className="input-line"
-                      />
-                    </FormField>
-
-                    {/* Message */}
-                    <FormField label="Message" hint="required">
-                      <textarea
-                        value={fields.message}
-                        onChange={set("message")}
-                        required
-                        rows={4}
-                        placeholder="What&apos;s on your mind?"
-                        className="input-line resize-none"
-                      />
-                    </FormField>
-
-                    {/* Name + Email side by side on md+ */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                      <FormField label="Name" hint="required">
-                        <input
-                          ref={firstRef}
-                          type="text"
-                          value={fields.name}
-                          onChange={set("name")}
-                          required
-                          placeholder="Your name"
-                          className="input-line"
-                        />
-                      </FormField>
-
-                      <FormField label="Email" hint="required">
-                        <input
-                          type="email"
-                          value={fields.email}
-                          onChange={set("email")}
-                          required
-                          placeholder="your@email.com"
-                          className="input-line"
-                        />
-                      </FormField>
-                    </div>
-
-                    {/* Phone */}
-                    <FormField label="Phone" hint="optional">
-                      <input
-                        type="tel"
-                        value={fields.phone}
-                        onChange={set("phone")}
-                        placeholder="+65 ···"
-                        className="input-line"
-                      />
-                    </FormField>
-
-                  </div>
-
-                  {/* Error */}
-                  {status === "error" && (
-                    <p className="mt-6 text-sm text-terracotta">{errorMsg}</p>
-                  )}
-
-                  {/* Submit */}
-                  <div className="mt-14 flex items-center gap-8">
-                    <button
-                      type="submit"
-                      disabled={status === "sending"}
-                      className="font-serif italic text-xl md:text-2xl tracking-tight text-ink hover:text-clay transition-colors duration-300 disabled:opacity-40"
-                    >
-                      {status === "sending" ? "Sending···" : "Send message →"}
-                    </button>
-                  </div>
-                </motion.form>
-              )}
-            </AnimatePresence>
+              <ContactForm instagram={instagram} />
+            </motion.div>
           </div>
         </motion.div>
       )}
     </AnimatePresence>
-  );
-}
-
-/* ── Shared field wrapper ─────────────────────────────────────────────────── */
-function FormField({
-  label,
-  hint,
-  children,
-}: {
-  label: string;
-  hint: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div>
-      <div className="flex items-baseline gap-3 mb-3">
-        <span className="label text-stone-500">{label}</span>
-        <span className="text-stone-300 text-[10px] uppercase tracking-widest">{hint}</span>
-      </div>
-      {children}
-    </div>
   );
 }

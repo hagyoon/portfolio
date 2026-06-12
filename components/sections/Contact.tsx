@@ -27,7 +27,7 @@ export default function Contact({ site }: { site: Site }) {
 
           <Reveal delay={0.16}>
             <div className="max-w-2xl mx-auto mt-14">
-              <ContactForm />
+              <ContactForm instagram={site.contact.instagram} />
             </div>
           </Reveal>
 
