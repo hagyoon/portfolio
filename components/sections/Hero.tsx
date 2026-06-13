@@ -8,6 +8,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Terminal from "@/components/motion/Terminal";
+import HeroGraph from "@/components/motion/HeroGraph";
 import type { Site } from "@/lib/content";
 
 const TERMINAL_LINES = [
@@ -81,60 +82,75 @@ export default function Hero({ site }: { site: Site }) {
           className="flex-1 flex flex-col justify-center origin-center"
         >
           <div className="container-edge w-full">
-            <h1
-              aria-label={site.name}
-              className="font-serif leading-[0.92] tracking-tightest select-none"
-              style={{ fontSize: "clamp(3.25rem, 8.5vw, 8rem)" }}
-            >
-              <span className="block overflow-hidden pb-[0.06em]">
-                <motion.span {...rise(0.15)} className="block text-ink">
-                  {first}
-                </motion.span>
-              </span>
-              <span className="block overflow-hidden pb-[0.06em]">
-                <motion.span {...rise(0.28)} className="block italic text-butter">
-                  {last}.
-                  <span
-                    aria-hidden
-                    className="cursor-blink not-italic inline-block align-baseline ml-[0.08em] w-[0.45em] h-[0.72em] bg-butter/80"
-                  />
-                </motion.span>
-              </span>
-            </h1>
-            <motion.p
-              {...fade(0.6)}
-              className="mt-8 font-mono text-lg md:text-xl text-stone-700"
-            >
-              AI &amp; Systems Builder — Singapore
-            </motion.p>
-            <motion.p
-              {...fade(0.7)}
-              className="mt-3 max-w-md text-stone-600 text-base md:text-lg leading-relaxed"
-            >
-              {site.tagline}
-            </motion.p>
-            {/* Primary calls to action */}
-            <motion.div {...fade(0.85)} className="mt-8 flex flex-wrap gap-4">
-              <a
-                href="/#projects"
-                className="inline-flex items-center gap-2 bg-ink text-paper px-7 py-3.5 label !text-paper hover:opacity-85 active:opacity-70 transition-opacity"
+            <div className="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+
+              {/* ── Left column: identity ──────────────────────────────── */}
+              <div className="lg:col-span-7">
+                <h1
+                  aria-label={site.name}
+                  className="font-serif leading-[0.92] tracking-tightest select-none"
+                  style={{ fontSize: "clamp(3.25rem, 7.5vw, 7rem)" }}
+                >
+                  <span className="block overflow-hidden pb-[0.06em]">
+                    <motion.span {...rise(0.15)} className="block text-ink">
+                      {first}
+                    </motion.span>
+                  </span>
+                  <span className="block overflow-hidden pb-[0.06em]">
+                    <motion.span {...rise(0.28)} className="block italic text-butter">
+                      {last}.
+                      <span
+                        aria-hidden
+                        className="cursor-blink not-italic inline-block align-baseline ml-[0.08em] w-[0.45em] h-[0.72em] bg-butter/80"
+                      />
+                    </motion.span>
+                  </span>
+                </h1>
+                <motion.p
+                  {...fade(0.6)}
+                  className="mt-8 font-mono text-lg md:text-xl text-stone-700"
+                >
+                  AI &amp; Systems Builder — Singapore
+                </motion.p>
+                <motion.p
+                  {...fade(0.7)}
+                  className="mt-3 max-w-md text-stone-600 text-base md:text-lg leading-relaxed"
+                >
+                  {site.tagline}
+                </motion.p>
+                {/* Primary calls to action */}
+                <motion.div {...fade(0.85)} className="mt-8 flex flex-wrap gap-4">
+                  <a
+                    href="/#projects"
+                    className="inline-flex items-center gap-2 bg-ink text-paper px-7 py-3.5 label !text-paper hover:opacity-85 active:opacity-70 transition-opacity"
+                  >
+                    View my work <span aria-hidden>↓</span>
+                  </a>
+                  <a
+                    href="/#contact"
+                    className="inline-flex items-center gap-2 border border-ink/30 px-7 py-3.5 label hover:bg-ink hover:!text-paper active:opacity-70 transition-colors"
+                  >
+                    Contact me <span aria-hidden>→</span>
+                  </a>
+                </motion.div>
+              </div>
+
+              {/* ── Right column: interactive constellation + terminal ─── */}
+              <motion.div
+                {...fade(1.0)}
+                className="hidden lg:flex lg:col-span-5 flex-col items-stretch gap-6"
               >
-                View my work <span aria-hidden>↓</span>
-              </a>
-              <a
-                href="/#contact"
-                className="inline-flex items-center gap-2 border border-ink/30 px-7 py-3.5 label hover:bg-ink hover:!text-paper active:opacity-70 transition-colors"
-              >
-                Contact me <span aria-hidden>→</span>
-              </a>
-            </motion.div>
-            <motion.div {...fade(1.05)}>
-              <Terminal
-                host="ryu@hkryu.space"
-                lines={TERMINAL_LINES}
-                className="mt-10 max-w-md hidden lg:block"
-              />
-            </motion.div>
+                <div className="h-[22rem] xl:h-[26rem] w-full">
+                  <HeroGraph />
+                </div>
+                <Terminal
+                  host="ryu@hkryu.space"
+                  lines={TERMINAL_LINES}
+                  className="w-full"
+                />
+              </motion.div>
+
+            </div>
           </div>
         </motion.div>
 
