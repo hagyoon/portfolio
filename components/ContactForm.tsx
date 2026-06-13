@@ -1,15 +1,15 @@
 "use client";
 
 /*
- * ContactForm — accessible contact form with a channel picker.
+ * ContactForm — composes a message and hands off to Telegram.
  *
- * The visitor chooses how they'd like to be reached (Email / Telegram /
- * Instagram), leaves their handle on that channel, and writes a message.
- * Posts to /api/contact, which routes to Ryu via Email + Telegram.
+ * No backend, no env vars: on submit it copies a formatted message to the
+ * clipboard and opens a chat with @hagy00n so the visitor pastes and sends.
+ * The message arrives in Ryu's Telegram from the visitor's own account.
  *
- * Response parsing is defensive: it reads text first and only then tries
- * JSON, so a crashed/empty server response shows a friendly message
- * instead of "Unexpected end of JSON input".
+ * The visitor still picks a preferred reply channel (Email / Telegram /
+ * Instagram) and leaves their handle, which is baked into the message so
+ * Ryu knows where to reply.
  */
 
 import { useState } from "react";
@@ -20,19 +20,40 @@ type Fields = { name: string; channel: Channel; handle: string; message: string 
 type Errors = Partial<Record<keyof Fields, string>>;
 
 const CHANNELS: { id: Channel; label: string; hint: string; placeholder: string }[] = [
-  { id: "email", label: "Email", hint: "I'll reply to your inbox", placeholder: "you@email.com" },
-  { id: "telegram", label: "Telegram", hint: "I'll message you on Telegram", placeholder: "@yourhandle" },
-  { id: "instagram", label: "Instagram", hint: "I'll DM you on Instagram", placeholder: "@yourhandle" },
+  { id: "email", label: "Email", hint: "reply to my inbox", placeholder: "you@email.com" },
+  { id: "telegram", label: "Telegram", hint: "reply on Telegram", placeholder: "@yourhandle" },
+  { id: "instagram", label: "Instagram", hint: "reply on Instagram", placeholder: "@yourhandle" },
 ];
 
 const EMPTY: Fields = { name: "", channel: "email", handle: "", message: "" };
 
-export default function ContactForm({ instagram }: { instagram?: string }) {
+function compose(f: Fields): string {
+  const channelLabel = CHANNELS.find((c) => c.id === f.channel)!.label;
+  return [
+    `Hi Hakyun — reaching out via hkryu.space.`,
+    ``,
+    `Name: ${f.name.trim()}`,
+    `Preferred reply: ${channelLabel} (${f.handle.trim()})`,
+    ``,
+    f.message.trim(),
+  ].join("\n");
+}
+
+export default function ContactForm({
+  telegram = "@hagy00n",
+  instagram,
+}: {
+  telegram?: string;
+  instagram?: string;
+}) {
   const [fields, setFields] = useState<Fields>(EMPTY);
   const [errors, setErrors] = useState<Errors>({});
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  const [serverError, setServerError] = useState("");
+  const [status, setStatus] = useState<"idle" | "sent">("idle");
+  const [composed, setComposed] = useState("");
+  const [copied, setCopied] = useState(false);
 
+  const tgHandle = telegram.replace(/^@/, "");
+  const tgUrl = `https://t.me/${tgHandle}`;
   const active = CHANNELS.find((c) => c.id === fields.channel)!;
 
   const set =
@@ -44,7 +65,7 @@ export default function ContactForm({ instagram }: { instagram?: string }) {
 
   const pickChannel = (channel: Channel) => {
     setFields((f) => ({ ...f, channel, handle: "" }));
-    setErrors((er) => ({ ...er, handle: undefined, channel: undefined }));
+    setErrors((er) => ({ ...er, handle: undefined }));
   };
 
   function validate(): boolean {
@@ -66,39 +87,25 @@ export default function ContactForm({ instagram }: { instagram?: string }) {
     return Object.keys(next).length === 0;
   }
 
-  async function submit(e: React.FormEvent) {
+  function copy(text: string) {
+    try {
+      navigator.clipboard?.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* clipboard blocked — the readonly box below is the fallback */
+    }
+  }
+
+  function submit(e: React.FormEvent) {
     e.preventDefault();
     if (!validate()) return;
-    setStatus("sending");
-    setServerError("");
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(fields),
-      });
-
-      // Defensive parse: read text, then attempt JSON.
-      const raw = await res.text();
-      let data: { error?: string; success?: boolean } = {};
-      try {
-        data = raw ? JSON.parse(raw) : {};
-      } catch {
-        data = {};
-      }
-
-      if (!res.ok) {
-        throw new Error(
-          data.error || "Something went wrong. Please email me directly."
-        );
-      }
-      setStatus("sent");
-    } catch (err) {
-      setServerError(
-        err instanceof Error ? err.message : "Something went wrong."
-      );
-      setStatus("error");
-    }
+    const text = compose(fields);
+    setComposed(text);
+    // Copy first (sync call keeps us inside the user gesture), then open.
+    copy(text);
+    window.open(tgUrl, "_blank", "noopener,noreferrer");
+    setStatus("sent");
   }
 
   if (status === "sent") {
@@ -106,23 +113,41 @@ export default function ContactForm({ instagram }: { instagram?: string }) {
       <div role="status" className="border border-ink/15 bg-ivory p-8 text-left">
         <p className="font-serif text-2xl mb-2">Appreciate you reaching out!</p>
         <p className="text-stone-600">
-          I read everything and usually reply within a day or two
-          {fields.channel === "email" ? "" : ` on ${active.label}`}.
+          Telegram should have opened with my chat. Your message is copied —
+          just <strong>paste</strong> it there and hit send.
         </p>
-        {fields.channel === "instagram" && instagram && (
-          <p className="text-stone-600 mt-3 text-sm">
-            Want to reach me first? DM{" "}
-            <a
-              href={`https://instagram.com/${instagram.replace(/^@/, "")}`}
-              target="_blank"
-              rel="noreferrer"
-              className="link-inline"
-            >
-              @{instagram.replace(/^@/, "")}
-            </a>
-            .
-          </p>
-        )}
+
+        {/* The composed message, ready to copy if the auto-copy was blocked */}
+        <textarea
+          readOnly
+          value={composed}
+          rows={6}
+          className="admin-input mt-5 font-mono text-sm"
+          onFocus={(e) => e.currentTarget.select()}
+        />
+
+        <div className="mt-4 flex flex-wrap gap-3">
+          <button
+            type="button"
+            onClick={() => copy(composed)}
+            className="border border-ink/25 px-5 py-2.5 label hover:border-ink/60 transition-colors cursor-pointer"
+          >
+            {copied ? "Copied ✓" : "Copy message"}
+          </button>
+          <a
+            href={tgUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="bg-ink !text-paper px-5 py-2.5 label inline-flex items-center gap-2 hover:opacity-85 transition-opacity"
+          >
+            Open Telegram ({telegram}) <span aria-hidden>→</span>
+          </a>
+        </div>
+
+        <p className="text-stone-500 mt-5 text-sm">
+          No Telegram? Reach me another way — the links are below
+          {instagram ? `, including Instagram @${instagram.replace(/^@/, "")}` : ""}.
+        </p>
       </div>
     );
   }
@@ -187,7 +212,7 @@ export default function ContactForm({ instagram }: { instagram?: string }) {
       <div>
         <label htmlFor="cf-handle" className="admin-label">
           {active.label}{" "}
-          <span className="text-stone-400 normal-case">— {active.hint}</span>
+          <span className="text-stone-400 normal-case">— I&apos;ll {active.hint}</span>
         </label>
         <input
           id="cf-handle"
@@ -232,19 +257,15 @@ export default function ContactForm({ instagram }: { instagram?: string }) {
         )}
       </div>
 
-      {status === "error" && (
-        <p role="alert" className="text-sm text-terracotta">
-          {serverError} You can also email me directly — the address is below.
-        </p>
-      )}
-
       <button
         type="submit"
-        disabled={status === "sending"}
-        className="bg-ink !text-paper px-8 py-3.5 label inline-flex items-center gap-2 hover:opacity-85 active:opacity-70 transition-opacity disabled:opacity-50 cursor-pointer"
+        className="bg-ink !text-paper px-8 py-3.5 label inline-flex items-center gap-2 hover:opacity-85 active:opacity-70 transition-opacity cursor-pointer"
       >
-        {status === "sending" ? "Sending…" : "Send message"} <span aria-hidden>→</span>
+        Send via Telegram <span aria-hidden>→</span>
       </button>
+      <p className="text-stone-500 text-sm">
+        Opens Telegram with your message ready to paste and send.
+      </p>
     </form>
   );
 }

@@ -15,7 +15,7 @@ export default function Footer({ site }: { site: Site }) {
 
   return (
     <>
-      <ContactModal open={open} onClose={() => setOpen(false)} instagram={site.contact.instagram} />
+      <ContactModal open={open} onClose={() => setOpen(false)} telegram={site.contact.telegram} instagram={site.contact.instagram} />
 
       <footer className="border-t border-ink/15 mt-32">
         <div className="container-edge py-16 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-6">

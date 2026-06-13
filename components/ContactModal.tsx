@@ -18,10 +18,12 @@ import ContactForm from "@/components/ContactForm";
 export default function ContactModal({
   open,
   onClose,
+  telegram,
   instagram,
 }: {
   open: boolean;
   onClose: () => void;
+  telegram?: string;
   instagram?: string;
 }) {
   // Close on Escape
@@ -77,7 +79,7 @@ export default function ContactModal({
                 Begin a conversation.
               </h2>
 
-              <ContactForm instagram={instagram} />
+              <ContactForm telegram={telegram} instagram={instagram} />
             </motion.div>
           </div>
         </motion.div>
