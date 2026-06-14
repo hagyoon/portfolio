@@ -2,8 +2,8 @@
 name: Hakyun Ryu
 tagline: Builder. Watch geek. Exploring the edge of AI systems and human workflows.
 description: >-
-  A personal index — independent builder, watch collector, and writer based in
-  Singapore. Notes, projects, and writing at hkryu.space.
+  The personal index of Hakyun Ryu. Independent builder, watch collector, and
+  writer based in Singapore.
 location: Singapore · 1°N
 intro: >-
   Same instinct that got me into watches got me into AI. Start with something
