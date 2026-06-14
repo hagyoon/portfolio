@@ -43,7 +43,7 @@ export default async function ProjectPage({
     name: project.title,
     description: project.summary,
     url: `https://hkryu.space/projects/${project.slug}`,
-    author: { "@type": "Person", name: "Hakyun Ryu", url: "https://hkryu.space" },
+    author: { "@type": "Person", name: "hkryu", url: "https://hkryu.space" },
     dateCreated: project.year,
     ...(project.cover ? { image: `https://hkryu.space${project.cover}` } : {}),
   };

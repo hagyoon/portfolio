@@ -323,6 +323,11 @@ html.lenis body {
   to { transform: translate3d(-4%, 3%, 0) scale(1.08); }
 }
 
+/* Hero name — letters are always visible; the hover wave is the interaction. */
+.hero-letter {
+  display: inline-block;
+}
+
 /* ── Reduced motion — via OS preference or the manual toggle ──────────── */
 @media (prefers-reduced-motion: reduce) {
   *,

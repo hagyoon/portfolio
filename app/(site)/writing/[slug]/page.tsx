@@ -40,7 +40,7 @@ export default async function EssayPage({
     description: essay.excerpt,
     datePublished: essay.date,
     url: `https://hkryu.space/writing/${essay.slug}`,
-    author: { "@type": "Person", name: "Hakyun Ryu", url: "https://hkryu.space" },
+    author: { "@type": "Person", name: "hkryu", url: "https://hkryu.space" },
     ...(essay.cover ? { image: `https://hkryu.space${essay.cover}` } : {}),
   };
 

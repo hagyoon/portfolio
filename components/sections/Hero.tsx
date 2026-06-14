@@ -5,7 +5,7 @@
  * lifts away, Apple-product-page style. A slow pastel wash drifts behind.
  */
 
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Terminal from "@/components/motion/Terminal";
 import HeroGraph from "@/components/motion/HeroGraph";
@@ -17,17 +17,39 @@ const TERMINAL_LINES = [
   { cmd: "studio --unlock", out: "→ sign in to the studio", href: "/admin" },
 ];
 
-const rise = (delay: number) => ({
-  initial: { y: "110%" },
-  animate: { y: 0 },
-  transition: { duration: 1.4, delay, ease: [0.16, 1, 0.3, 1] as const },
-});
-
 const fade = (delay: number) => ({
   initial: { opacity: 0 },
   animate: { opacity: 1 },
   transition: { duration: 1.1, delay, ease: "easeOut" as const },
 });
+
+/*
+ * Letters — renders a word as individual staggered letters. Letters are
+ * visible at rest (a CSS entrance animation only enhances first paint, so
+ * nothing depends on JS running). On hover of the whole name they lift in a
+ * wave. A zero-width space is interleaved between letters so the contiguous
+ * name string isn't present in crawlable DOM text — the h1's aria-label
+ * carries the accessible label instead.
+ */
+function Letters({ text }: { text: string }) {
+  return (
+    <>
+      {Array.from(text).map((ch, i) => (
+        <Fragment key={i}>
+          <span className="hero-letter">
+            <span
+              className="inline-block transition-transform duration-500 ease-out group-hover/name:-translate-y-[0.09em]"
+              style={{ transitionDelay: `${i * 35}ms` }}
+            >
+              {ch}
+            </span>
+          </span>
+          {"​"}
+        </Fragment>
+      ))}
+    </>
+  );
+}
 
 export default function Hero({ site }: { site: Site }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -87,23 +109,17 @@ export default function Hero({ site }: { site: Site }) {
               {/* ── Left column: identity ──────────────────────────────── */}
               <div className="lg:col-span-7">
                 <h1
-                  aria-label={site.name}
-                  className="font-serif leading-[0.92] tracking-tightest select-none"
+                  aria-label="hkryu — AI and Systems Builder, Singapore"
+                  className="group/name font-serif leading-[0.92] tracking-tightest select-none cursor-default"
                   style={{ fontSize: "clamp(3.25rem, 7.5vw, 7rem)" }}
                 >
-                  <span className="block overflow-hidden pb-[0.06em]">
-                    <motion.span {...rise(0.15)} className="block text-ink">
-                      {first}
-                    </motion.span>
+                  <span aria-hidden className="block text-ink">
+                    <Letters text={first} />
                   </span>
-                  <span className="block overflow-hidden pb-[0.06em]">
-                    <motion.span {...rise(0.28)} className="block italic text-butter">
-                      {last}.
-                      <span
-                        aria-hidden
-                        className="cursor-blink not-italic inline-block align-baseline ml-[0.08em] w-[0.45em] h-[0.72em] bg-butter/80"
-                      />
-                    </motion.span>
+                  <span aria-hidden className="block italic text-butter">
+                    <Letters text={last} />
+                    <span className="not-italic">.</span>
+                    <span className="cursor-blink not-italic inline-block align-baseline ml-[0.08em] w-[0.45em] h-[0.72em] bg-butter/80" />
                   </span>
                 </h1>
                 <motion.p

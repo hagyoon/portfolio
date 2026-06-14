@@ -76,7 +76,7 @@ export default function Footer({ site }: { site: Site }) {
         </div>
 
         <div className="container-edge border-t border-ink/10 py-6 text-stone-500 text-xs uppercase tracking-widest">
-          <div>© {year} {site.name}. All rights reserved.</div>
+          <div>© {year} hkryu.space. All rights reserved.</div>
         </div>
       </footer>
     </>

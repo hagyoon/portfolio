@@ -11,6 +11,13 @@ import { getSite } from "@/lib/content";
 
 const SITE_URL = "https://hkryu.space";
 
+// Public brand for all crawlable metadata — kept separate from the legal name
+// so the site doesn't rank for an exact full-name search. The name still
+// appears (stylised, obfuscated) in the hero, just not in title/OG/JSON-LD.
+const BRAND = "hkryu";
+const SEO_DESCRIPTION =
+  "Independent builder working at the edge of AI systems, agents, markets, and horology. Notes, projects, and writing — hkryu.space.";
+
 const serif = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-serif",
@@ -45,23 +52,23 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(SITE_URL),
     title: {
-      default: `${site.name} — ${site.tagline}`,
-      template: `%s — ${site.name}`,
+      default: `${BRAND} — ${site.tagline}`,
+      template: `%s — ${BRAND}`,
     },
-    description: site.description,
+    description: SEO_DESCRIPTION,
     alternates: { types: { "application/rss+xml": `${SITE_URL}/feed.xml` } },
     openGraph: {
-      title: `${site.name} — ${site.tagline}`,
-      description: site.description,
+      title: `${BRAND} — ${site.tagline}`,
+      description: SEO_DESCRIPTION,
       url: SITE_URL,
-      siteName: site.name,
+      siteName: BRAND,
       type: "website",
       locale: "en_SG",
     },
     twitter: {
       card: "summary",
-      title: `${site.name} — ${site.tagline}`,
-      description: site.description,
+      title: `${BRAND} — ${site.tagline}`,
+      description: SEO_DESCRIPTION,
     },
   };
 }

@@ -34,7 +34,7 @@ export default async function FieldNotePage({
     headline: note.title,
     description: note.summary,
     url: `https://hkryu.space/field-notes/${note.slug}`,
-    author: { "@type": "Person", name: "Hakyun Ryu", url: "https://hkryu.space" },
+    author: { "@type": "Person", name: "hkryu", url: "https://hkryu.space" },
   };
 
   return (
