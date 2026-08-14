@@ -10,6 +10,10 @@ import Reveal from "@/components/Reveal";
 import { ParallaxInner } from "@/components/motion/Parallax";
 import SafeImage from "@/components/ui/SafeImage";
 import type { Project } from "@/lib/content";
+import Ornament from "@/components/graphics/Ornament";
+
+// Matte tints rotated across cover placeholders so the grid never reads flat
+const TINTS = ["tint-sage", "tint-ochre", "tint-mist", "tint-terracotta", "tint-lavender"];
 
 export default function Projects({ projects }: { projects: Project[] }) {
   const selected = projects.filter((p) => p.status !== "archive");
@@ -20,10 +24,11 @@ export default function Projects({ projects }: { projects: Project[] }) {
       <div className="grid grid-cols-12 gap-6 mb-16 md:mb-24">
         <div className="col-span-12 md:col-span-3">
           <Reveal>
-            <div className="eyebrow">Selected Work</div>
+            <div className="eyebrow text-ochre">Selected Work</div>
             <div className="mt-3 text-stone-500 text-sm">
               ({String(selected.length).padStart(2, "0")})
             </div>
+            <Ornament variant="grid" className="mt-8 w-24 h-24 text-ochre/40" />
           </Reveal>
         </div>
         <div className="col-span-12 md:col-span-9">
@@ -71,9 +76,9 @@ export default function Projects({ projects }: { projects: Project[] }) {
                         /* Monogram placeholder until a cover is uploaded via /admin */
                         <div
                           aria-hidden
-                          className="absolute inset-0 grid place-items-center wash-sage bg-ivory transition-transform duration-1000 ease-editorial group-hover:scale-[1.03]"
+                          className={`absolute inset-0 grid place-items-center ${TINTS[index % TINTS.length]} transition-transform duration-1000 ease-editorial group-hover:scale-[1.03]`}
                         >
-                          <span className="font-serif text-8xl text-stone-300 select-none">
+                          <span className="font-serif font-light text-8xl text-stone-400 select-none">
                             {project.title.charAt(0)}
                           </span>
                         </div>

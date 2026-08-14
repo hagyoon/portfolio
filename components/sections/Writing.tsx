@@ -10,6 +10,7 @@ import { useState } from "react";
 import clsx from "clsx";
 import Reveal from "@/components/Reveal";
 import type { Essay } from "@/lib/content";
+import Ornament from "@/components/graphics/Ornament";
 
 export default function Writing({ essays }: { essays: Essay[] }) {
   const [active, setActive] = useState<string | null>(null);
@@ -22,8 +23,9 @@ export default function Writing({ essays }: { essays: Essay[] }) {
       <div className="grid grid-cols-12 gap-6 mb-14 md:mb-20">
         <div className="col-span-12 md:col-span-3">
           <Reveal>
-            <div className="eyebrow">Note 04</div>
+            <div className="eyebrow text-lavender">Note 04</div>
             <div className="mt-3 text-stone-500 text-sm">Writing</div>
+            <Ornament variant="hatch" className="mt-8 w-24 h-16 text-lavender/40" />
           </Reveal>
         </div>
         <div className="col-span-12 md:col-span-9">

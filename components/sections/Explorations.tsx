@@ -8,8 +8,9 @@
 import { motion } from "framer-motion";
 import Reveal from "@/components/Reveal";
 import type { Interest } from "@/lib/content";
+import Ornament from "@/components/graphics/Ornament";
 
-const accents = ["bg-mist/30", "bg-blush/30", "bg-sage/30", "bg-lavender/30", "bg-butter/30"];
+const accents = ["bg-mist/45", "bg-terracotta/40", "bg-sage/45", "bg-lavender/45", "bg-ochre/45"];
 
 export default function Explorations({ interests }: { interests: Interest[] }) {
   if (!interests.length) return null;
@@ -20,8 +21,9 @@ export default function Explorations({ interests }: { interests: Interest[] }) {
         <div className="grid grid-cols-12 gap-6 mb-14 md:mb-20">
           <div className="col-span-12 md:col-span-3">
             <Reveal>
-              <div className="eyebrow">Note 02</div>
+              <div className="eyebrow text-mist">Note 02</div>
               <div className="mt-3 text-stone-500 text-sm">Currently Exploring</div>
+              <Ornament variant="rings" className="mt-8 w-24 h-24 text-mist/45" />
             </Reveal>
           </div>
           <div className="col-span-12 md:col-span-9">

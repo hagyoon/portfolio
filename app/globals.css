@@ -188,12 +188,16 @@ html.lenis body {
   .rule {
     @apply border-t border-ink/15;
   }
-  /* Nordic label system — tiny, wide-tracked, uppercase sans */
-  .label {
-    @apply font-sans uppercase tracking-[0.2em] text-[11px] font-normal text-stone-400;
-  }
+  /* Nordic label system — tiny, wide-tracked, uppercase sans.
+     The default colour is wrapped in :where() so it carries zero
+     specificity and any `text-*` utility on the element wins. */
+  .label,
   .eyebrow {
-    @apply font-sans uppercase tracking-[0.2em] text-[11px] font-normal text-stone-400;
+    @apply font-sans uppercase tracking-[0.2em] text-[11px] font-normal;
+  }
+  :where(.label),
+  :where(.eyebrow) {
+    color: rgb(var(--c-stone-400));
   }
   /* Display scale — classicle-large, bleeding toward the edges */
   .display-1 {
@@ -223,6 +227,30 @@ html.lenis body {
   /* Hero wordmark letters — inline-block so each can lift independently */
   .hero-letter {
     display: inline-block;
+  }
+  /* Slow orbit for the hero figure's accent ring */
+  .orbit-slow {
+    animation: orbit-slow 64s linear infinite;
+  }
+  /* Terminal prompt cursor */
+  .cursor-blink {
+    animation: cursor-blink 1.15s steps(1) infinite;
+  }
+  /* Matte tint panels — a whisper of colour behind cards and placeholders */
+  .tint-sage {
+    background: rgb(var(--c-sage) / 0.1);
+  }
+  .tint-mist {
+    background: rgb(var(--c-mist) / 0.1);
+  }
+  .tint-ochre {
+    background: rgb(var(--c-ochre) / 0.1);
+  }
+  .tint-terracotta {
+    background: rgb(var(--c-terracotta) / 0.09);
+  }
+  .tint-lavender {
+    background: rgb(var(--c-lavender) / 0.1);
   }
   /* Full-bleed tonal band — the alternating section rhythm. A deeper shade
      of the same ground rather than an inversion, so every child component
@@ -309,6 +337,26 @@ html.lenis body {
   html.dark .grain::before {
     mix-blend-mode: screen;
     opacity: 0.04;
+  }
+}
+
+@keyframes orbit-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cursor-blink {
+  0%,
+  55% {
+    opacity: 1;
+  }
+  56%,
+  100% {
+    opacity: 0;
   }
 }
 
