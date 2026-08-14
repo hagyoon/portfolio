@@ -15,7 +15,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
   const selected = projects.filter((p) => p.status !== "archive");
 
   return (
-    <section id="projects" className="container-edge pt-32 md:pt-44">
+    <section id="projects" className="container-edge pt-40 md:pt-56">
       {/* Section header */}
       <div className="grid grid-cols-12 gap-6 mb-16 md:mb-24">
         <div className="col-span-12 md:col-span-3">
@@ -29,7 +29,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
         <div className="col-span-12 md:col-span-9">
           <Reveal>
             <h2 className="display-2">
-              Projects treated with <em className="text-blush">intention</em>,{" "}
+              Projects treated with <em className="text-stone-400">intention</em>,{" "}
               <br className="hidden md:block" />
               with people and ideas I believe in.
             </h2>

@@ -18,7 +18,7 @@ export default function About({ site }: { site: Site }) {
     .filter(Boolean);
 
   return (
-    <section id="about" className="container-edge pt-32 md:pt-44">
+    <section id="about" className="container-edge pt-40 md:pt-56">
       {/* Scrubbed intro statement */}
       <div className="grid grid-cols-12 gap-6 mb-20 md:mb-28">
         <div className="col-span-12 md:col-span-3">

@@ -41,13 +41,15 @@ const config: Config = {
         ochre: "rgb(var(--c-ochre) / <alpha-value>)",
       },
       fontFamily: {
-        // Mondwest leads the display stack; Cormorant holds until the file lands
-        serif: ["Mondwest", "var(--font-serif)", "Cormorant Garamond", "serif"],
-        // Body is typewriter mono, Hermes-style
-        sans: ["var(--font-mono)", "Courier Prime", "ui-monospace", "monospace"],
-        mono: ["var(--font-mono)", "Courier Prime", "ui-monospace", "monospace"],
-        condensed: ["Collapse", "var(--font-serif)", "serif"],
-        wide: ["Rules Expanded", "var(--font-mono)", "ui-monospace", "monospace"],
+        // Classical display serif — set light and very large
+        serif: ["var(--font-serif)", "Cormorant Garamond", "Georgia", "serif"],
+        // Garamond body — the reading voice
+        body: ["var(--font-body)", "EB Garamond", "Georgia", "serif"],
+        // Neutral grotesque reserved for labels, nav meta and UI chrome
+        sans: ["var(--font-sans)", "Inter", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
+        condensed: ["var(--font-serif)", "Cormorant Garamond", "serif"],
+        wide: ["var(--font-sans)", "system-ui", "sans-serif"],
       },
       letterSpacing: {
         tightest: "-0.04em",

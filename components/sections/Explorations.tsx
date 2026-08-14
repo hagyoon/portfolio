@@ -15,7 +15,7 @@ export default function Explorations({ interests }: { interests: Interest[] }) {
   if (!interests.length) return null;
 
   return (
-    <section id="explorations" className="pt-32 md:pt-44">
+    <section id="explorations" className="band-deep py-32 md:py-44 mt-40 md:mt-56">
       <div className="container-edge">
         <div className="grid grid-cols-12 gap-6 mb-14 md:mb-20">
           <div className="col-span-12 md:col-span-3">
@@ -27,7 +27,7 @@ export default function Explorations({ interests }: { interests: Interest[] }) {
           <div className="col-span-12 md:col-span-9">
             <Reveal>
               <h2 className="display-2 max-w-3xl">
-                Open questions, <em className="text-sage">active</em> threads.
+                Open questions, <em className="text-stone-400">active</em> threads.
               </h2>
             </Reveal>
           </div>

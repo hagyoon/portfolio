@@ -5,7 +5,7 @@
  */
 
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Courier_Prime, Atkinson_Hyperlegible } from "next/font/google";
+import { Cormorant_Garamond, EB_Garamond, Atkinson_Hyperlegible } from "next/font/google";
 import "./globals.css";
 import { getSite } from "@/lib/content";
 
@@ -18,13 +18,25 @@ const BRAND = "hkryu";
 const SEO_DESCRIPTION =
   "Independent builder working at the edge of AI systems, agents, markets, and horology. Notes, projects, and writing — hkryu.space.";
 
+// Display — high-contrast classical serif, used light and very large
 const serif = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-serif",
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
+// Body — classical garamond reading voice
+const body = EB_Garamond({
+  subsets: ["latin"],
+  variable: "--font-body",
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+// UI — reserved for labels, nav meta and studio chrome only
 const sans = Atkinson_Hyperlegible({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -32,18 +44,12 @@ const sans = Atkinson_Hyperlegible({
   display: "swap",
 });
 
-const mono = Courier_Prime({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  weight: ["400", "700"],
-  display: "swap",
-});
-
 // Applies stored theme/motion preferences before first paint (no flash).
-// Falls back to prefers-color-scheme when nothing is stored.
+// The slate ground is the signature look, so dark is the default; the bone
+// theme applies only when the visitor picks it from the toggle.
 const bootstrap = `(function(){try{
 var t=localStorage.getItem('theme');
-if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark');
+if(t!=='light')document.documentElement.classList.add('dark');
 if(localStorage.getItem('motion')==='reduced')document.documentElement.classList.add('reduce-motion');
 }catch(e){}})()`;
 
@@ -81,7 +87,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${serif.variable} ${sans.variable} ${mono.variable}`}
+      className={`${serif.variable} ${body.variable} ${sans.variable}`}
       suppressHydrationWarning
     >
       <head>

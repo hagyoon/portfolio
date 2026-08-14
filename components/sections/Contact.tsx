@@ -11,8 +11,8 @@ import type { Site } from "@/lib/content";
 
 export default function Contact({ site }: { site: Site }) {
   return (
-    <section id="contact" className="pt-32 md:pt-44">
-      <div className="wash-blush py-24 md:py-36">
+    <section id="contact" className="pt-40 md:pt-56">
+      <div className="band-deep py-28 md:py-40">
         <div className="container-edge">
           <div className="max-w-2xl mx-auto text-center">
             <Reveal>
@@ -20,7 +20,7 @@ export default function Contact({ site }: { site: Site }) {
             </Reveal>
             <Reveal delay={0.08}>
               <h2 className="display-2">
-                If something here <em className="text-blush">resonates</em>, say hello.
+                If something here <em className="text-stone-400">resonates</em>, say hello.
               </h2>
             </Reveal>
           </div>

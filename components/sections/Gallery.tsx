@@ -21,7 +21,7 @@ export default function Gallery({ images }: { images: GalleryImage[] }) {
   if (!images.length) return null;
 
   return (
-    <section id="gallery" className="pt-32 md:pt-44">
+    <section id="gallery" className="pt-40 md:pt-56">
       <div className="container-edge mb-12 md:mb-16">
         <Reveal>
           <div className="eyebrow">Note 03 — Atmosphere</div>
