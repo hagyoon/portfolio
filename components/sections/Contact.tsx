@@ -16,7 +16,7 @@ export default function Contact({ site }: { site: Site }) {
         <div className="container-edge">
           <div className="max-w-2xl mx-auto text-center">
             <Reveal>
-              <p className="eyebrow mb-8">Get in touch</p>
+              <p className="eyebrow mb-8 text-terracotta">Get in touch</p>
             </Reveal>
             <Reveal delay={0.08}>
               <h2 className="display-2">

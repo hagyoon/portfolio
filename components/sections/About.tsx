@@ -10,6 +10,7 @@ import ScrubWords from "@/components/motion/ScrubWords";
 import { ParallaxInner } from "@/components/motion/Parallax";
 import SafeImage from "@/components/ui/SafeImage";
 import type { Site } from "@/lib/content";
+import Ornament from "@/components/graphics/Ornament";
 
 export default function About({ site }: { site: Site }) {
   const paragraphs = site.about
@@ -23,8 +24,9 @@ export default function About({ site }: { site: Site }) {
       <div className="grid grid-cols-12 gap-6 mb-20 md:mb-28">
         <div className="col-span-12 md:col-span-3">
           <Reveal>
-            <div className="eyebrow">Note 01</div>
+            <div className="eyebrow text-sage">Note 01</div>
             <div className="mt-3 text-stone-500 text-sm">Philosophy</div>
+            <Ornament variant="bars" className="mt-8 w-24 h-24 text-sage/45" />
           </Reveal>
         </div>
         <div className="col-span-12 md:col-span-9">
@@ -55,7 +57,7 @@ export default function About({ site }: { site: Site }) {
                   {site.marquee.map((skill) => (
                     <li
                       key={skill}
-                      className="border border-ink/20 bg-ivory px-4 py-1.5 text-sm text-stone-700"
+                      className="border border-sage/30 tint-sage px-4 py-1.5 text-sm text-stone-600"
                     >
                       {skill}
                     </li>
@@ -75,7 +77,7 @@ export default function About({ site }: { site: Site }) {
                     <li key={i} className="relative">
                       <span
                         aria-hidden
-                        className="absolute -left-[1.85rem] top-1.5 w-2.5 h-2.5 bg-butter"
+                        className="absolute -left-[1.85rem] top-1.5 w-2.5 h-2.5 bg-ochre"
                       />
                       <div className="font-mono text-sm text-stone-500">{t.period}</div>
                       <div className="text-base md:text-lg text-ink mt-0.5">{t.title}</div>
