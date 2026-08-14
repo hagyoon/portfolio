@@ -20,12 +20,12 @@ export default function Footer({ site }: { site: Site }) {
       <footer className="border-t border-ink/15 mt-32">
         <div className="container-edge py-16 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-6">
           <div className="md:col-span-5">
-            <div className="font-serif text-4xl md:text-5xl tracking-tightest leading-[0.95]">
+            <div className="display-3 max-w-xl">
               <span className="italic">If something resonates,</span>
               <br />
               <span>let&apos;s build something</span>
               <br />
-              <span className="italic text-blush">meaningful</span>
+              <span className="italic text-stone-400">meaningful</span>
               <span> together.</span>
             </div>
             <button

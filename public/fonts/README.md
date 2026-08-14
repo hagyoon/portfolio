@@ -1,16 +1,17 @@
-# Display fonts
+# Fonts
 
-Drop these files here to activate the full type system (declared in
-`app/globals.css`; the site falls back gracefully while they're missing):
+The site now runs entirely on Google-hosted faces loaded via `next/font` in
+`app/layout.tsx` — nothing needs to be dropped in here:
 
-| File | Used for | Where to get it |
+| Role | Face | Where |
 | --- | --- | --- |
-| `Mondwest-Regular.woff2` | All headings & display type | [PP Mondwest](https://pangrampangram.com/products/mondwest) — free personal-use license |
-| `Collapse-Bold.woff2` | Marquee band | Nous Research's licensed face — needs the file from a licensed source |
-| `RulesExpanded-Bold.woff2` | Labels / eyebrows | Same as above |
+| Display / headings | **Cormorant Garamond** (300) | `--font-serif` |
+| Body / reading | **EB Garamond** (400–600) | `--font-body` |
+| Labels, nav meta, studio UI | **Atkinson Hyperlegible** | `--font-sans` |
+| Code / tabular | system mono stack | `--font-mono` |
 
-Courier Prime (body & terminal) loads from Google Fonts — nothing to do.
-
-If you have `.otf`/`.ttf` files, convert to woff2 first:
-`npx fonteditor-core` or https://cloudconvert.com/otf-to-woff2 — then name
-them exactly as above.
+The earlier local-file slots (Mondwest, Collapse, Rules Expanded) were part of
+the retired terminal-aesthetic direction and have been removed. If you ever
+want a licensed display face again, add an `@font-face` block at the top of
+`app/globals.css` and put it in front of `--font-serif` in the
+`.display-*` rules and the `@layer base` heading stack.

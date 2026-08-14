@@ -27,7 +27,7 @@ export default function Marquee({ words }: { words: string[] }) {
   const items = words.length ? words : ["Portfolio"];
 
   return (
-    <section aria-hidden className="py-10 md:py-14 border-y border-ink/10 overflow-hidden wash-mist">
+    <section aria-hidden className="py-12 md:py-16 border-y border-ink/10 overflow-hidden">
       <motion.div style={{ x }} className="flex whitespace-nowrap will-change-transform">
         {[0, 1, 2, 3].map((copy) => (
           <div key={copy} className="flex shrink-0">

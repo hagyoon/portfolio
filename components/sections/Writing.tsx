@@ -18,7 +18,7 @@ export default function Writing({ essays }: { essays: Essay[] }) {
   if (!list.length) return null;
 
   return (
-    <section id="writing" className="container-edge pt-32 md:pt-44">
+    <section id="writing" className="container-edge pt-40 md:pt-56">
       <div className="grid grid-cols-12 gap-6 mb-14 md:mb-20">
         <div className="col-span-12 md:col-span-3">
           <Reveal>
@@ -30,7 +30,7 @@ export default function Writing({ essays }: { essays: Essay[] }) {
           <Reveal>
             <div className="flex flex-wrap items-end justify-between gap-6">
               <h2 className="display-2 max-w-3xl">
-                Thinking, <em className="text-lavender">slowly</em>, in public.
+                Thinking, <em className="text-stone-400">slowly</em>, in public.
               </h2>
               <Link
                 href="/writing"

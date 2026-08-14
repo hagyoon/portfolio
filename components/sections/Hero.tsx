@@ -1,35 +1,27 @@
 "use client";
 
 /*
- * Hero — pinned opener. The viewport holds while the name scales down and
- * lifts away, Apple-product-page style. A slow pastel wash drifts behind.
+ * Hero — a single held frame: an oversized classical wordmark on the slate
+ * ground, a hairline meta rail beneath it, nothing else. The name scales
+ * and lifts away as the page scrolls (desktop only; on small screens the
+ * hero flows normally so nothing clips).
  */
 
 import { Fragment, useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import Terminal from "@/components/motion/Terminal";
-import HeroGraph from "@/components/motion/HeroGraph";
 import type { Site } from "@/lib/content";
-
-const TERMINAL_LINES = [
-  { cmd: "cat role.txt", out: "ai & systems builder — data · agents · markets" },
-  { cmd: "ls ~/current", out: "agentic-systems  markets  horology  second-brain" },
-  { cmd: "studio --unlock", out: "→ sign in to the studio", href: "/admin" },
-];
 
 const fade = (delay: number) => ({
   initial: { opacity: 0 },
   animate: { opacity: 1 },
-  transition: { duration: 1.1, delay, ease: "easeOut" as const },
+  transition: { duration: 1.2, delay, ease: "easeOut" as const },
 });
 
 /*
- * Letters — renders a word as individual staggered letters. Letters are
- * visible at rest (a CSS entrance animation only enhances first paint, so
- * nothing depends on JS running). On hover of the whole name they lift in a
- * wave. A zero-width space is interleaved between letters so the contiguous
- * name string isn't present in crawlable DOM text — the h1's aria-label
- * carries the accessible label instead.
+ * Letters — renders a word as individual letters that lift in a wave on
+ * hover. A zero-width space is interleaved so the contiguous name string
+ * isn't present in crawlable DOM text; the h1's aria-label carries the
+ * accessible label instead.
  */
 function Letters({ text }: { text: string }) {
   return (
@@ -38,7 +30,7 @@ function Letters({ text }: { text: string }) {
         <Fragment key={i}>
           <span className="hero-letter">
             <span
-              className="inline-block transition-transform duration-500 ease-out group-hover/name:-translate-y-[0.09em]"
+              className="inline-block transition-transform duration-500 ease-out group-hover/name:-translate-y-[0.06em]"
               style={{ transitionDelay: `${i * 35}ms` }}
             >
               {ch}
@@ -59,142 +51,92 @@ export default function Hero({ site }: { site: Site }) {
   });
   const progress = useSpring(scrollYProgress, { stiffness: 90, damping: 24 });
 
-  const scale = useTransform(progress, [0, 1], [1, 0.86]);
-  const opacity = useTransform(progress, [0, 0.75], [1, 0]);
-  const lift = useTransform(progress, [0, 1], ["0%", "-12%"]);
-  const washY = useTransform(progress, [0, 1], ["0%", "30%"]);
+  const scale = useTransform(progress, [0, 1], [1, 0.9]);
+  const opacity = useTransform(progress, [0, 0.8], [1, 0]);
+  const lift = useTransform(progress, [0, 1], ["0%", "-10%"]);
 
   const [first, ...rest] = site.name.split(" ");
   const last = rest.join(" ");
 
   return (
-    // The scroll-pin is desktop-only; on smaller screens the hero flows
-    // normally so name + CTAs + terminal never clip on short viewports.
-    <div ref={ref} className="relative lg:h-[170svh]">
-      <section className="lg:sticky top-0 min-h-[100svh] lg:h-[100svh] flex flex-col overflow-hidden pt-28 lg:pt-0">
-        {/* Blueprint grid + scanlines + drifting phosphor glow */}
-        <div aria-hidden className="absolute inset-0 pointer-events-none grid-lines" />
-        <div aria-hidden className="absolute inset-0 pointer-events-none scanlines" />
-        <motion.div
-          aria-hidden
-          style={{ y: washY }}
-          className="absolute inset-0 pointer-events-none"
-        >
-          <div
-            className="glow-drift absolute -top-1/4 right-[-15%] w-[70vw] h-[70vw] rounded-full opacity-60"
-            style={{
-              background:
-                "radial-gradient(circle at center, rgba(236,142,63,0.16) 0%, transparent 65%)",
-            }}
-          />
-          <div
-            className="glow-drift absolute bottom-[-30%] left-[-10%] w-[55vw] h-[55vw] rounded-full opacity-55"
-            style={{
-              background:
-                "radial-gradient(circle at center, rgba(132,168,192,0.18) 0%, transparent 65%)",
-              animationDelay: "-16s",
-              animationDirection: "alternate-reverse",
-            }}
-          />
-        </motion.div>
-
-        {/* Name — scales and lifts away as you scroll */}
+    <div ref={ref} className="relative lg:h-[165svh]">
+      <section className="lg:sticky top-0 min-h-[100svh] lg:h-[100svh] flex flex-col overflow-hidden pt-32 lg:pt-0">
         <motion.div
           style={{ scale, opacity, y: lift }}
           className="flex-1 flex flex-col justify-center origin-center"
         >
           <div className="container-edge w-full">
-            <div className="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+            {/* Standfirst */}
+            <motion.p {...fade(0.15)} className="label mb-10 md:mb-14">
+              Independent practice — {site.location}
+            </motion.p>
 
-              {/* ── Left column: identity ──────────────────────────────── */}
-              <div className="lg:col-span-7">
-                <h1
-                  aria-label="hkryu — AI and Systems Builder, Singapore"
-                  className="group/name font-serif leading-[0.92] tracking-tightest select-none cursor-default"
-                  style={{ fontSize: "clamp(3.25rem, 7.5vw, 7rem)" }}
-                >
-                  <span aria-hidden className="block text-ink">
-                    <Letters text={first} />
-                  </span>
-                  <span aria-hidden className="block italic text-butter">
-                    <Letters text={last} />
-                    <span className="not-italic">.</span>
-                    <span className="cursor-blink not-italic inline-block align-baseline ml-[0.08em] w-[0.45em] h-[0.72em] bg-butter/80" />
-                  </span>
-                </h1>
-                <motion.p
-                  {...fade(0.6)}
-                  className="mt-8 font-mono text-lg md:text-xl text-stone-700"
-                >
-                  AI &amp; Systems Builder — Singapore
-                </motion.p>
-                <motion.p
-                  {...fade(0.7)}
-                  className="mt-3 max-w-md text-stone-600 text-base md:text-lg leading-relaxed"
-                >
-                  {site.tagline}
-                </motion.p>
-                {/* Primary calls to action */}
-                <motion.div {...fade(0.85)} className="mt-8 flex flex-wrap gap-4">
-                  <a
-                    href="/#projects"
-                    className="inline-flex items-center gap-2 bg-ink text-paper px-7 py-3.5 label !text-paper hover:opacity-85 active:opacity-70 transition-opacity"
-                  >
-                    View my work <span aria-hidden>↓</span>
-                  </a>
-                  <a
-                    href="/#contact"
-                    className="inline-flex items-center gap-2 border border-ink/30 px-7 py-3.5 label hover:bg-ink hover:!text-paper active:opacity-70 transition-colors"
-                  >
-                    Contact me <span aria-hidden>→</span>
-                  </a>
-                </motion.div>
-              </div>
+            {/* Wordmark — set very large, allowed to run to the edges */}
+            <h1
+              aria-label="hkryu — AI and Systems Builder, Singapore"
+              className="group/name display-1 select-none cursor-default"
+            >
+              <span aria-hidden className="block">
+                <Letters text={first} />
+              </span>
+              <span aria-hidden className="block italic text-stone-400">
+                <Letters text={last} />
+              </span>
+            </h1>
 
-              {/* ── Right column: interactive constellation + terminal ─── */}
-              <motion.div
-                {...fade(1.0)}
-                className="hidden lg:flex lg:col-span-5 flex-col items-stretch gap-6"
+            {/* Statement + actions */}
+            <div className="mt-12 md:mt-16 grid lg:grid-cols-12 gap-8 lg:gap-10 items-end">
+              <motion.p
+                {...fade(0.5)}
+                className="lg:col-span-6 xl:col-span-5 text-xl md:text-2xl leading-[1.55] text-stone-500"
               >
-                <div className="h-[22rem] xl:h-[26rem] w-full">
-                  <HeroGraph />
-                </div>
-                <Terminal
-                  host="ryu@hkryu.space"
-                  lines={TERMINAL_LINES}
-                  className="w-full"
-                />
-              </motion.div>
+                {site.tagline}
+              </motion.p>
 
+              <motion.div
+                {...fade(0.65)}
+                className="lg:col-span-6 xl:col-start-8 xl:col-span-5 flex flex-wrap gap-3 lg:justify-end"
+              >
+                <a href="/#projects" className="btn-solid">
+                  Selected work <span aria-hidden>↓</span>
+                </a>
+                <a href="/#contact" className="btn-outline">
+                  Get in touch <span aria-hidden>→</span>
+                </a>
+              </motion.div>
             </div>
           </div>
         </motion.div>
 
-        {/* Bottom strip */}
+        {/* Meta rail */}
         <motion.div style={{ opacity }} className="container-edge w-full pb-10 md:pb-12">
           <motion.div
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
-            transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.4, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
             style={{ transformOrigin: "left" }}
-            className="h-px bg-ink/20 mb-7"
+            className="h-px bg-ink/15 mb-6"
           />
-          <motion.div {...fade(0.85)} className="flex items-center justify-between">
-            <div className="label text-stone-400">{site.location}</div>
-            <div className="hidden md:flex gap-10 label text-stone-500">
+          <motion.div
+            {...fade(0.8)}
+            className="flex items-center justify-between gap-6 label"
+          >
+            <span>{site.location}</span>
+            <span className="hidden md:flex gap-10">
               <span>Builder</span>
               <span>Collector</span>
               <span>Systems Thinker</span>
-            </div>
-            <div className="label text-stone-400 flex items-center gap-2">
-              <span>Scroll</span>
+            </span>
+            <span className="flex items-center gap-2">
+              Scroll
               <motion.span
-                animate={{ y: [0, 5, 0] }}
-                transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                aria-hidden
+                animate={{ y: [0, 4, 0] }}
+                transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
               >
                 ↓
               </motion.span>
-            </div>
+            </span>
           </motion.div>
         </motion.div>
       </section>

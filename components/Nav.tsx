@@ -41,8 +41,8 @@ export default function Nav() {
         className={clsx(
           "fixed top-0 left-0 right-0 z-50 transition-[backdrop-filter,background-color,border-color,padding] duration-500 ease-editorial",
           scrolled
-            ? "bg-paper/80 backdrop-blur-md border-b border-ink/10 py-3"
-            : "bg-transparent py-6"
+            ? "bg-paper/85 backdrop-blur-md border-b border-ink/10 py-4"
+            : "bg-transparent py-7"
         )}
       >
         <div className="container-edge flex items-center justify-between">
@@ -50,10 +50,9 @@ export default function Nav() {
           <Link href="/" aria-label="Home" className="group">
             <span
               className="font-serif tracking-tight select-none"
-              style={{ fontSize: "1.05rem", letterSpacing: "-0.02em" }}
+              style={{ fontSize: "1.35rem", letterSpacing: "-0.01em" }}
             >
-              <span className="italic text-clay transition-opacity duration-500 group-hover:opacity-70">H</span>
-              <span className="text-ink transition-opacity duration-500 group-hover:opacity-70">Ryu</span>
+              <span className="text-ink transition-opacity duration-500 group-hover:opacity-60">hkryu</span>
             </span>
           </Link>
 
@@ -63,7 +62,7 @@ export default function Nav() {
               <a
                 key={l.href}
                 href={l.href}
-                className="label text-stone-500 hover:text-ink transition-colors duration-500"
+                className="font-body text-[17px] text-stone-500 hover:text-ink transition-colors duration-500"
               >
                 <span className="underline-grow">{l.label}</span>
               </a>
@@ -124,7 +123,7 @@ export default function Nav() {
                   <a
                     href={l.href}
                     onClick={() => setOpen(false)}
-                    className="font-serif text-5xl tracking-tight block"
+                    className="font-serif font-light text-6xl tracking-tight block"
                   >
                     {l.label}
                   </a>
