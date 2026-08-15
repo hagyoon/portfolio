@@ -1,8 +1,12 @@
 ---
 title: The Cyber-AI Paradox
-date: 2026-04-21
+date: 2026-04-21T00:00:00.000Z
 tag: Markets
-excerpt: The market reads AI as a threat to cybersecurity revenue. The structural reality is the opposite, and the bear case loses either way.
+excerpt: >-
+  The market reads AI as a threat to cybersecurity revenue. The structural
+  reality is the opposite, and the bear case loses either way.
+status: archived
+updated: '2026-08-15T08:41:28.064Z'
 ---
 
 The dominant narrative in Q1 2026 was that AI ends the cybersecurity trade. Anthropic's code-scanning preview triggered CRWD, PANW, and ZS each down roughly six percent in a single session. A later report on a more powerful Anthropic model flagged for elevated cyber-offensive risk took the iShares Cybersecurity ETF down another four and a half percent. JPMorgan summarised the consensus anxiety neatly. *It's not about disruption this year or even fourteen to eighteen months from now. It's about whether, longer term, these business models will still be viable.*
