@@ -2,6 +2,7 @@
 
 import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import PasswordInput from "@/components/admin/PasswordInput";
 
 function LoginForm() {
   const router = useRouter();
@@ -46,15 +47,14 @@ function LoginForm() {
         onChange={(e) => setEmail(e.target.value)}
         className="admin-input mb-5"
       />
-      <label className="admin-label" htmlFor="password">Password</label>
-      <input
+      <PasswordInput
         id="password"
-        type="password"
+        label="Password"
         required
         autoComplete="current-password"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="admin-input mb-8"
+        onChange={setPassword}
+        className="mb-8"
       />
       {error && <div className="text-terracotta text-sm mb-5">{error}</div>}
       <button

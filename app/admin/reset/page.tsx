@@ -3,6 +3,7 @@
 import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import PasswordInput from "@/components/admin/PasswordInput";
 
 function ResetForm() {
   const params = useSearchParams();
@@ -54,24 +55,23 @@ function ResetForm() {
 
   return (
     <form onSubmit={submit}>
-      <label className="admin-label">New password (min 10 characters)</label>
-      <input
-        type="password"
+      <PasswordInput
+        label="New password"
+        hint="min 10 characters"
         required
         minLength={10}
         autoComplete="new-password"
-        className="admin-input mb-5"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={setPassword}
+        className="mb-5"
       />
-      <label className="admin-label">Confirm new password</label>
-      <input
-        type="password"
+      <PasswordInput
+        label="Confirm new password"
         required
         autoComplete="new-password"
-        className="admin-input mb-8"
         value={confirm}
-        onChange={(e) => setConfirm(e.target.value)}
+        onChange={setConfirm}
+        className="mb-8"
       />
       {error && <div className="text-terracotta text-sm mb-5">{error}</div>}
       <button
