@@ -1,8 +1,13 @@
 ---
 title: Mimetic Desire and the Collector
-date: 2026-03-18
+date: 2026-03-18T00:00:00.000Z
 tag: Philosophy
-excerpt: Girard explains the watch market more cleanly than supply and demand does. The question for any collector worth the name is which of their desires are actually their own.
+excerpt: >-
+  Girard explains the watch market more cleanly than supply and demand does. The
+  question for any collector worth the name is which of their desires are
+  actually their own.
+status: archived
+updated: '2026-08-15T08:41:26.316Z'
 ---
 
 René Girard's claim, in its sharpest form, is that almost all human desire is mediated by other humans. We don't want objects directly. We want them because someone else (a model, in Girard's language) wants them first. The triangle is *subject, model, object*. The model is what makes the object desirable.
