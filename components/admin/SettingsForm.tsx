@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import PasswordInput from "@/components/admin/PasswordInput";
 
 export default function SettingsForm() {
   const [email, setEmail] = useState("");
@@ -99,37 +100,29 @@ export default function SettingsForm() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label className="admin-label">New password (optional)</label>
-          <input
-            type="password"
-            autoComplete="new-password"
-            className="admin-input"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-          />
-        </div>
-        <div>
-          <label className="admin-label">Confirm new password</label>
-          <input
-            type="password"
-            autoComplete="new-password"
-            className="admin-input"
-            value={confirm}
-            onChange={(e) => setConfirm(e.target.value)}
-          />
-        </div>
+        <PasswordInput
+          label="New password"
+          hint="optional"
+          autoComplete="new-password"
+          value={newPassword}
+          onChange={setNewPassword}
+        />
+        <PasswordInput
+          label="Confirm new password"
+          autoComplete="new-password"
+          value={confirm}
+          onChange={setConfirm}
+        />
       </div>
 
       <div className="border-t border-ink/10 pt-6">
-        <label className="admin-label">Current password — required to save</label>
-        <input
-          type="password"
+        <PasswordInput
+          label="Current password"
+          hint="required to save"
           required
           autoComplete="current-password"
-          className="admin-input"
           value={currentPassword}
-          onChange={(e) => setCurrentPassword(e.target.value)}
+          onChange={setCurrentPassword}
         />
       </div>
 
