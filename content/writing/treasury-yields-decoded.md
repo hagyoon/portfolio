@@ -1,8 +1,13 @@
 ---
-title: Treasury Yields, Decoded
-date: 2026-03-04
+title: 'Treasury Yields, Decoded'
+date: 2026-03-04T00:00:00.000Z
 tag: Markets
-excerpt: The Iran strikes broke the textbook reaction. Yields are supposed to fall during war. They rose. Understanding why is the most important macro lesson of the cycle.
+excerpt: >-
+  The Iran strikes broke the textbook reaction. Yields are supposed to fall
+  during war. They rose. Understanding why is the most important macro lesson of
+  the cycle.
+status: archived
+updated: '2026-08-15T08:41:27.179Z'
 ---
 
 The textbook reaction to a major geopolitical shock is straightforward. War, panic, flight to safety, bid for Treasuries, yields fall. Generations of investors have been taught this as the safe-haven trade.
