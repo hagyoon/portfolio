@@ -59,7 +59,7 @@ export default function Writing({ essays }: { essays: Essay[] }) {
                 {essay.date}
               </div>
               <div className="col-span-9 md:col-span-7">
-                <h3 className="font-serif uppercase font-bold text-xl md:text-3xl tracking-[-0.035em] leading-[1.02]">
+                <h3 className="font-serif font-normal text-2xl md:text-4xl tracking-[-0.02em] leading-[1.05]">
                   {essay.title}
                 </h3>
                 <p className="mt-2.5 text-stone-500 text-sm leading-[1.65] max-w-xl hidden md:block">

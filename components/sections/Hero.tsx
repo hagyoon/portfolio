@@ -1,55 +1,41 @@
 "use client";
 
 /*
- * Hero — a full-bleed architectural frame with the wordmark stacked hard
- * against the left edge, a monospaced spec rail beneath, and an exposed
- * structural grid overlaid. The name scales and lifts away on scroll
- * (desktop only; on small screens the hero flows normally so nothing clips).
+ * Hero — statement-led, no name. A quiet monospaced eyebrow, a large light
+ * Garamond thesis about the practice, and a single ghost word cropped by
+ * the bottom edge of the viewport. The whole block eases and fades as the
+ * visitor scrolls (desktop only; on small screens it flows normally).
+ *
+ * Copy lives here rather than site.md so the hero can be composed line by
+ * line. Edit STATEMENT / GHOST / SPECS below.
  */
 
-import { Fragment, useRef } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import SafeImage from "@/components/ui/SafeImage";
 import type { Site } from "@/lib/content";
+
+// The thesis — three lines, the middle one in italic
+const STATEMENT = {
+  a: "Systems that hold",
+  b: "attention",
+  c: "long after the novelty fades.",
+};
+
+// One ghost word, cropped at the fold. Change freely; it's decorative.
+const GHOST = "practice";
 
 // Monospaced spec rail — the hero's only supporting type
 const SPECS = [
-  { k: "Practice", v: "Independent" },
-  { k: "Focus", v: "Agents · Markets" },
+  { k: "Field", v: "Agents · Markets · Horology" },
+  { k: "Mode", v: "Independent" },
   { k: "Est.", v: "2026" },
 ];
 
 const fade = (delay: number) => ({
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  transition: { duration: 1.1, delay, ease: "easeOut" as const },
+  initial: { opacity: 0, y: 14 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 1.2, delay, ease: [0.16, 1, 0.3, 1] as const },
 });
-
-/*
- * Letters — renders a word as individual letters that lift in a wave on
- * hover. A zero-width space is interleaved so the contiguous name string
- * isn't present in crawlable DOM text; the h1's aria-label carries the
- * accessible label instead.
- */
-function Letters({ text }: { text: string }) {
-  return (
-    <>
-      {Array.from(text).map((ch, i) => (
-        <Fragment key={i}>
-          <span className="hero-letter">
-            <span
-              className="inline-block transition-transform duration-500 ease-out group-hover/name:-translate-y-[0.04em]"
-              style={{ transitionDelay: `${i * 30}ms` }}
-            >
-              {ch}
-            </span>
-          </span>
-          {"​"}
-        </Fragment>
-      ))}
-    </>
-  );
-}
 
 export default function Hero({ site }: { site: Site }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -59,95 +45,80 @@ export default function Hero({ site }: { site: Site }) {
   });
   const progress = useSpring(scrollYProgress, { stiffness: 90, damping: 24 });
 
-  const scale = useTransform(progress, [0, 1], [1, 0.94]);
-  const opacity = useTransform(progress, [0, 0.8], [1, 0]);
-  const lift = useTransform(progress, [0, 1], ["0%", "-8%"]);
-  const plateY = useTransform(progress, [0, 1], ["0%", "12%"]);
-  const plateScale = useTransform(progress, [0, 1], [1, 1.08]);
-
-  const [first, ...rest] = site.name.split(" ");
-  const last = rest.join(" ");
+  const scale = useTransform(progress, [0, 1], [1, 0.96]);
+  const opacity = useTransform(progress, [0, 0.75], [1, 0]);
+  const lift = useTransform(progress, [0, 1], ["0%", "-6%"]);
+  const ghostY = useTransform(progress, [0, 1], ["0%", "18%"]);
+  const ghostX = useTransform(progress, [0, 1], ["0%", "-4%"]);
 
   return (
-    <div ref={ref} className="relative lg:h-[160svh]">
+    <div ref={ref} className="relative lg:h-[150svh]">
       <section className="lg:sticky top-0 min-h-[100svh] lg:h-[100svh] flex flex-col overflow-hidden">
-        {/* Architectural plate — full-bleed, heavily dimmed so type stays legible */}
-        <motion.div
+        {/* Tonal ground — a soft vertical wash, nothing figurative */}
+        <div
           aria-hidden
-          style={{ y: plateY, scale: plateScale }}
-          className="absolute inset-0 -z-10"
-        >
-          <SafeImage
-            src="/images/atmosphere/facade.webp"
-            alt=""
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-          {/* Tonal scrim — grounds the image into the concrete palette */}
-          <div className="absolute inset-0 bg-paper/72" />
-          <div className="absolute inset-0 bg-gradient-to-t from-paper via-paper/40 to-paper/85" />
-        </motion.div>
+          className="absolute inset-0 -z-10 bg-gradient-to-b from-ivory via-paper to-paper"
+        />
 
         {/* Exposed structural grid — four bays, hairline rules */}
         <div aria-hidden className="pointer-events-none absolute inset-0 grid-lines" />
 
+        {/* Ghost word — enormous, outlined, cut off by the fold */}
+        <motion.div
+          aria-hidden
+          style={{ y: ghostY, x: ghostX }}
+          className="pointer-events-none absolute -bottom-[0.18em] left-[-0.04em] select-none ghost-type"
+        >
+          {GHOST}
+        </motion.div>
+
         <motion.div
           style={{ scale, opacity, y: lift }}
-          className="flex-1 flex flex-col justify-end origin-bottom-left pb-8 pt-32 lg:pt-0"
+          className="flex-1 flex flex-col justify-center origin-left pt-32 pb-16 lg:pt-28 lg:pb-6"
         >
           <div className="container-edge w-full">
-            {/* Standfirst */}
-            <motion.div
-              {...fade(0.15)}
-              className="flex items-center gap-4 mb-8 md:mb-10"
-            >
-              <span aria-hidden className="h-2 w-2 bg-terracotta" />
-              <span className="label text-stone-400">
-                Independent practice — {site.location}
-              </span>
-            </motion.div>
+            <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-end">
+              {/* Statement */}
+              <div className="lg:col-span-9">
+                <motion.div {...fade(0.1)} className="flex items-center gap-4 mb-10 md:mb-14">
+                  <span aria-hidden className="h-1.5 w-1.5 bg-terracotta" />
+                  <span className="label">An independent practice — {site.location}</span>
+                </motion.div>
 
-            {/* Wordmark — heavy grotesque, stacked, run to the edge */}
-            <h1
-              aria-label="hkryu — AI and Systems Builder, Singapore"
-              className="group/name display-1 select-none cursor-default"
-            >
-              <span aria-hidden className="block">
-                <Letters text={first} />
-              </span>
-              <span aria-hidden className="block text-stone-300">
-                <Letters text={last} />
-              </span>
-            </h1>
+                <motion.h1 {...fade(0.3)} className="display-hero max-w-[14ch]">
+                  <span className="block">{STATEMENT.a}</span>
+                  <span className="block">
+                    <em className="editorial-italic">{STATEMENT.b}</em>
+                  </span>
+                  <span className="block">{STATEMENT.c}</span>
+                </motion.h1>
 
-            {/* Statement + actions */}
-            <div className="mt-10 md:mt-14 grid lg:grid-cols-12 gap-8 lg:gap-12 items-end">
-              <div className="lg:col-span-5">
                 <motion.p
-                  {...fade(0.5)}
-                  className="text-base md:text-lg leading-[1.6] text-stone-500 max-w-[46ch]"
+                  {...fade(0.55)}
+                  className="mt-10 md:mt-14 text-base md:text-lg leading-[1.65] text-stone-500 max-w-[44ch]"
                 >
-                  {site.tagline}
+                  Agents, markets and mechanical watches — built, studied and
+                  written about from Singapore. Work that compounds quietly.
                 </motion.p>
-                <motion.div {...fade(0.65)} className="mt-8 flex flex-wrap gap-3">
+
+                <motion.div {...fade(0.7)} className="mt-9 flex flex-wrap gap-3">
                   <a href="/#projects" className="btn-solid">
                     Selected work <span aria-hidden>↓</span>
                   </a>
-                  <a href="/#contact" className="btn-outline">
-                    Get in touch <span aria-hidden>→</span>
+                  <a href="/#about" className="btn-outline">
+                    The practice <span aria-hidden>→</span>
                   </a>
                 </motion.div>
               </div>
 
               {/* Spec rail — monospaced key/value pairs on a hairline grid */}
               <motion.dl
-                {...fade(0.8)}
-                className="hidden lg:grid lg:col-start-8 lg:col-span-5 grid-cols-3 gap-px bg-ink/15 border border-ink/15"
+                {...fade(0.85)}
+                className="hidden lg:grid lg:col-span-3 grid-cols-1 gap-px bg-ink/12 border border-ink/12"
               >
                 {SPECS.map((s) => (
-                  <div key={s.k} className="bg-paper/70 backdrop-blur-sm px-4 py-5">
-                    <dt className="label text-stone-400">{s.k}</dt>
+                  <div key={s.k} className="bg-paper/80 backdrop-blur-sm px-5 py-5">
+                    <dt className="label">{s.k}</dt>
                     <dd className="mt-2 font-mono text-[13px] text-ink">{s.v}</dd>
                   </div>
                 ))}
@@ -157,23 +128,20 @@ export default function Hero({ site }: { site: Site }) {
         </motion.div>
 
         {/* Meta rail */}
-        <motion.div style={{ opacity }} className="container-edge w-full pb-8 md:pb-10">
+        <motion.div style={{ opacity }} className="relative z-10 container-edge w-full pb-8 md:pb-10">
           <motion.div
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
-            transition={{ duration: 1.3, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1.3, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
             style={{ transformOrigin: "left" }}
             className="h-px bg-ink/20 mb-5"
           />
-          <motion.div
-            {...fade(0.8)}
-            className="flex items-center justify-between gap-6 label"
-          >
+          <motion.div {...fade(0.9)} className="flex items-center justify-between gap-6 label">
             <span>{site.location}</span>
             <span className="hidden md:flex gap-10">
               <span>Builder</span>
               <span>Collector</span>
-              <span>Systems Thinker</span>
+              <span>Systems thinker</span>
             </span>
             <span className="flex items-center gap-2">
               Scroll

@@ -7,8 +7,6 @@
 
 import Reveal from "@/components/Reveal";
 import ScrubWords from "@/components/motion/ScrubWords";
-import { ParallaxInner } from "@/components/motion/Parallax";
-import SafeImage from "@/components/ui/SafeImage";
 import type { Site } from "@/lib/content";
 
 export default function About({ site }: { site: Site }) {
@@ -93,16 +91,20 @@ export default function About({ site }: { site: Site }) {
 
         <div className="col-span-12 md:col-span-5 md:pl-8 space-y-12">
           <Reveal delay={0.1}>
-            <div className="relative w-full aspect-[4/5] bg-ivory overflow-hidden border border-ink/15">
-              <ParallaxInner amount={7}>
-                <div className="relative w-full h-[114%]">
-                  <SafeImage
-                    src="/images/atmosphere/desk.webp"
-                    alt={`${site.name}, ${site.location}`}
-                    sizes="(min-width: 768px) 40vw, 100vw"
-                  />
+            {/* Typographic plate — stands in for a portrait until one is set */}
+            <div className="relative w-full aspect-[4/5] overflow-hidden border border-ink/15 band-deep grid-lines">
+              <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
+                <div className="flex items-start justify-between">
+                  <span className="label">Fig. 01</span>
+                  <span className="label">{site.location}</span>
                 </div>
-              </ParallaxInner>
+                <div>
+                  <p className="font-serif font-light italic text-[2rem] md:text-[2.5rem] leading-[1.05] text-ink/90 tracking-tight">
+                    Find what matters before it&apos;s mainstream. Figure it out. Bring others along.
+                  </p>
+                  <div aria-hidden className="mt-6 h-px w-12 bg-terracotta" />
+                </div>
+              </div>
             </div>
           </Reveal>
 

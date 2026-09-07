@@ -49,7 +49,7 @@ export default function Explorations({ interests }: { interests: Interest[] }) {
                     className="h-2 w-2 bg-terracotta transition-transform duration-500 ease-editorial group-hover:scale-[1.8]"
                   />
                 </div>
-                <h3 className="font-serif uppercase font-bold text-xl tracking-[-0.03em] mb-3">
+                <h3 className="font-serif font-normal text-2xl tracking-[-0.015em] leading-[1.1] mb-3">
                   {item.title}
                 </h3>
                 <p className="text-stone-600 text-sm leading-relaxed">{item.caption}</p>

@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 /* ── Theme tokens ─────────────────────────────────────────────────────────
-   Design language: dark architectural brutalism. Raw concrete ground,
-   heavy grotesque display set enormous and uppercase, exposed hairline
-   grid, monospaced meta. Muted neutrals throughout; a single oxide accent
-   used sparingly as a signal.
+   Design language: dark architectural minimalism with a classical voice.
+   Raw concrete ground, a light high-contrast Garamond set enormous and
+   lowercase, exposed hairline grid, monospaced meta. Muted neutrals
+   throughout; a single oxide accent used sparingly as a signal.
 
    All colours are RGB triplets consumed by Tailwind as
    rgb(var(--c-*) / <alpha>). Dark (concrete) is the signature theme;
@@ -161,33 +161,32 @@ html.lenis body {
 
 @layer base {
   body {
-    /* Tight grotesque reading voice */
-    font-family: var(--font-body), "Inter Tight", system-ui, sans-serif;
+    /* Old-style Garamond reading voice */
+    font-family: var(--font-body), "EB Garamond", Georgia, serif;
     font-weight: 400;
-    font-size: 17px;
+    font-size: 18px;
     line-height: 1.6;
-    letter-spacing: -0.011em;
+    letter-spacing: 0;
   }
   h1,
   h2,
   h3,
   h4,
   h5 {
-    /* Heavy grotesque display — uppercase, tracked in hard */
-    font-family: var(--font-serif), "Archivo", system-ui, sans-serif;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: -0.035em;
+    /* Light classical display — sentence case, gently tightened */
+    font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.015em;
   }
-  /* Brutalist emphasis — no italics; outlined instead */
+  /* Classical emphasis — true italic, slightly lighter in tone */
   h1 em,
   h2 em,
   h3 em,
   h4 em,
   h5 em {
-    font-style: normal;
-    color: transparent;
-    -webkit-text-stroke: 1px rgb(var(--c-ink) / 0.55);
+    font-style: italic;
+    font-weight: 300;
+    color: rgb(var(--c-stone-500));
   }
   a {
     color: inherit;
@@ -244,35 +243,54 @@ html.lenis body {
     font-variant-numeric: tabular-nums;
     color: rgb(var(--c-stone-300));
   }
-  /* Display scale — brutalist, set to the edges */
+  /* Display scale — light Garamond, run large and close */
   .display-1 {
-    font-family: var(--font-serif), "Archivo", system-ui, sans-serif;
-    font-weight: 800;
-    text-transform: uppercase;
-    font-size: clamp(3.25rem, 15.5vw, 16rem);
-    line-height: 0.8;
-    letter-spacing: -0.05em;
-  }
-  .display-2 {
-    font-family: var(--font-serif), "Archivo", system-ui, sans-serif;
-    font-weight: 800;
-    text-transform: uppercase;
-    font-size: clamp(2.25rem, 7vw, 6rem);
-    line-height: 0.88;
-    letter-spacing: -0.04em;
-  }
-  .display-3 {
-    font-family: var(--font-serif), "Archivo", system-ui, sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: clamp(1.75rem, 3.8vw, 3.25rem);
-    line-height: 0.94;
+    font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+    font-weight: 300;
+    font-size: clamp(3rem, 9.5vw, 10rem);
+    line-height: 0.92;
     letter-spacing: -0.03em;
   }
+  .display-2 {
+    font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+    font-weight: 300;
+    font-size: clamp(2.25rem, 5.6vw, 5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .display-3 {
+    font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+  }
   .editorial-italic {
-    font-style: normal;
+    font-style: italic;
+    font-weight: 300;
+    color: rgb(var(--c-stone-500));
+  }
+  /* Hero statement — the largest voice on the site, still light and lowercase */
+  .display-hero {
+    font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+    font-weight: 300;
+    font-size: clamp(2.75rem, 7.2vw, 7.5rem);
+    line-height: 0.96;
+    letter-spacing: -0.03em;
+  }
+  /* Ghost type — enormous, cropped by the viewport, barely there */
+  .ghost-type {
+    font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+    font-weight: 300;
+    font-size: clamp(9rem, 30vw, 34rem);
+    line-height: 0.8;
+    letter-spacing: -0.04em;
     color: transparent;
-    -webkit-text-stroke: 1px rgb(var(--c-ink) / 0.55);
+    -webkit-text-stroke: 1px rgb(var(--c-ink) / 0.14);
+    white-space: nowrap;
+  }
+  html.dark .ghost-type {
+    -webkit-text-stroke: 1px rgb(var(--c-ink) / 0.11);
   }
   /* Hero wordmark letters — inline-block so each can lift independently */
   .hero-letter {
@@ -477,28 +495,28 @@ html.reduce-motion *::after {
   color: rgb(var(--c-stone-600));
 }
 .prose-editorial h2 {
-  font-family: var(--font-serif), "Archivo", system-ui, sans-serif;
-  font-weight: 800;
-  text-transform: uppercase;
-  font-size: 1.875rem;
+  font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+  font-weight: 400;
+  font-size: 2.25rem;
   margin: 2.2em 0 0.55em;
-  letter-spacing: -0.03em;
-  line-height: 0.98;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
 }
 .prose-editorial h3 {
-  font-family: var(--font-serif), "Archivo", system-ui, sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 1.25rem;
-  letter-spacing: -0.02em;
+  font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  font-size: 1.5rem;
+  letter-spacing: -0.015em;
   margin: 1.9em 0 0.45em;
 }
 .prose-editorial blockquote {
-  border-left: 2px solid rgb(var(--c-terracotta));
+  border-left: 1px solid rgb(var(--c-terracotta));
   padding-left: 1.5rem;
-  font-size: 1.375rem;
-  line-height: 1.4;
-  letter-spacing: -0.02em;
+  font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: 1.625rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
   color: rgb(var(--c-stone-700));
   margin: 1.9em 0;
 }

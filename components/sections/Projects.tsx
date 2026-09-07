@@ -77,8 +77,9 @@ export default function Projects({ projects }: { projects: Project[] }) {
                           aria-hidden
                           className={`absolute inset-0 grid place-items-center ${TINTS[index % TINTS.length]} transition-transform duration-1000 ease-editorial group-hover:scale-[1.03]`}
                         >
-                          <span className="font-serif font-extrabold text-7xl text-stone-300 select-none tracking-[-0.05em]">
-                            {project.title.charAt(0)}
+                          <div className="absolute inset-0 grid-lines" />
+                          <span className="relative font-serif font-light italic text-[5rem] md:text-[6.5rem] leading-none text-stone-300 select-none tracking-[-0.03em]">
+                            {String(index + 1).padStart(2, "0")}
                           </span>
                         </div>
                       )}

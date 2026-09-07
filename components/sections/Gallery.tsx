@@ -12,22 +12,14 @@ import Reveal from "@/components/Reveal";
 import SafeImage from "@/components/ui/SafeImage";
 import type { GalleryImage } from "@/lib/content";
 
-/* Fallback plates — used until images are set in site.md `gallery:` or via
-   /admin. Swap or extend the list there and these disappear. */
-const FALLBACK: GalleryImage[] = [
-  { src: "/images/atmosphere/facade.webp", caption: "Structure — mass and shadow" },
-  { src: "/images/atmosphere/interior.webp", caption: "Interior — held light" },
-  { src: "/images/atmosphere/object.webp", caption: "Objects — instruments of attention" },
-  { src: "/images/atmosphere/desk.webp", caption: "Practice — where the work happens" },
-];
-
 export default function Gallery({ images }: { images: GalleryImage[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const progress = useSpring(scrollYProgress, { stiffness: 90, damping: 26 });
   const x = useTransform(progress, [0, 1], ["2%", "-62%"]);
 
-  const plates = images.length ? images : FALLBACK;
+  if (!images.length) return null;
+  const plates = images;
 
   return (
     <section id="gallery" className="pt-40 md:pt-56">

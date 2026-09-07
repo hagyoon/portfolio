@@ -5,36 +5,38 @@
  */
 
 import type { Metadata } from "next";
-import { Archivo, Inter_Tight, JetBrains_Mono } from "next/font/google";
+import { Cormorant_Garamond, EB_Garamond, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { getSite } from "@/lib/content";
 
 const SITE_URL = "https://hkryu.space";
 
 // Public brand for all crawlable metadata — kept separate from the legal name
-// so the site doesn't rank for an exact full-name search. The name still
-// appears (stylised, obfuscated) in the hero, just not in title/OG/JSON-LD.
+// so the site doesn't rank for an exact full-name search. The hero carries a
+// practice statement rather than the name; the name lives in the About bio.
 const BRAND = "hkryu";
 const SEO_DESCRIPTION =
   "Independent builder working at the edge of AI systems, agents, markets, and horology. Notes, projects, and writing — hkryu.space.";
 
-// Display — heavy grotesque, set enormous and uppercase
-const display = Archivo({
+// Display — high-contrast Garamond, set large, light and lowercase
+const display = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-serif",
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["300", "400", "500", "600"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-// Body — tight grotesque reading voice
-const body = Inter_Tight({
+// Body — old-style Garamond reading voice, paired with the display serif
+const body = EB_Garamond({
   subsets: ["latin"],
   variable: "--font-body",
   weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-// UI — shares the body grotesque for labels and studio chrome
+// UI — quiet grotesque for studio chrome and form controls only
 const sans = Inter_Tight({
   subsets: ["latin"],
   variable: "--font-sans",

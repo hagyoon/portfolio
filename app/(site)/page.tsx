@@ -30,7 +30,7 @@ export default async function HomePage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: site.name,
+    name: "hkryu",
     description: site.tagline,
     url: "https://hkryu.space",
     jobTitle: "AI & Systems Builder",

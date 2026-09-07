@@ -41,15 +41,15 @@ const config: Config = {
         ochre: "rgb(var(--c-ochre) / <alpha-value>)",
       },
       fontFamily: {
-        // Heavy grotesque display — set enormous and uppercase.
+        // Light high-contrast Garamond display — set large and lowercase.
         // Kept under the `serif` key so existing markup needs no rename.
-        serif: ["var(--font-serif)", "Archivo", "system-ui", "sans-serif"],
-        // Tight grotesque body — the reading voice
-        body: ["var(--font-body)", "Inter Tight", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "Cormorant Garamond", "Georgia", "serif"],
+        // Old-style Garamond body — the reading voice
+        body: ["var(--font-body)", "EB Garamond", "Georgia", "serif"],
         // Mono carries the whole small-type system: labels, meta, numerals
         mono: ["var(--font-mono)", "JetBrains Mono", "ui-monospace", "monospace"],
-        sans: ["var(--font-body)", "Inter Tight", "system-ui", "sans-serif"],
-        condensed: ["var(--font-serif)", "Archivo", "system-ui", "sans-serif"],
+        sans: ["var(--font-sans)", "Inter Tight", "system-ui", "sans-serif"],
+        condensed: ["var(--font-serif)", "Cormorant Garamond", "Georgia", "serif"],
         wide: ["var(--font-mono)", "JetBrains Mono", "monospace"],
       },
       letterSpacing: {

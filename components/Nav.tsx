@@ -46,14 +46,15 @@ export default function Nav() {
         )}
       >
         <div className="container-edge flex items-center justify-between">
-          {/* Logo — two-tone serif wordmark */}
-          <Link href="/" aria-label="Home" className="group">
+          {/* Mark — a single light serif glyph and a hairline, no name */}
+          <Link href="/" aria-label="Home" className="group flex items-center gap-3">
             <span
-              className="font-serif uppercase select-none"
-              style={{ fontSize: "1.25rem", fontWeight: 800, letterSpacing: "-0.04em" }}
+              className="font-serif font-light italic select-none text-ink transition-opacity duration-500 group-hover:opacity-55"
+              style={{ fontSize: "1.5rem", letterSpacing: "-0.02em", lineHeight: 1 }}
             >
-              <span className="text-ink transition-opacity duration-500 group-hover:opacity-55">hkryu</span>
+              &amp;
             </span>
+            <span aria-hidden className="h-px w-6 bg-ink/40 transition-[width] duration-500 group-hover:w-10" />
           </Link>
 
           {/* Desktop links + preference toggles */}
