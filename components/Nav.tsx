@@ -41,33 +41,33 @@ export default function Nav() {
         className={clsx(
           "fixed top-0 left-0 right-0 z-50 transition-[backdrop-filter,background-color,border-color,padding] duration-500 ease-editorial",
           scrolled
-            ? "bg-paper/85 backdrop-blur-md border-b border-ink/10 py-4"
-            : "bg-transparent py-7"
+            ? "bg-paper/88 backdrop-blur-md border-b border-ink/15 py-3.5"
+            : "bg-transparent py-6"
         )}
       >
         <div className="container-edge flex items-center justify-between">
           {/* Logo — two-tone serif wordmark */}
           <Link href="/" aria-label="Home" className="group">
             <span
-              className="font-serif tracking-tight select-none"
-              style={{ fontSize: "1.35rem", letterSpacing: "-0.01em" }}
+              className="font-serif uppercase select-none"
+              style={{ fontSize: "1.25rem", fontWeight: 800, letterSpacing: "-0.04em" }}
             >
-              <span className="text-ink transition-opacity duration-500 group-hover:opacity-60">hkryu</span>
+              <span className="text-ink transition-opacity duration-500 group-hover:opacity-55">hkryu</span>
             </span>
           </Link>
 
           {/* Desktop links + preference toggles */}
-          <nav aria-label="Primary" className="hidden md:flex items-center gap-8">
+          <nav aria-label="Primary" className="hidden md:flex items-center gap-7">
             {links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                className="font-body text-[17px] text-stone-500 hover:text-ink transition-colors duration-500"
+                className="label text-stone-400 hover:text-ink transition-colors duration-400"
               >
                 <span className="underline-grow">{l.label}</span>
               </a>
             ))}
-            <span aria-hidden className="h-4 w-px bg-ink/15" />
+            <span aria-hidden className="h-3.5 w-px bg-ink/20" />
             <ThemeToggle />
             <MotionToggle />
           </nav>
@@ -103,7 +103,7 @@ export default function Nav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-40 bg-paper md:hidden"
+            className="fixed inset-0 z-40 bg-paper grid-lines md:hidden"
           >
             <nav
               aria-label="Primary"
@@ -123,13 +123,13 @@ export default function Nav() {
                   <a
                     href={l.href}
                     onClick={() => setOpen(false)}
-                    className="font-serif font-light text-6xl tracking-tight block"
+                    className="display-3 block"
                   >
                     {l.label}
                   </a>
                 </motion.div>
               ))}
-              <div className="flex gap-8 pt-6 border-t border-ink/10">
+              <div className="flex gap-8 pt-6 border-t border-ink/15">
                 <ThemeToggle />
                 <MotionToggle />
               </div>

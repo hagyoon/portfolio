@@ -3,8 +3,8 @@
 /*
  * Terminal — a typed console panel. Commands type out character by
  * character, output prints beneath, and a block cursor blinks at the
- * prompt. Restyled for the classical ground: hairline frame, muted stone
- * chrome, sage prompt glyphs.
+ * prompt. Restyled for the concrete ground: hard frame, mono chrome,
+ * oxide prompt glyphs.
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -65,14 +65,14 @@ export default function Terminal({
   const finished = done.length === lines.length;
 
   return (
-    <div className={`border border-ink/15 bg-ivory/70 backdrop-blur-sm ${className ?? ""}`}>
+    <div className={`border border-ink/20 bg-abyss/70 backdrop-blur-md ${className ?? ""}`}>
       {/* Title bar */}
-      <div className="flex items-center justify-between border-b border-ink/10 px-4 py-2.5">
+      <div className="flex items-center justify-between border-b border-ink/15 px-4 py-2.5">
         <span className="font-mono text-[11px] tracking-wide text-stone-400">{host}</span>
         <span aria-hidden className="flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-sage/60" />
-          <span className="w-1.5 h-1.5 rounded-full bg-ochre/60" />
-          <span className="w-1.5 h-1.5 rounded-full bg-terracotta/50" />
+          <span className="w-2 h-2 bg-stone-300/50" />
+          <span className="w-2 h-2 bg-stone-300/35" />
+          <span className="w-2 h-2 bg-terracotta/70" />
         </span>
       </div>
       {/* Body */}
@@ -80,13 +80,13 @@ export default function Terminal({
         {done.map((line, i) => (
           <div key={i}>
             <div>
-              <span className="text-sage">$ </span>
+              <span className="text-terracotta">$ </span>
               <span className="text-ink">{line.cmd}</span>
             </div>
             {line.href ? (
               <a
                 href={line.href}
-                className="group inline-flex items-center gap-1.5 text-ochre link-inline mb-2"
+                className="group inline-flex items-center gap-1.5 text-terracotta link-inline mb-2"
               >
                 {line.out}
                 <span
@@ -102,7 +102,7 @@ export default function Terminal({
           </div>
         ))}
         <div>
-          <span className="text-sage">$ </span>
+          <span className="text-terracotta">$ </span>
           {typing !== null && <span className="text-ink">{typing}</span>}
           {(typing !== null || finished) && (
             <span

@@ -3,76 +3,78 @@
 @tailwind utilities;
 
 /* ── Theme tokens ─────────────────────────────────────────────────────────
-   Design language: classical-Nordic. Deep slate-plum ground, warm white
-   classical serif set very large, hairline rules, no ornament.
+   Design language: dark architectural brutalism. Raw concrete ground,
+   heavy grotesque display set enormous and uppercase, exposed hairline
+   grid, monospaced meta. Muted neutrals throughout; a single oxide accent
+   used sparingly as a signal.
 
    All colours are RGB triplets consumed by Tailwind as
-   rgb(var(--c-*) / <alpha>). Dark (slate) is the signature theme; light
-   (Nordic bone) is the alternate. Both are tuned for WCAG AA: body text and
-   accents clear 4.5:1 against their ground; stone-300 and below are
+   rgb(var(--c-*) / <alpha>). Dark (concrete) is the signature theme;
+   light (raw plaster) is the alternate. Both tuned for WCAG AA: body text
+   and accents clear 4.5:1 against their ground; stone-300 and below are
    decorative only. */
 :root {
-  /* Nordic bone — oatmeal paper, ink charcoal */
-  --c-paper: 242 240 235;
-  --c-ivory: 236 233 226;
-  --c-bone: 228 225 216;
-  --c-sand: 214 210 199;
-  --c-abyss: 30 30 36;        /* inverted band on light ground */
-  --c-ink: 34 34 42;
-  --c-stone-50: 238 236 230;
-  --c-stone-100: 228 225 217;
-  --c-stone-200: 205 201 191;
-  --c-stone-300: 150 146 137;
-  --c-stone-400: 114 111 104;
-  --c-stone-500: 92 89 84;
-  --c-stone-600: 72 70 66;
-  --c-stone-700: 58 56 54;
-  --c-stone-800: 42 41 40;
-  --c-stone-900: 28 28 30;
-  /* Accents — muted, single-note. Deep slate leads. */
-  --c-butter: 74 72 87;       /* deep slate — primary accent */
-  --c-sage: 78 96 84;
-  --c-mist: 72 92 112;
-  --c-blush: 130 96 84;
-  --c-lavender: 92 86 108;
-  --c-forest: 56 72 62;
-  --c-terracotta: 138 86 62;
-  --c-clay: 74 72 87;
-  --c-moss: 78 96 84;
-  --c-ochre: 122 100 62;
-  --fx-line: 34 34 42;
+  /* Raw plaster — cool concrete paper, graphite ink */
+  --c-paper: 231 229 223;
+  --c-ivory: 221 219 212;
+  --c-bone: 210 208 200;
+  --c-sand: 194 191 183;
+  --c-abyss: 13 13 12;        /* inverted band on light ground */
+  --c-ink: 22 22 21;
+  --c-stone-50: 226 224 217;
+  --c-stone-100: 214 212 205;
+  --c-stone-200: 189 187 179;
+  --c-stone-300: 147 145 138;
+  --c-stone-400: 103 102 97;
+  --c-stone-500: 83 82 78;
+  --c-stone-600: 63 62 59;
+  --c-stone-700: 47 46 44;
+  --c-stone-800: 33 33 31;
+  --c-stone-900: 22 22 21;
+  /* Accents — muted mineral. Graphite leads; oxide is the lone signal. */
+  --c-butter: 58 57 54;       /* graphite — primary accent */
+  --c-sage: 92 102 92;
+  --c-mist: 84 98 110;
+  --c-blush: 132 98 86;
+  --c-lavender: 96 92 104;
+  --c-forest: 66 80 70;
+  --c-terracotta: 158 78 42;  /* oxide — signal only */
+  --c-clay: 158 78 42;
+  --c-moss: 92 102 92;
+  --c-ochre: 130 104 56;
+  --fx-line: 22 22 21;
 }
 
 html.dark {
-  /* Classicle slate-plum — the signature ground */
-  --c-paper: 56 55 69;
-  --c-ivory: 47 46 59;
-  --c-bone: 66 65 80;
-  --c-sand: 86 84 100;
-  --c-abyss: 14 14 18;        /* near-black alternating band */
-  --c-ink: 244 243 240;
-  --c-stone-50: 52 51 64;
-  --c-stone-100: 62 61 75;
-  --c-stone-200: 84 82 98;
-  --c-stone-300: 116 113 130;
-  --c-stone-400: 158 155 166;
-  --c-stone-500: 184 181 190;
-  --c-stone-600: 205 203 209;
-  --c-stone-700: 223 221 226;
-  --c-stone-800: 235 234 237;
-  --c-stone-900: 246 245 247;
-  /* Muted stone accent, lifted from classicle's button colour */
-  --c-butter: 190 187 180;
-  --c-sage: 156 176 158;
-  --c-mist: 154 176 196;
-  --c-blush: 202 168 154;
-  --c-lavender: 176 170 196;
-  --c-forest: 150 178 160;
-  --c-terracotta: 208 154 128;
-  --c-clay: 190 187 180;
-  --c-moss: 156 176 158;
-  --c-ochre: 196 172 122;
-  --fx-line: 244 243 240;
+  /* Poured concrete at dusk — the signature ground */
+  --c-paper: 14 14 13;
+  --c-ivory: 21 21 20;
+  --c-bone: 30 30 28;
+  --c-sand: 44 44 41;
+  --c-abyss: 6 6 6;           /* deepest alternating band */
+  --c-ink: 233 231 225;
+  --c-stone-50: 24 24 22;
+  --c-stone-100: 34 34 32;
+  --c-stone-200: 53 53 50;
+  --c-stone-300: 94 93 88;
+  --c-stone-400: 140 138 131;
+  --c-stone-500: 170 168 160;
+  --c-stone-600: 197 195 187;
+  --c-stone-700: 215 213 206;
+  --c-stone-800: 227 225 218;
+  --c-stone-900: 241 239 233;
+  /* Muted mineral accents, lifted for the dark ground */
+  --c-butter: 201 198 189;    /* bone — primary accent */
+  --c-sage: 138 152 136;
+  --c-mist: 134 152 166;
+  --c-blush: 186 148 134;
+  --c-lavender: 158 152 168;
+  --c-forest: 128 148 132;
+  --c-terracotta: 198 106 60; /* oxide — signal only */
+  --c-clay: 201 198 189;
+  --c-moss: 138 152 136;
+  --c-ochre: 178 148 92;
+  --fx-line: 233 231 225;
 }
 
 /* Legacy single-value aliases (email templates, odd corners) */
@@ -105,7 +107,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  font-feature-settings: "calt", "liga", "kern";
+  font-feature-settings: "calt", "liga", "kern", "ss01";
 }
 
 html.lenis,
@@ -126,14 +128,14 @@ html.lenis body {
 }
 
 ::selection {
-  background: rgb(var(--c-ink));
+  background: rgb(var(--c-terracotta));
   color: rgb(var(--c-paper));
 }
 
 /* Visible keyboard focus everywhere */
 :focus-visible {
-  outline: 1px solid rgb(var(--c-ink));
-  outline-offset: 4px;
+  outline: 2px solid rgb(var(--c-terracotta));
+  outline-offset: 3px;
   border-radius: 0;
 }
 
@@ -147,7 +149,10 @@ html.lenis body {
   background: rgb(var(--c-ink));
   color: rgb(var(--c-paper));
   padding: 10px 18px;
-  font-size: 14px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
   transition: transform 200ms ease;
 }
 .skip-link:focus-visible {
@@ -156,73 +161,118 @@ html.lenis body {
 
 @layer base {
   body {
-    /* Classical garamond body, set large and airy */
-    font-family: var(--font-body), "EB Garamond", Georgia, serif;
+    /* Tight grotesque reading voice */
+    font-family: var(--font-body), "Inter Tight", system-ui, sans-serif;
     font-weight: 400;
-    font-size: 19px;
-    line-height: 1.65;
+    font-size: 17px;
+    line-height: 1.6;
+    letter-spacing: -0.011em;
   }
   h1,
   h2,
   h3,
   h4,
   h5 {
-    /* High-contrast classical display serif, light weight at large sizes */
-    font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
-    font-weight: 300;
-    letter-spacing: -0.015em;
+    /* Heavy grotesque display — uppercase, tracked in hard */
+    font-family: var(--font-serif), "Archivo", system-ui, sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.035em;
+  }
+  /* Brutalist emphasis — no italics; outlined instead */
+  h1 em,
+  h2 em,
+  h3 em,
+  h4 em,
+  h5 em {
+    font-style: normal;
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(var(--c-ink) / 0.55);
   }
   a {
     color: inherit;
   }
   strong,
   b {
-    font-weight: 600;
+    font-weight: 700;
   }
 }
 
 @layer utilities {
   .container-edge {
-    @apply max-w-[1600px] mx-auto px-6 md:px-10 lg:px-14;
+    @apply max-w-[1680px] mx-auto px-5 md:px-8 lg:px-12;
   }
   .rule {
-    @apply border-t border-ink/15;
+    @apply border-t border-ink/20;
   }
-  /* Nordic label system — tiny, wide-tracked, uppercase sans.
-     The default colour is wrapped in :where() so it carries zero
-     specificity and any `text-*` utility on the element wins. */
+  /* Exposed structural hairlines — the architectural grid, drawn as a
+     repeating background so it costs nothing and never blocks pointers. */
+  .grid-lines {
+    position: relative;
+  }
+  .grid-lines::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: linear-gradient(
+      to right,
+      rgb(var(--c-ink) / 0.08) 0 1px,
+      transparent 1px 100%
+    );
+    background-size: 25% 100%;
+  }
+  /* Monospaced meta system — the site's only small type.
+     Default colour is wrapped in :where() so it carries zero specificity
+     and any `text-*` utility on the element wins. */
   .label,
   .eyebrow {
-    @apply font-sans uppercase tracking-[0.2em] text-[11px] font-normal;
+    @apply font-mono uppercase tracking-[0.16em] text-[11px] font-medium;
   }
   :where(.label),
   :where(.eyebrow) {
     color: rgb(var(--c-stone-400));
   }
-  /* Display scale — classicle-large, bleeding toward the edges */
+  /* Index numerals — oversized mono counters beside section heads */
+  .index-num {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: clamp(2.25rem, 4vw, 3.5rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+    color: rgb(var(--c-stone-300));
+  }
+  /* Display scale — brutalist, set to the edges */
   .display-1 {
-    font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
-    font-weight: 300;
-    font-size: clamp(3.75rem, 15vw, 15rem);
-    line-height: 0.86;
-    letter-spacing: -0.03em;
+    font-family: var(--font-serif), "Archivo", system-ui, sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: clamp(3.25rem, 15.5vw, 16rem);
+    line-height: 0.8;
+    letter-spacing: -0.05em;
   }
   .display-2 {
-    font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
-    font-weight: 300;
-    font-size: clamp(2.75rem, 7.5vw, 6.5rem);
-    line-height: 0.98;
-    letter-spacing: -0.025em;
+    font-family: var(--font-serif), "Archivo", system-ui, sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: clamp(2.25rem, 7vw, 6rem);
+    line-height: 0.88;
+    letter-spacing: -0.04em;
   }
   .display-3 {
-    font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
-    font-weight: 300;
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    font-family: var(--font-serif), "Archivo", system-ui, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(1.75rem, 3.8vw, 3.25rem);
+    line-height: 0.94;
+    letter-spacing: -0.03em;
   }
   .editorial-italic {
-    font-style: italic;
+    font-style: normal;
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(var(--c-ink) / 0.55);
   }
   /* Hero wordmark letters — inline-block so each can lift independently */
   .hero-letter {
@@ -236,29 +286,29 @@ html.lenis body {
   .cursor-blink {
     animation: cursor-blink 1.15s steps(1) infinite;
   }
-  /* Matte tint panels — a whisper of colour behind cards and placeholders */
+  /* Matte tint panels — mineral washes behind cards and placeholders */
   .tint-sage {
-    background: rgb(var(--c-sage) / 0.1);
+    background: rgb(var(--c-sage) / 0.09);
   }
   .tint-mist {
-    background: rgb(var(--c-mist) / 0.1);
+    background: rgb(var(--c-mist) / 0.09);
   }
   .tint-ochre {
-    background: rgb(var(--c-ochre) / 0.1);
+    background: rgb(var(--c-ochre) / 0.09);
   }
   .tint-terracotta {
-    background: rgb(var(--c-terracotta) / 0.09);
+    background: rgb(var(--c-terracotta) / 0.1);
   }
   .tint-lavender {
-    background: rgb(var(--c-lavender) / 0.1);
+    background: rgb(var(--c-lavender) / 0.09);
   }
   /* Full-bleed tonal band — the alternating section rhythm. A deeper shade
      of the same ground rather than an inversion, so every child component
      keeps its contrast in both themes. */
   .band-deep {
     background: rgb(var(--c-ivory));
-    border-top: 1px solid rgb(var(--c-ink) / 0.08);
-    border-bottom: 1px solid rgb(var(--c-ink) / 0.08);
+    border-top: 1px solid rgb(var(--c-ink) / 0.14);
+    border-bottom: 1px solid rgb(var(--c-ink) / 0.14);
   }
   html.dark .band-deep {
     background: rgb(var(--c-abyss));
@@ -277,7 +327,7 @@ html.lenis body {
     background: currentColor;
     transform: scaleX(0);
     transform-origin: right center;
-    transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
   }
   .underline-grow:hover::after,
   .underline-grow:focus-visible::after {
@@ -287,29 +337,36 @@ html.lenis body {
   /* Inline links — underlined by default, not colour-only */
   .link-inline {
     text-decoration: underline;
-    text-underline-offset: 5px;
+    text-underline-offset: 4px;
     text-decoration-thickness: 1px;
     text-decoration-color: rgb(var(--c-ink) / 0.35);
-    transition: text-decoration-color 300ms ease;
+    transition: text-decoration-color 250ms ease, color 250ms ease;
   }
   .link-inline:hover,
   .link-inline:focus-visible {
-    text-decoration-color: rgb(var(--c-ink));
+    text-decoration-color: rgb(var(--c-terracotta));
+    color: rgb(var(--c-terracotta));
   }
-  /* Buttons — square, hairline, no shadow */
+  /* Buttons — square, hard-edged, mono caps, invert on hover */
   .btn-solid {
-    @apply inline-flex items-center gap-2.5 bg-ink px-8 py-4 label transition-opacity duration-300;
+    @apply inline-flex items-center gap-3 bg-ink px-7 py-4 label transition-colors duration-300;
     color: rgb(var(--c-paper));
+    border: 1px solid rgb(var(--c-ink));
   }
   .btn-solid:hover {
-    opacity: 0.82;
+    background: rgb(var(--c-terracotta));
+    border-color: rgb(var(--c-terracotta));
+    color: rgb(var(--c-paper));
   }
   .btn-outline {
-    @apply inline-flex items-center gap-2.5 border px-8 py-4 label transition-colors duration-300;
-    border-color: rgb(var(--c-ink) / 0.3);
+    @apply inline-flex items-center gap-3 border px-7 py-4 label transition-colors duration-300;
+    border-color: rgb(var(--c-ink) / 0.35);
+    color: rgb(var(--c-ink));
   }
   .btn-outline:hover {
+    background: rgb(var(--c-ink));
     border-color: rgb(var(--c-ink));
+    color: rgb(var(--c-paper));
   }
   /* Section washes — near-invisible tonal shifts, no colour cast */
   .wash-mist,
@@ -319,24 +376,33 @@ html.lenis body {
     background: linear-gradient(
       180deg,
       transparent 0%,
-      rgb(var(--c-ink) / 0.03) 50%,
+      rgb(var(--c-ink) / 0.04) 50%,
       transparent 100%
     );
   }
-  /* Paper grain — barely there */
+  /* Concrete grain — coarser than paper, and it earns its keep here */
   .grain::before {
     content: "";
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 60;
-    opacity: 0.025;
+    opacity: 0.035;
     mix-blend-mode: multiply;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   }
   html.dark .grain::before {
     mix-blend-mode: screen;
-    opacity: 0.04;
+    opacity: 0.055;
+  }
+  /* Photography grade — pulls any image into the concrete palette */
+  .img-grade {
+    filter: saturate(0.45) contrast(1.06) brightness(0.94);
+    transition: filter 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .group:hover .img-grade,
+  .img-grade:hover {
+    filter: saturate(0.62) contrast(1.03) brightness(1);
   }
 }
 
@@ -385,19 +451,19 @@ html.reduce-motion *::after {
   width: 100%;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgb(var(--c-ink) / 0.25);
-  padding: 8px 0;
-  font-family: var(--font-body), Georgia, serif;
+  border-bottom: 1px solid rgb(var(--c-ink) / 0.3);
+  padding: 10px 0;
+  font-family: var(--font-body), system-ui, sans-serif;
   font-size: 1rem;
   color: rgb(var(--c-ink));
   outline: none;
-  transition: border-color 400ms ease;
+  transition: border-color 300ms ease;
 }
 .input-line::placeholder {
   color: rgb(var(--c-stone-400));
 }
 .input-line:focus {
-  border-bottom-color: rgb(var(--c-ink));
+  border-bottom-color: rgb(var(--c-terracotta));
 }
 
 /* Prose for reading pages */
@@ -405,54 +471,57 @@ html.reduce-motion *::after {
   max-width: 68ch;
 }
 .prose-editorial p {
-  margin-bottom: 1.3em;
-  font-size: 1.125rem;
-  line-height: 1.75;
+  margin-bottom: 1.35em;
+  font-size: 1.0625rem;
+  line-height: 1.72;
   color: rgb(var(--c-stone-600));
 }
 .prose-editorial h2 {
-  font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
-  font-weight: 300;
-  font-size: 2.25rem;
-  margin: 2.2em 0 0.5em;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  font-family: var(--font-serif), "Archivo", system-ui, sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 1.875rem;
+  margin: 2.2em 0 0.55em;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
 }
 .prose-editorial h3 {
-  font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
-  font-weight: 400;
-  font-size: 1.5rem;
+  font-family: var(--font-serif), "Archivo", system-ui, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
   margin: 1.9em 0 0.45em;
 }
 .prose-editorial blockquote {
-  border-left: 1px solid rgb(var(--c-ink) / 0.25);
+  border-left: 2px solid rgb(var(--c-terracotta));
   padding-left: 1.5rem;
-  font-style: italic;
-  font-size: 1.25rem;
-  color: rgb(var(--c-stone-500));
-  margin: 1.8em 0;
+  font-size: 1.375rem;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: rgb(var(--c-stone-700));
+  margin: 1.9em 0;
 }
 .prose-editorial a {
   text-decoration: underline;
-  text-underline-offset: 5px;
+  text-underline-offset: 4px;
   text-decoration-thickness: 1px;
   text-decoration-color: rgb(var(--c-ink) / 0.35);
 }
 .prose-editorial a:hover,
 .prose-editorial a:focus-visible {
-  text-decoration-color: rgb(var(--c-ink));
-}
-.prose-editorial em {
-  font-style: italic;
+  text-decoration-color: rgb(var(--c-terracotta));
+  color: rgb(var(--c-terracotta));
 }
 .prose-editorial img {
   width: 100%;
   margin: 2.4em 0;
+  filter: saturate(0.45) contrast(1.06) brightness(0.94);
 }
 .prose-editorial ul,
 .prose-editorial ol {
   padding-left: 1.25rem;
-  margin-bottom: 1.3em;
+  margin-bottom: 1.35em;
 }
 .prose-editorial li {
   margin-bottom: 0.35em;
@@ -460,12 +529,13 @@ html.reduce-motion *::after {
 }
 .prose-editorial code {
   font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 0.9em;
-  background: rgb(var(--c-ink) / 0.06);
-  padding: 0.1em 0.35em;
+  font-size: 0.875em;
+  background: rgb(var(--c-ink) / 0.07);
+  padding: 0.15em 0.4em;
 }
 .prose-editorial pre {
-  background: rgb(var(--c-ink) / 0.06);
+  background: rgb(var(--c-ink) / 0.07);
+  border-left: 2px solid rgb(var(--c-ink) / 0.2);
   padding: 1.1rem 1.25rem;
   overflow-x: auto;
   margin-bottom: 1.4em;
@@ -474,36 +544,43 @@ html.reduce-motion *::after {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 1.6em;
-  font-size: 0.95rem;
+  font-size: 0.9375rem;
 }
 .prose-editorial th,
 .prose-editorial td {
-  border-bottom: 1px solid rgb(var(--c-ink) / 0.12);
+  border-bottom: 1px solid rgb(var(--c-ink) / 0.14);
   padding: 0.6em 0.8em 0.6em 0;
   text-align: left;
+}
+.prose-editorial th {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgb(var(--c-stone-500));
 }
 
 /* Admin studio */
 .admin-input {
   width: 100%;
   background: rgb(var(--c-ivory));
-  border: 1px solid rgb(var(--c-ink) / 0.16);
+  border: 1px solid rgb(var(--c-ink) / 0.18);
   padding: 10px 12px;
-  font-family: var(--font-body), Georgia, serif;
+  font-family: var(--font-body), system-ui, sans-serif;
   font-size: 0.9375rem;
   color: rgb(var(--c-ink));
   outline: none;
-  transition: border-color 300ms ease;
+  transition: border-color 250ms ease;
 }
 .admin-input:focus {
-  border-color: rgb(var(--c-ink));
+  border-color: rgb(var(--c-terracotta));
 }
 .admin-label {
   display: block;
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 10.5px;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   color: rgb(var(--c-stone-400));
   margin-bottom: 7px;
 }

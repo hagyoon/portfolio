@@ -10,7 +10,6 @@ import { useState } from "react";
 import clsx from "clsx";
 import Reveal from "@/components/Reveal";
 import type { Essay } from "@/lib/content";
-import Ornament from "@/components/graphics/Ornament";
 
 export default function Writing({ essays }: { essays: Essay[] }) {
   const [active, setActive] = useState<string | null>(null);
@@ -23,20 +22,20 @@ export default function Writing({ essays }: { essays: Essay[] }) {
       <div className="grid grid-cols-12 gap-6 mb-14 md:mb-20">
         <div className="col-span-12 md:col-span-3">
           <Reveal>
-            <div className="eyebrow text-lavender">Note 04</div>
-            <div className="mt-3 text-stone-500 text-sm">Writing</div>
-            <Ornament variant="hatch" className="mt-8 w-24 h-16 text-lavender/40" />
+            <div className="index-num">05</div>
+            <div className="mt-3 label">Writing</div>
+            <div aria-hidden className="mt-6 h-px w-16 bg-terracotta" />
           </Reveal>
         </div>
         <div className="col-span-12 md:col-span-9">
           <Reveal>
             <div className="flex flex-wrap items-end justify-between gap-6">
               <h2 className="display-2 max-w-3xl">
-                Thinking, <em className="text-stone-400">slowly</em>, in public.
+                Thinking, <em>slowly</em>, in public.
               </h2>
               <Link
                 href="/writing"
-                className="link-inline font-mono text-sm text-stone-600 mb-2 shrink-0"
+                className="link-inline label text-stone-500 mb-2 shrink-0"
               >
                 All writing — search &amp; topics →
               </Link>
@@ -45,14 +44,14 @@ export default function Writing({ essays }: { essays: Essay[] }) {
         </div>
       </div>
 
-      <div className="border-t border-ink/15" onPointerLeave={() => setActive(null)}>
+      <div className="border-t border-ink/20" onPointerLeave={() => setActive(null)}>
         {list.map((essay, i) => (
           <Reveal key={essay.slug} delay={i * 0.04}>
             <Link
               href={`/writing/${essay.slug}`}
               onPointerEnter={() => setActive(essay.slug)}
               className={clsx(
-                "group grid grid-cols-12 gap-4 items-baseline border-b border-ink/15 py-7 md:py-9 transition-opacity duration-500",
+                "group grid grid-cols-12 gap-4 items-baseline border-b border-ink/20 py-6 md:py-8 transition-opacity duration-500",
                 active && active !== essay.slug ? "opacity-35" : "opacity-100"
               )}
             >
@@ -60,10 +59,10 @@ export default function Writing({ essays }: { essays: Essay[] }) {
                 {essay.date}
               </div>
               <div className="col-span-9 md:col-span-7">
-                <h3 className="font-serif text-2xl md:text-4xl tracking-tight leading-tight">
+                <h3 className="font-serif uppercase font-bold text-xl md:text-3xl tracking-[-0.035em] leading-[1.02]">
                   {essay.title}
                 </h3>
-                <p className="mt-2 text-stone-500 text-sm max-w-xl hidden md:block">
+                <p className="mt-2.5 text-stone-500 text-sm leading-[1.65] max-w-xl hidden md:block">
                   {essay.excerpt}
                 </p>
               </div>

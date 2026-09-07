@@ -14,26 +14,28 @@ export default function Contact({ site }: { site: Site }) {
     <section id="contact" className="pt-40 md:pt-56">
       <div className="band-deep py-28 md:py-40">
         <div className="container-edge">
-          <div className="max-w-2xl mx-auto text-center">
+          <div className="max-w-3xl">
             <Reveal>
-              <p className="eyebrow mb-8 text-terracotta">Get in touch</p>
+              <div className="index-num">06</div>
+              <div className="mt-3 label">Get in touch</div>
+              <div aria-hidden className="mt-6 h-px w-16 bg-terracotta" />
             </Reveal>
             <Reveal delay={0.08}>
-              <h2 className="display-2">
-                If something here <em className="text-stone-400">resonates</em>, say hello.
+              <h2 className="display-2 mt-10">
+                If something here <em>resonates</em>, say hello.
               </h2>
             </Reveal>
           </div>
 
           <Reveal delay={0.16}>
-            <div className="max-w-2xl mx-auto mt-14">
+            <div className="max-w-2xl mt-14">
               <ContactForm telegram={site.contact.telegram} instagram={site.contact.instagram} />
             </div>
           </Reveal>
 
           {site.contact.email && (
             <Reveal delay={0.24}>
-              <p className="max-w-2xl mx-auto mt-8 text-stone-600 text-sm">
+              <p className="max-w-2xl mt-8 text-stone-500 text-sm">
                 Prefer email?{" "}
                 <a href={`mailto:${site.contact.email}`} className="link-inline">
                   {site.contact.email}

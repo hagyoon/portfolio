@@ -17,15 +17,15 @@ export default function Footer({ site }: { site: Site }) {
     <>
       <ContactModal open={open} onClose={() => setOpen(false)} telegram={site.contact.telegram} instagram={site.contact.instagram} />
 
-      <footer className="border-t border-ink/15 mt-32">
-        <div className="container-edge py-16 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-6">
+      <footer className="border-t border-ink/20 mt-32 grid-lines">
+        <div className="relative z-10 container-edge py-16 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-6">
           <div className="md:col-span-5">
             <div className="display-3 max-w-xl">
-              <span className="italic">If something resonates,</span>
+              <span>If something resonates,</span>
               <br />
               <span>let&apos;s build something</span>
               <br />
-              <span className="italic text-stone-400">meaningful</span>
+              <span className="editorial-italic">meaningful</span>
               <span> together.</span>
             </div>
             <button
@@ -38,7 +38,7 @@ export default function Footer({ site }: { site: Site }) {
 
           <div className="md:col-span-3 md:col-start-7 space-y-3">
             <div className="label">Index</div>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm text-stone-500">
               <li><a href="/#about" className="link-inline">About</a></li>
               <li><a href="/#projects" className="link-inline">Projects</a></li>
               <li><a href="/#explorations" className="link-inline">Exploring</a></li>
@@ -49,7 +49,7 @@ export default function Footer({ site }: { site: Site }) {
 
           <div className="md:col-span-3 space-y-3">
             <div className="label">Elsewhere</div>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm text-stone-500">
               {site.contact.email && (
                 <li>
                   <a href={`mailto:${site.contact.email}`} className="link-inline">
@@ -75,7 +75,7 @@ export default function Footer({ site }: { site: Site }) {
           </div>
         </div>
 
-        <div className="container-edge border-t border-ink/10 py-6 text-stone-500 text-xs uppercase tracking-widest">
+        <div className="relative z-10 container-edge border-t border-ink/15 py-6 label">
           <div>© {year} hkryu.space. All rights reserved.</div>
         </div>
       </footer>

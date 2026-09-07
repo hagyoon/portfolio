@@ -8,9 +8,6 @@
 import { motion } from "framer-motion";
 import Reveal from "@/components/Reveal";
 import type { Interest } from "@/lib/content";
-import Ornament from "@/components/graphics/Ornament";
-
-const accents = ["bg-mist/45", "bg-terracotta/40", "bg-sage/45", "bg-lavender/45", "bg-ochre/45"];
 
 export default function Explorations({ interests }: { interests: Interest[] }) {
   if (!interests.length) return null;
@@ -21,37 +18,40 @@ export default function Explorations({ interests }: { interests: Interest[] }) {
         <div className="grid grid-cols-12 gap-6 mb-14 md:mb-20">
           <div className="col-span-12 md:col-span-3">
             <Reveal>
-              <div className="eyebrow text-mist">Note 02</div>
-              <div className="mt-3 text-stone-500 text-sm">Currently Exploring</div>
-              <Ornament variant="rings" className="mt-8 w-24 h-24 text-mist/45" />
+              <div className="index-num">03</div>
+              <div className="mt-3 label">Currently Exploring</div>
+              <div aria-hidden className="mt-6 h-px w-16 bg-terracotta" />
             </Reveal>
           </div>
           <div className="col-span-12 md:col-span-9">
             <Reveal>
               <h2 className="display-2 max-w-3xl">
-                Open questions, <em className="text-stone-400">active</em> threads.
+                Open questions, <em>active</em> threads.
               </h2>
             </Reveal>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-ink/10 border border-ink/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-ink/15 border border-ink/15">
           {interests.map((item, i) => (
             <Reveal key={item.slug} delay={(i % 3) * 0.08} className="bg-paper">
               <motion.div
-                whileHover={{ y: -6 }}
+                whileHover={{ y: -4 }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="h-full p-8 md:p-10 group cursor-default"
+                className="h-full p-7 md:p-9 group cursor-default"
               >
-                <div
-                  className={`w-8 h-8 rounded-full mb-8 transition-transform duration-700 ease-editorial group-hover:scale-125 ${
-                    accents[i % accents.length]
-                  }`}
-                />
-                <div className="label text-stone-400 mb-3 tabular-nums">
-                  {String(i + 1).padStart(2, "0")}
+                <div className="flex items-baseline justify-between mb-8">
+                  <span className="label text-stone-400 tabular-nums">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span
+                    aria-hidden
+                    className="h-2 w-2 bg-terracotta transition-transform duration-500 ease-editorial group-hover:scale-[1.8]"
+                  />
                 </div>
-                <h3 className="font-serif text-2xl tracking-tight mb-3">{item.title}</h3>
+                <h3 className="font-serif uppercase font-bold text-xl tracking-[-0.03em] mb-3">
+                  {item.title}
+                </h3>
                 <p className="text-stone-600 text-sm leading-relaxed">{item.caption}</p>
               </motion.div>
             </Reveal>

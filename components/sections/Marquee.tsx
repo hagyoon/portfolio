@@ -27,17 +27,17 @@ export default function Marquee({ words }: { words: string[] }) {
   const items = words.length ? words : ["Portfolio"];
 
   return (
-    <section aria-hidden className="py-12 md:py-16 border-y border-ink/10 overflow-hidden">
+    <section aria-hidden className="py-8 md:py-10 border-y border-ink/15 overflow-hidden bg-ivory">
       <motion.div style={{ x }} className="flex whitespace-nowrap will-change-transform">
         {[0, 1, 2, 3].map((copy) => (
           <div key={copy} className="flex shrink-0">
             {items.map((w, i) => (
               <span
                 key={`${copy}-${i}`}
-                className="font-condensed text-3xl md:text-5xl text-stone-500 mx-6 md:mx-10"
+                className="font-serif uppercase font-extrabold text-2xl md:text-4xl tracking-[-0.035em] text-stone-400 mx-5 md:mx-8"
               >
                 {w}
-                <span className="not-italic text-stone-300 ml-12 md:ml-20">·</span>
+                <span className="text-terracotta ml-10 md:ml-16">/</span>
               </span>
             ))}
           </div>

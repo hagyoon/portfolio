@@ -10,7 +10,6 @@ import ScrubWords from "@/components/motion/ScrubWords";
 import { ParallaxInner } from "@/components/motion/Parallax";
 import SafeImage from "@/components/ui/SafeImage";
 import type { Site } from "@/lib/content";
-import Ornament from "@/components/graphics/Ornament";
 
 export default function About({ site }: { site: Site }) {
   const paragraphs = site.about
@@ -24,15 +23,15 @@ export default function About({ site }: { site: Site }) {
       <div className="grid grid-cols-12 gap-6 mb-20 md:mb-28">
         <div className="col-span-12 md:col-span-3">
           <Reveal>
-            <div className="eyebrow text-sage">Note 01</div>
-            <div className="mt-3 text-stone-500 text-sm">Philosophy</div>
-            <Ornament variant="bars" className="mt-8 w-24 h-24 text-sage/45" />
+            <div className="index-num">01</div>
+            <div className="mt-3 label">Philosophy</div>
+            <div aria-hidden className="mt-6 h-px w-16 bg-terracotta" />
           </Reveal>
         </div>
         <div className="col-span-12 md:col-span-9">
           <ScrubWords
             text={site.intro}
-            className="font-serif text-display-lg leading-[1.02] tracking-tighter max-w-5xl"
+            className="display-2 max-w-5xl"
           />
         </div>
       </div>
@@ -40,7 +39,7 @@ export default function About({ site }: { site: Site }) {
       {/* Bio + portrait + manifesto */}
       <div className="grid grid-cols-12 gap-6 md:gap-12">
         <div className="col-span-12 md:col-span-7">
-          <div className="space-y-6 text-stone-700 text-base md:text-lg leading-relaxed">
+          <div className="space-y-6 text-stone-600 text-base leading-[1.7] max-w-[62ch]">
             {paragraphs.map((para, i) => (
               <Reveal key={i} delay={i * 0.05}>
                 <p>{para}</p>
@@ -57,7 +56,7 @@ export default function About({ site }: { site: Site }) {
                   {site.marquee.map((skill) => (
                     <li
                       key={skill}
-                      className="border border-sage/30 tint-sage px-4 py-1.5 text-sm text-stone-600"
+                      className="border border-ink/20 px-3.5 py-1.5 label text-stone-500"
                     >
                       {skill}
                     </li>
@@ -72,12 +71,12 @@ export default function About({ site }: { site: Site }) {
             <Reveal delay={0.12}>
               <div className="mt-14">
                 <h3 className="label mb-6">Timeline</h3>
-                <ol className="border-l border-ink/20 space-y-8 pl-6">
+                <ol className="border-l border-ink/25 space-y-8 pl-6">
                   {site.timeline.map((t, i) => (
                     <li key={i} className="relative">
                       <span
                         aria-hidden
-                        className="absolute -left-[1.85rem] top-1.5 w-2.5 h-2.5 bg-ochre"
+                        className="absolute -left-[1.85rem] top-1.5 w-2.5 h-2.5 bg-terracotta"
                       />
                       <div className="font-mono text-sm text-stone-500">{t.period}</div>
                       <div className="text-base md:text-lg text-ink mt-0.5">{t.title}</div>
@@ -94,11 +93,11 @@ export default function About({ site }: { site: Site }) {
 
         <div className="col-span-12 md:col-span-5 md:pl-8 space-y-12">
           <Reveal delay={0.1}>
-            <div className="relative w-full aspect-[4/5] bg-ivory overflow-hidden">
+            <div className="relative w-full aspect-[4/5] bg-ivory overflow-hidden border border-ink/15">
               <ParallaxInner amount={7}>
                 <div className="relative w-full h-[114%]">
                   <SafeImage
-                    src="/images/portraits/portrait.jpg"
+                    src="/images/atmosphere/desk.webp"
                     alt={`${site.name}, ${site.location}`}
                     sizes="(min-width: 768px) 40vw, 100vw"
                   />
@@ -111,10 +110,10 @@ export default function About({ site }: { site: Site }) {
             <ul className="space-y-5">
               {site.manifesto.map((line, i) => (
                 <li key={i} className="flex gap-4 items-start">
-                  <span className="label text-stone-400 mt-1 tabular-nums">
+                  <span className="label text-terracotta mt-1 tabular-nums">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-stone-700 text-sm md:text-base leading-relaxed">
+                  <span className="text-stone-600 text-sm leading-relaxed">
                     {line}
                   </span>
                 </li>

@@ -41,15 +41,16 @@ const config: Config = {
         ochre: "rgb(var(--c-ochre) / <alpha-value>)",
       },
       fontFamily: {
-        // Classical display serif — set light and very large
-        serif: ["var(--font-serif)", "Cormorant Garamond", "Georgia", "serif"],
-        // Garamond body — the reading voice
-        body: ["var(--font-body)", "EB Garamond", "Georgia", "serif"],
-        // Neutral grotesque reserved for labels, nav meta and UI chrome
-        sans: ["var(--font-sans)", "Inter", "system-ui", "sans-serif"],
-        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
-        condensed: ["var(--font-serif)", "Cormorant Garamond", "serif"],
-        wide: ["var(--font-sans)", "system-ui", "sans-serif"],
+        // Heavy grotesque display — set enormous and uppercase.
+        // Kept under the `serif` key so existing markup needs no rename.
+        serif: ["var(--font-serif)", "Archivo", "system-ui", "sans-serif"],
+        // Tight grotesque body — the reading voice
+        body: ["var(--font-body)", "Inter Tight", "system-ui", "sans-serif"],
+        // Mono carries the whole small-type system: labels, meta, numerals
+        mono: ["var(--font-mono)", "JetBrains Mono", "ui-monospace", "monospace"],
+        sans: ["var(--font-body)", "Inter Tight", "system-ui", "sans-serif"],
+        condensed: ["var(--font-serif)", "Archivo", "system-ui", "sans-serif"],
+        wide: ["var(--font-mono)", "JetBrains Mono", "monospace"],
       },
       letterSpacing: {
         tightest: "-0.04em",
@@ -58,12 +59,12 @@ const config: Config = {
         widest: "0.18em",
       },
       fontSize: {
-        "display-xl": ["clamp(4rem, 12vw, 12rem)", { lineHeight: "0.92", letterSpacing: "-0.035em" }],
-        "display-lg": ["clamp(3rem, 8vw, 8rem)", { lineHeight: "0.95", letterSpacing: "-0.03em" }],
-        "display-md": ["clamp(2.25rem, 5vw, 4.5rem)", { lineHeight: "1.0", letterSpacing: "-0.02em" }],
+        "display-xl": ["clamp(4rem, 13vw, 13rem)", { lineHeight: "0.82", letterSpacing: "-0.05em" }],
+        "display-lg": ["clamp(2.75rem, 8vw, 7.5rem)", { lineHeight: "0.86", letterSpacing: "-0.045em" }],
+        "display-md": ["clamp(2rem, 5vw, 4.25rem)", { lineHeight: "0.92", letterSpacing: "-0.035em" }],
       },
       transitionTimingFunction: {
-        editorial: "cubic-bezier(0.22, 1, 0.36, 1)",
+        editorial: "cubic-bezier(0.16, 1, 0.3, 1)",
       },
     },
   },
