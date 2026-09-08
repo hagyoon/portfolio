@@ -11,6 +11,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import Guilloche from "@/components/graphics/Guilloche";
 import type { Site } from "@/lib/content";
 
 // The thesis — three lines, the middle one in italic
@@ -57,6 +58,15 @@ export default function Hero({ site }: { site: Site }) {
         {/* Exposed structural grid — four bays, hairline rules */}
         <div aria-hidden className="pointer-events-none absolute inset-0 grid-lines" />
 
+        {/* Engine-turned ground — a dial catching light off to one side */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-[55%] -top-[60%] -z-10 h-[190svh] w-[190svh] text-stone-200 dark:text-stone-300
+                     [mask-image:radial-gradient(circle_at_30%_70%,black_0%,transparent_60%)]"
+        >
+          <Guilloche variant="soleil" opacity={0.28} className="h-full w-full" />
+        </div>
+
         <motion.div
           style={{ scale, opacity, y: lift }}
           className="flex-1 flex flex-col justify-center origin-left pt-32 pb-16 lg:pt-28 lg:pb-6"
@@ -66,7 +76,7 @@ export default function Hero({ site }: { site: Site }) {
               {/* Statement */}
               <div className="lg:col-span-9">
                 <motion.div {...fade(0.1)} className="flex items-center gap-4 mb-10 md:mb-14">
-                  <span aria-hidden className="h-1.5 w-1.5 bg-terracotta" />
+                  <span aria-hidden className="h-1.5 w-1.5 bg-rosegold" />
                   <span className="label">A creative practice, AI as the canvas — {site.location}</span>
                 </motion.div>
 

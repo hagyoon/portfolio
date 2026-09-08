@@ -39,6 +39,9 @@ const config: Config = {
         clay: "rgb(var(--c-clay) / <alpha-value>)",
         moss: "rgb(var(--c-moss) / <alpha-value>)",
         ochre: "rgb(var(--c-ochre) / <alpha-value>)",
+        ruri: "rgb(var(--c-ruri) / <alpha-value>)",
+        rosegold: "rgb(var(--c-rosegold) / <alpha-value>)",
+        titanium: "rgb(var(--c-titanium) / <alpha-value>)",
       },
       fontFamily: {
         // Light high-contrast Garamond display — set large and lowercase.

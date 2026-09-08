@@ -11,7 +11,7 @@ import clsx from "clsx";
 import Reveal from "@/components/Reveal";
 import type { Essay } from "@/lib/content";
 
-export default function Writing({ essays }: { essays: Essay[] }) {
+export default function Writing({ essays, index = "05" }: { essays: Essay[]; index?: string }) {
   const [active, setActive] = useState<string | null>(null);
   const list = essays.slice(0, 8);
 
@@ -22,9 +22,9 @@ export default function Writing({ essays }: { essays: Essay[] }) {
       <div className="grid grid-cols-12 gap-6 mb-14 md:mb-20">
         <div className="col-span-12 md:col-span-3">
           <Reveal>
-            <div className="index-num">05</div>
+            <div className="index-num">{index}</div>
             <div className="mt-3 label">Writing</div>
-            <div aria-hidden className="mt-6 h-px w-16 bg-terracotta" />
+            <div aria-hidden className="mt-6 h-px w-16 bg-rosegold" />
           </Reveal>
         </div>
         <div className="col-span-12 md:col-span-9">

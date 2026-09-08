@@ -7,6 +7,7 @@
 
 import Reveal from "@/components/Reveal";
 import ScrubWords from "@/components/motion/ScrubWords";
+import Guilloche from "@/components/graphics/Guilloche";
 import type { Site } from "@/lib/content";
 
 export default function About({ site }: { site: Site }) {
@@ -23,7 +24,7 @@ export default function About({ site }: { site: Site }) {
           <Reveal>
             <div className="index-num">01</div>
             <div className="mt-3 label">Philosophy</div>
-            <div aria-hidden className="mt-6 h-px w-16 bg-terracotta" />
+            <div aria-hidden className="mt-6 h-px w-16 bg-rosegold" />
           </Reveal>
         </div>
         <div className="col-span-12 md:col-span-9">
@@ -74,7 +75,7 @@ export default function About({ site }: { site: Site }) {
                     <li key={i} className="relative">
                       <span
                         aria-hidden
-                        className="absolute -left-[1.85rem] top-1.5 w-2.5 h-2.5 bg-terracotta"
+                        className="absolute -left-[1.85rem] top-1.5 w-2.5 h-2.5 bg-rosegold"
                       />
                       <div className="font-mono text-sm text-stone-500">{t.period}</div>
                       <div className="text-base md:text-lg text-ink mt-0.5">{t.title}</div>
@@ -91,8 +92,14 @@ export default function About({ site }: { site: Site }) {
 
         <div className="col-span-12 md:col-span-5 md:pl-8 space-y-12">
           <Reveal delay={0.1}>
-            {/* Typographic plate — stands in for a portrait until one is set */}
-            <div className="relative w-full aspect-[4/5] overflow-hidden border border-ink/15 band-deep grid-lines">
+            {/* Engine-turned plate — stands in for a portrait until one is set */}
+            <div className="relative w-full aspect-[4/5] overflow-hidden border border-ink/15 band-deep">
+              <Guilloche
+                variant="soleil"
+                opacity={0.3}
+                className="absolute inset-0 w-full h-full text-stone-200 dark:text-stone-300"
+              />
+              <div aria-hidden className="absolute inset-[10px] border border-rosegold/15" />
               <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
                 <div className="flex items-start justify-between">
                   <span className="label">Fig. 01</span>
@@ -102,7 +109,7 @@ export default function About({ site }: { site: Site }) {
                   <p className="font-serif font-light italic text-[2rem] md:text-[2.5rem] leading-[1.05] text-ink/90 tracking-tight">
                     Find what matters before it&apos;s mainstream. Figure it out. Bring others along.
                   </p>
-                  <div aria-hidden className="mt-6 h-px w-12 bg-terracotta" />
+                  <div aria-hidden className="mt-6 h-px w-12 bg-rosegold" />
                 </div>
               </div>
             </div>
@@ -112,7 +119,7 @@ export default function About({ site }: { site: Site }) {
             <ul className="space-y-5">
               {site.manifesto.map((line, i) => (
                 <li key={i} className="flex gap-4 items-start">
-                  <span className="label text-terracotta mt-1 tabular-nums">
+                  <span className="label text-rosegold mt-1 tabular-nums">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span className="text-stone-600 text-sm leading-relaxed">

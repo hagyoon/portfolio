@@ -9,10 +9,8 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import { ParallaxInner } from "@/components/motion/Parallax";
 import SafeImage from "@/components/ui/SafeImage";
+import { GuillochePlate, GUILLOCHE_VARIANTS } from "@/components/graphics/Guilloche";
 import type { Project } from "@/lib/content";
-
-// Matte tints rotated across cover placeholders so the grid never reads flat
-const TINTS = ["tint-sage", "tint-ochre", "tint-mist", "tint-terracotta", "tint-lavender"];
 
 export default function Projects({ projects }: { projects: Project[] }) {
   const selected = projects.filter((p) => p.status !== "archive");
@@ -27,7 +25,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
             <div className="mt-3 label">
               Selected Work — {String(selected.length).padStart(2, "0")}
             </div>
-            <div aria-hidden className="mt-6 h-px w-16 bg-terracotta" />
+            <div aria-hidden className="mt-6 h-px w-16 bg-rosegold" />
           </Reveal>
         </div>
         <div className="col-span-12 md:col-span-9">
@@ -72,15 +70,16 @@ export default function Projects({ projects }: { projects: Project[] }) {
                           </ParallaxInner>
                         </div>
                       ) : (
-                        /* Monogram placeholder until a cover is uploaded via /admin */
+                        /* Engine-turned plate until a cover is uploaded via /admin */
                         <div
                           aria-hidden
-                          className={`absolute inset-0 grid place-items-center ${TINTS[index % TINTS.length]} transition-transform duration-1000 ease-editorial group-hover:scale-[1.03]`}
+                          className="absolute inset-0 transition-transform duration-1000 ease-editorial group-hover:scale-[1.03]"
                         >
-                          <div className="absolute inset-0 grid-lines" />
-                          <span className="relative font-serif font-light italic text-[5rem] md:text-[6.5rem] leading-none text-stone-300 select-none tracking-[-0.03em]">
-                            {String(index + 1).padStart(2, "0")}
-                          </span>
+                          <GuillochePlate
+                            variant={GUILLOCHE_VARIANTS[index % GUILLOCHE_VARIANTS.length]}
+                            numeral={String(index + 1).padStart(2, "0")}
+                            caption={project.domain}
+                          />
                         </div>
                       )}
                     </div>

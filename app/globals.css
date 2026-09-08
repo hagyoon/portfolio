@@ -42,6 +42,10 @@
   --c-clay: 158 78 42;
   --c-moss: 92 102 92;
   --c-ochre: 130 104 56;
+  /* Horology signals: Ruri porcelain dial, 18K pink gold, titanium */
+  --c-ruri: 42 62 96;
+  --c-rosegold: 168 122 100;
+  --c-titanium: 148 148 143;
   --fx-line: 22 22 21;
 }
 
@@ -74,6 +78,10 @@ html.dark {
   --c-clay: 201 198 189;
   --c-moss: 138 152 136;
   --c-ochre: 178 148 92;
+  /* Horology signals, lifted for the dark ground */
+  --c-ruri: 96 132 178;
+  --c-rosegold: 206 158 132;
+  --c-titanium: 164 164 158;
   --fx-line: 233 231 225;
 }
 
@@ -95,6 +103,9 @@ html.dark {
   --clay: rgb(var(--c-clay));
   --moss: rgb(var(--c-moss));
   --ochre: rgb(var(--c-ochre));
+  --ruri: rgb(var(--c-ruri));
+  --rosegold: rgb(var(--c-rosegold));
+  --titanium: rgb(var(--c-titanium));
   --stone-300: rgb(var(--c-stone-300));
   --stone-500: rgb(var(--c-stone-500));
   --stone-700: rgb(var(--c-stone-700));

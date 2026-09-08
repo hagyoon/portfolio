@@ -37,7 +37,7 @@ export default function Marquee({ words }: { words: string[] }) {
                 className="font-serif font-light text-3xl md:text-5xl tracking-[-0.02em] text-stone-400 mx-5 md:mx-8"
               >
                 {w}
-                <span className="text-terracotta ml-10 md:ml-16 italic">·</span>
+                <span className="text-rosegold ml-10 md:ml-16 italic">·</span>
               </span>
             ))}
           </div>

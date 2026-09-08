@@ -12,7 +12,7 @@ import Reveal from "@/components/Reveal";
 import SafeImage from "@/components/ui/SafeImage";
 import type { GalleryImage } from "@/lib/content";
 
-export default function Gallery({ images }: { images: GalleryImage[] }) {
+export default function Gallery({ images, index = "04" }: { images: GalleryImage[]; index?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const progress = useSpring(scrollYProgress, { stiffness: 90, damping: 26 });
@@ -25,9 +25,9 @@ export default function Gallery({ images }: { images: GalleryImage[] }) {
     <section id="gallery" className="pt-40 md:pt-56">
       <div className="container-edge mb-12 md:mb-16">
         <Reveal>
-          <div className="index-num">04</div>
+          <div className="index-num">{index}</div>
           <div className="mt-3 label">Atmosphere</div>
-          <div aria-hidden className="mt-6 h-px w-16 bg-terracotta" />
+          <div aria-hidden className="mt-6 h-px w-16 bg-rosegold" />
         </Reveal>
       </div>
 

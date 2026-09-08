@@ -20,7 +20,7 @@ export default function Explorations({ interests }: { interests: Interest[] }) {
             <Reveal>
               <div className="index-num">03</div>
               <div className="mt-3 label">Currently Exploring</div>
-              <div aria-hidden className="mt-6 h-px w-16 bg-terracotta" />
+              <div aria-hidden className="mt-6 h-px w-16 bg-rosegold" />
             </Reveal>
           </div>
           <div className="col-span-12 md:col-span-9">
@@ -46,7 +46,7 @@ export default function Explorations({ interests }: { interests: Interest[] }) {
                   </span>
                   <span
                     aria-hidden
-                    className="h-2 w-2 bg-terracotta transition-transform duration-500 ease-editorial group-hover:scale-[1.8]"
+                    className="h-2 w-2 bg-rosegold transition-transform duration-500 ease-editorial group-hover:scale-[1.8]"
                   />
                 </div>
                 <h3 className="font-serif font-normal text-2xl tracking-[-0.015em] leading-[1.1] mb-3">

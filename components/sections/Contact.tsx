@@ -9,16 +9,16 @@ import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
 import type { Site } from "@/lib/content";
 
-export default function Contact({ site }: { site: Site }) {
+export default function Contact({ site, index = "06" }: { site: Site; index?: string }) {
   return (
     <section id="contact" className="pt-40 md:pt-56">
       <div className="band-deep py-28 md:py-40">
         <div className="container-edge">
           <div className="max-w-3xl">
             <Reveal>
-              <div className="index-num">06</div>
+              <div className="index-num">{index}</div>
               <div className="mt-3 label">Get in touch</div>
-              <div aria-hidden className="mt-6 h-px w-16 bg-terracotta" />
+              <div aria-hidden className="mt-6 h-px w-16 bg-rosegold" />
             </Reveal>
             <Reveal delay={0.08}>
               <h2 className="display-2 mt-10">

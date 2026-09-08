@@ -49,9 +49,11 @@ export default async function HomePage() {
       <About site={site} />
       <Projects projects={projects} />
       <Explorations interests={interests} />
-      <Gallery images={site.gallery} />
-      <Writing essays={essays} />
-      <Contact site={site} />
+      <Gallery images={site.gallery} index="04" />
+      {/* Gallery only renders once images exist, so the dial numerals close
+          up behind it rather than leaving a gap in the sequence. */}
+      <Writing essays={essays} index={site.gallery.length ? "05" : "04"} />
+      <Contact site={site} index={site.gallery.length ? "06" : "05"} />
     </>
   );
 }
