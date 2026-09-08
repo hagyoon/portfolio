@@ -82,7 +82,7 @@ export default function Hero({ site }: { site: Site }) {
               <div className="lg:col-span-9">
                 <motion.div {...fade(0.1)} className="flex items-center gap-4 mb-10 md:mb-14">
                   <span aria-hidden className="h-1.5 w-1.5 bg-terracotta" />
-                  <span className="label">An independent practice — {site.location}</span>
+                  <span className="label">A creative practice, AI as the canvas — {site.location}</span>
                 </motion.div>
 
                 <motion.h1 {...fade(0.3)} className="display-hero max-w-[14ch]">
