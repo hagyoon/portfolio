@@ -1,26 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-OBSIDIAN_REPO="https://github.com/hagyoon/obsidian-secondbrain.git"
-OBSIDIAN_CONTENT_PATH="Portfolio/content"
+VAULT_CONTENT_PATH="/home/workspace/obsidian_llmwiki/vault/Portfolio/content"
 PORTFOLIO_DIR="/home/workspace/Projects/portfolio"
-SYNC_CACHE="/tmp/obsidian-sync-cache"
 
 echo "[sync] Starting Obsidian → portfolio sync at $(date)"
 
-# Pull latest vault (read-only — never pushes back to the vault repo)
-if [ -d "$SYNC_CACHE/.git" ]; then
-  echo "[sync] Updating cached vault..."
-  git -C "$SYNC_CACHE" pull --quiet
-else
-  echo "[sync] Cloning vault (first run)..."
-  git clone --depth=1 "$OBSIDIAN_REPO" "$SYNC_CACHE" --quiet
-fi
-
-# Check if Portfolio/content exists in the vault
-if [ ! -d "$SYNC_CACHE/$OBSIDIAN_CONTENT_PATH" ]; then
-  echo "[sync] No '$OBSIDIAN_CONTENT_PATH' folder found in obsidian-secondbrain."
-  echo "[sync] Create it in Obsidian and it will sync on the next run."
+# The vault folder is kept up to date by an rsync push from the Mac
+# (over the existing ssh-openclaw-agent service), not by a git pull.
+# See README.md "How content flows" for the Mac-side setup.
+if [ ! -d "$VAULT_CONTENT_PATH" ]; then
+  echo "[sync] No '$VAULT_CONTENT_PATH' folder found."
+  echo "[sync] Make sure the Mac-side rsync has run at least once."
   exit 0
 fi
 
@@ -29,7 +20,7 @@ fi
 # Zo, and the vault's copy is stale — syncing it would clobber live copy
 # changes. Edit hero/tagline copy via /admin or directly in this repo.
 rsync -av --delete --exclude="site.md" \
-  "$SYNC_CACHE/$OBSIDIAN_CONTENT_PATH/" \
+  "$VAULT_CONTENT_PATH/" \
   "$PORTFOLIO_DIR/content/"
 
 # Commit locally so history reflects what's live — never pushed to GitHub

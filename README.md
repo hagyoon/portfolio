@@ -4,29 +4,31 @@ A personal portfolio site built as an editorial object: minimal, architectural, 
 
 ## How content flows
 
-The site runs as a live Node service on Zo (`https://portfolio-hagyoon.zocomputer.io`), not on Vercel. There is no GitHub push in this pipeline — Zo only ever *pulls*.
+The site runs as a live Node service on Zo (`https://portfolio-hagyoon.zocomputer.io`), not on Vercel. GitHub is no longer part of this pipeline at all — the vault reaches Zo directly.
 
 ```
-A. Add clippings / write in Obsidian, as usual
-   Obsidian Git plugin commits + pushes to github.com/hagyoon/obsidian-secondbrain
+A. Add clippings / write in Obsidian, as usual, on the Mac
+
+B. A local rsync job on the Mac pushes the vault over SSH
+   (the existing ssh-openclaw-agent service, ts6.zocomputer.io:10052)
+   into /home/workspace/obsidian_llmwiki/vault/ on Zo
         │
         ▼
    A Zo automation runs scripts/sync-obsidian.sh on a schedule:
-     - git pull (read-only) the vault repo
-     - rsync Portfolio/content/ → content/ in this checkout
+     - rsync vault/Portfolio/content/ → content/ in this checkout
      - commit locally (never pushed to GitHub)
         │
         ▼
    If content changed, the automation restarts the live Zo service
    → change is visible on the site within a minute or two
 
-B. Edit in the browser at /admin (login required)
+C. Edit in the browser at /admin (login required)
    Saves write straight to this checkout's content/ (local filesystem —
    no GITHUB_TOKEN is set, so the GitHub-API write path is inactive).
    Media uploads land in public/uploads/.
 ```
 
-**Source of truth for synced content:** the `Portfolio/content/` folder inside the [obsidian-secondbrain](https://github.com/hagyoon/obsidian-secondbrain) repo. Direct edits to this repo's `content/` folder will be overwritten by the next sync — edit in Obsidian, or at `/admin` if you want the change to stick outside the sync cycle.
+**Source of truth for synced content:** `/home/workspace/obsidian_llmwiki/vault/Portfolio/content/` — a mirror of the local Obsidian vault, kept current by a Mac-side rsync push (see that folder's own notes). Direct edits to this repo's `content/` folder will be overwritten by the next sync — edit in Obsidian, or at `/admin` if you want the change to stick outside the sync cycle.
 
 To run a sync manually, ask Zo to run `scripts/sync-obsidian.sh`.
 
