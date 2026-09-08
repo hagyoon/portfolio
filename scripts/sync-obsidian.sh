@@ -8,7 +8,7 @@ SYNC_CACHE="/tmp/obsidian-sync-cache"
 
 echo "[sync] Starting Obsidian → portfolio sync at $(date)"
 
-# Pull latest obsidian vault
+# Pull latest vault (read-only — never pushes back to the vault repo)
 if [ -d "$SYNC_CACHE/.git" ]; then
   echo "[sync] Updating cached vault..."
   git -C "$SYNC_CACHE" pull --quiet
@@ -24,22 +24,24 @@ if [ ! -d "$SYNC_CACHE/$OBSIDIAN_CONTENT_PATH" ]; then
   exit 0
 fi
 
-# Sync content
-rsync -av --delete \
+# Mirror content into the live portfolio checkout.
+# site.md is excluded: it holds hand-tuned hero/nav copy edited directly on
+# Zo, and the vault's copy is stale — syncing it would clobber live copy
+# changes. Edit hero/tagline copy via /admin or directly in this repo.
+rsync -av --delete --exclude="site.md" \
   "$SYNC_CACHE/$OBSIDIAN_CONTENT_PATH/" \
   "$PORTFOLIO_DIR/content/"
 
-# Commit and push if anything changed
+# Commit locally so history reflects what's live — never pushed to GitHub
 cd "$PORTFOLIO_DIR"
 git add content/
 
 if git diff --staged --quiet; then
-  echo "[sync] No changes — portfolio is already up to date."
+  echo "[sync] No changes — portfolio content is already up to date."
   exit 0
 fi
 
 git -c user.name="Obsidian Sync" -c user.email="sync@hakyun.com" \
-  commit -m "sync: update content from Obsidian vault"
+  commit -m "sync: update content from Obsidian vault" --quiet
 
-git push origin main
-echo "[sync] Done — portfolio updated and pushed."
+echo "[sync] CONTENT_CHANGED — new content synced from vault, restart the live service to publish it."

@@ -4,33 +4,31 @@ A personal portfolio site built as an editorial object: minimal, architectural, 
 
 ## How content flows
 
-Two edit surfaces, one source of truth:
+The site runs as a live Node service on Zo (`https://portfolio-hagyoon.zocomputer.io`), not on Vercel. There is no GitHub push in this pipeline — Zo only ever *pulls*.
 
 ```
-A. Edit in Obsidian (Portfolio/content/)
-   Obsidian Git commits ~2 min after you stop typing, pushes to main
+A. Add clippings / write in Obsidian, as usual
+   Obsidian Git plugin commits + pushes to github.com/hagyoon/obsidian-secondbrain
         │
         ▼
-   notify-portfolio.yml (vault repo) fires a repository_dispatch
+   A Zo automation runs scripts/sync-obsidian.sh on a schedule:
+     - git pull (read-only) the vault repo
+     - rsync Portfolio/content/ → content/ in this checkout
+     - commit locally (never pushed to GitHub)
         │
         ▼
-   sync-from-obsidian.yml (this repo) mirrors Portfolio/content/ → content/
-        │
-        ▼
-   Commit & push → Vercel deploys           (hourly poll remains as fallback)
+   If content changed, the automation restarts the live Zo service
+   → change is visible on the site within a minute or two
 
 B. Edit in the browser at /admin (login required)
-   Every save commits via the GitHub API to BOTH repos at once:
-     1. vault  Portfolio/content/…   ← source of truth, flows back into Obsidian
-     2. this repo  content/…         ← triggers an immediate Vercel deploy
-   Media uploads commit to public/uploads/ in this repo only.
+   Saves write straight to this checkout's content/ (local filesystem —
+   no GITHUB_TOKEN is set, so the GitHub-API write path is inactive).
+   Media uploads land in public/uploads/.
 ```
 
-**Source of truth:** the `Portfolio/content/` folder inside the [obsidian-secondbrain](https://github.com/hagyoon/obsidian-secondbrain) repo.
+**Source of truth for synced content:** the `Portfolio/content/` folder inside the [obsidian-secondbrain](https://github.com/hagyoon/obsidian-secondbrain) repo. Direct edits to this repo's `content/` folder will be overwritten by the next sync — edit in Obsidian, or at `/admin` if you want the change to stick outside the sync cycle.
 
-**Direct edits to this repo's `content/` folder will be overwritten** on the next sync cycle. Edit in Obsidian or at `/admin`.
-
-To trigger a sync manually, go to the [Actions tab](https://github.com/hagyoon/portfolio/actions) and run the *Sync from Obsidian* workflow.
+To run a sync manually, ask Zo to run `scripts/sync-obsidian.sh`.
 
 ## The admin studio (/admin)
 
@@ -143,19 +141,14 @@ Edit any markdown file in `content/` and the page refreshes automatically.
 
 ## Building & deploying
 
+**Currently live on Zo**, not Vercel — a supervised Node process (`next start`) running directly on the Zo server, edited in place at `/home/workspace/Projects/portfolio`. Content and code changes take effect after a service restart, no build/deploy step needed from the outside.
+
 ```bash
 npm run build    # production build — fully static
 npm run start    # serve the built site
 ```
 
-Designed to deploy on Vercel:
-
-1. Push this folder to a Git repo.
-2. Import the repo on [vercel.com/new](https://vercel.com/new).
-3. Accept defaults — Vercel detects Next.js 15 automatically.
-4. Every push to `main` redeploys. Every markdown edit is a deploy.
-
-Custom domain — add it in the Vercel project settings under **Domains**.
+The project can still be deployed on Vercel if ever needed (push to a Git repo, import on [vercel.com/new](https://vercel.com/new), accept the Next.js defaults) — but that path is not currently wired up, on purpose.
 
 ---
 
