@@ -1,13 +1,12 @@
 "use client";
 
 /*
- * Hero — statement-led, no name. A quiet monospaced eyebrow, a large light
- * Garamond thesis about the practice, and a single ghost word cropped by
- * the bottom edge of the viewport. The whole block eases and fades as the
- * visitor scrolls (desktop only; on small screens it flows normally).
+ * Hero — statement-led, no name. A quiet monospaced eyebrow and a large
+ * light Garamond thesis. The whole block eases and fades as the visitor
+ * scrolls (desktop only; on small screens it flows normally).
  *
  * Copy lives here rather than site.md so the hero can be composed line by
- * line. Edit STATEMENT / GHOST / SPECS below.
+ * line. Edit STATEMENT / SPECS below.
  */
 
 import { useRef } from "react";
@@ -20,9 +19,6 @@ const STATEMENT = {
   b: "attention",
   c: "long after the novelty fades.",
 };
-
-// One ghost word, cropped at the fold. Change freely; it's decorative.
-const GHOST = "practice";
 
 // Monospaced spec rail — the hero's only supporting type
 const SPECS = [
@@ -48,8 +44,6 @@ export default function Hero({ site }: { site: Site }) {
   const scale = useTransform(progress, [0, 1], [1, 0.96]);
   const opacity = useTransform(progress, [0, 0.75], [1, 0]);
   const lift = useTransform(progress, [0, 1], ["0%", "-6%"]);
-  const ghostY = useTransform(progress, [0, 1], ["0%", "18%"]);
-  const ghostX = useTransform(progress, [0, 1], ["0%", "-4%"]);
 
   return (
     <div ref={ref} className="relative lg:h-[150svh]">
@@ -62,15 +56,6 @@ export default function Hero({ site }: { site: Site }) {
 
         {/* Exposed structural grid — four bays, hairline rules */}
         <div aria-hidden className="pointer-events-none absolute inset-0 grid-lines" />
-
-        {/* Ghost word — enormous, outlined, cut off by the fold */}
-        <motion.div
-          aria-hidden
-          style={{ y: ghostY, x: ghostX }}
-          className="pointer-events-none absolute -bottom-[0.18em] left-[-0.04em] select-none ghost-type"
-        >
-          {GHOST}
-        </motion.div>
 
         <motion.div
           style={{ scale, opacity, y: lift }}
