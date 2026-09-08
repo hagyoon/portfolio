@@ -1,13 +1,8 @@
 ---
 title: The LLM Wiki Pattern
-date: 2026-04-23T00:00:00.000Z
+date: 2026-04-23
 tag: AI
-excerpt: >-
-  Most LLM-document systems are RAG. Retrieve, regenerate, repeat. The wiki
-  pattern is different. The LLM maintains a persistent artefact, and knowledge
-  actually compounds.
-status: archived
-updated: '2026-08-15T08:41:29.014Z'
+excerpt: Most LLM-document systems are RAG. Retrieve, regenerate, repeat. The wiki pattern is different. The LLM maintains a persistent artefact, and knowledge actually compounds.
 ---
 
 The standard architecture for an LLM-over-documents system is retrieval-augmented generation. You drop sources into a vector store. At query time, the model retrieves chunks, regenerates an answer from scratch, and you read the output. Nothing accumulates between sessions. Every question pays the full cost of reading and synthesis again. The system has no memory of what it has already figured out.

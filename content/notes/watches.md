@@ -14,10 +14,6 @@ updated: '2026-06-11T18:32:08.955Z'
 
 ---
 
-## Current Collection
-
----
-
 ## Preferences
 
 **Independent brand focus:** Values design intent, limited production, and the maker's direct philosophy over corporate horological production.
@@ -31,9 +27,11 @@ updated: '2026-06-11T18:32:08.955Z'
 ## Grail / Aspirational List
 
 ### Ultra-High-End Independents
-| Brand/Model                     |                                    |
+| Brand/Model                     | Notes                                   |
 | ------------------------------- | --------------------------------------- |
-         
+| **Berneron**                    | Current grail                           |
+| **FP Journe**                   | Multiple references of interest         |
+| **De Bethune**                  | Avant-garde microtechnology             |
 | **Rexhep Rexhepi (Akrivia)**    | Geneva independent, masterful finishing |
 | **Naoya Hida**                  | Japanese independent                    |
 | **Hajime Asaoka**               | Tokyo-based master                      |
@@ -41,9 +39,15 @@ updated: '2026-06-11T18:32:08.955Z'
 | **Laurent Ferrier**             | Geneva, classical elegance              |
 | **Romain Gauthier Logical One** | Under consideration                     |
 
+### High-End Swiss
+| Brand/Model             | Notes                                   |
+| ----------------------- | --------------------------------------- |
+| **A. Lange & Söhne**    | more refs of interest                   |
+| **Patek Philippe**      | Multiple references                     |
+| **Vacheron Constantin** | Particularly interested in independents |
 
 ### Independents (Next Tier)
-| Brand/Model | |
+| Brand/Model | Notes |
 |-------------|-------|
 | **Ming** | Malaysian-based independent, cult following |
 | **Kudoke** | German independent |
@@ -55,6 +59,12 @@ updated: '2026-06-11T18:32:08.955Z'
 ## Strap Philosophy
 
 **Core principle:** Strap pairing is as important as the watch itself. Aesthetics must be considered as a system.
+
+**Materials:**
+- **Alligator** — formal, structured
+- **Chevre (goatskin)** — fine, elegant texture
+- **Rubber** — sport / tropical
+- **Sailcloth** — casual sport, nautical aesthetic
 
 **Singapore climate consideration:** High heat and humidity makes rubber viability important. Leather straps degrade faster in tropical conditions.
 
@@ -79,11 +89,28 @@ updated: '2026-06-11T18:32:08.955Z'
 
 **Microbrands:** Baltic, Folio, Farer, Furlan Marri, Yema, Christopher Ward, Timex, Seiko, Casio
 
+### Technical Stack
+- Fraunces + Geist fonts
+- Warm off-white palette
+- Vanilla HTML/CSS/JS, single `index.html`
+- Deployed on Vercel
+- Supabase backend (planned for user sessions + data)
+
+### Build Priorities
+1. Onboarding flow
+2. Real product images
+3. Expanded catalogue (100+ watches)
+4. User session persistence
+5. Backend integration (Supabase)
+6. Dealer dashboard (B2B analytics layer)
+
+---
+
 ## Market Context
 
 The watch secondary market has grown significantly. Platforms like Chrono24, Bob's Watches, and WatchCharts dominate.
 
-**CurrentGap in market:**
+**Gap in market:**
 - Discovery (not search) — most people don't always know what they want. Most spend lots of time and money before they actually arrive at the choices they love in their collecting journey.
 - Taste profiling — no platform learns your aesthetic
 - Dealer intelligence — no aggregated preference data sold B2B

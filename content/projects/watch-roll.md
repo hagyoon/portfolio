@@ -2,19 +2,15 @@
 title: Watch-Roll
 client: Independent
 domain: Product · Mobile · B2B
-year: '2026'
-status: archive
+year: "2026"
+status: selected
 role: Founder & Designer
-summary: >-
-  Swipe-based watch discovery with taste profiling and B2B dealer intelligence.
-  Tinder mechanics applied to horological connoisseurship. The market learns
-  your aesthetic, not the other way around.
+summary: Swipe-based watch discovery with taste profiling and B2B dealer intelligence. Tinder mechanics applied to horological connoisseurship. The market learns your aesthetic, not the other way around.
 stack:
   - React
   - Supabase
   - TypeScript
   - Vercel
-updated: '2026-08-15T08:41:00.928Z'
 ---
 
 ## Premise
