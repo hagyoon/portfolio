@@ -12,6 +12,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Guilloche from "@/components/graphics/Guilloche";
+import Terminal from "@/components/motion/Terminal";
 import type { Site } from "@/lib/content";
 
 // The thesis — three lines, the middle one in italic
@@ -21,11 +22,12 @@ const STATEMENT = {
   c: "long after the novelty fades.",
 };
 
-// Monospaced spec rail — the hero's only supporting type
-const SPECS = [
-  { k: "Field", v: "Agents · Markets · Horology" },
-  { k: "Mode", v: "Independent" },
-  { k: "Est.", v: "2026" },
+// Console — the hero's only supporting type. Prints the practice's specs,
+// then leaves the studio entrance open on the last line.
+const CONSOLE = [
+  { cmd: "cat ~/field", out: "Agents · Markets · Horology" },
+  { cmd: "stat practice", out: "Independent · est. 2026" },
+  { cmd: "studio --unlock", out: "Sign in to the studio", href: "/admin" },
 ];
 
 const fade = (delay: number) => ({
@@ -74,7 +76,7 @@ export default function Hero({ site }: { site: Site }) {
           <div className="container-edge w-full">
             <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-end">
               {/* Statement */}
-              <div className="lg:col-span-9">
+              <div className="lg:col-span-8">
                 <motion.div {...fade(0.1)} className="flex items-center gap-4 mb-10 md:mb-14">
                   <span aria-hidden className="h-1.5 w-1.5 bg-rosegold" />
                   <span className="label">A creative practice, AI as the canvas — {site.location}</span>
@@ -106,18 +108,10 @@ export default function Hero({ site }: { site: Site }) {
                 </motion.div>
               </div>
 
-              {/* Spec rail — monospaced key/value pairs on a hairline grid */}
-              <motion.dl
-                {...fade(0.85)}
-                className="hidden lg:grid lg:col-span-3 grid-cols-1 gap-px bg-ink/12 border border-ink/12"
-              >
-                {SPECS.map((s) => (
-                  <div key={s.k} className="bg-paper/80 backdrop-blur-sm px-5 py-5">
-                    <dt className="label">{s.k}</dt>
-                    <dd className="mt-2 font-mono text-[13px] text-ink">{s.v}</dd>
-                  </div>
-                ))}
-              </motion.dl>
+              {/* Console — frameless, printed onto the ground, ending at the studio */}
+              <motion.div {...fade(0.85)} className="hidden lg:block lg:col-span-4">
+                <Terminal host="studio — hkryu.space" lines={CONSOLE} />
+              </motion.div>
             </div>
           </div>
         </motion.div>

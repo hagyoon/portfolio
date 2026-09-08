@@ -75,8 +75,15 @@ export default function Footer({ site }: { site: Site }) {
           </div>
         </div>
 
-        <div className="relative z-10 container-edge border-t border-ink/15 py-6 label">
+        <div className="relative z-10 container-edge border-t border-ink/15 py-6 label flex items-center justify-between gap-6">
           <div>© {year} hkryu.space. All rights reserved.</div>
+          {/* Studio entrance — quiet counterpart to the hero console, for small screens */}
+          <a
+            href="/admin"
+            className="text-stone-300 transition-colors duration-300 hover:text-rosegold focus-visible:text-rosegold"
+          >
+            <span aria-hidden className="text-rosegold/50">›&nbsp;</span>Studio
+          </a>
         </div>
       </footer>
     </>

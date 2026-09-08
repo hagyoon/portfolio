@@ -1,10 +1,10 @@
 "use client";
 
 /*
- * Terminal — a typed console panel. Commands type out character by
- * character, output prints beneath, and a block cursor blinks at the
- * prompt. Restyled for the concrete ground: hard frame, mono chrome,
- * oxide prompt glyphs.
+ * Terminal — a typed console printed directly onto the ground. No frame,
+ * no chrome, no panel: a hairline rule, a caption, and mono lines that
+ * type themselves in. Sits at the bottom of the hero's open field and
+ * carries the studio entrance as its last line.
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -12,9 +12,9 @@ import { prefersReducedMotion } from "@/components/Preferences";
 
 type Line = { cmd: string; out: string; href?: string };
 
-const TYPE_MS = 38;
-const PAUSE_AFTER_CMD = 260;
-const PAUSE_AFTER_OUT = 420;
+const TYPE_MS = 42;
+const PAUSE_AFTER_CMD = 300;
+const PAUSE_AFTER_OUT = 460;
 
 export default function Terminal({
   host,
@@ -41,7 +41,7 @@ export default function Terminal({
         new Promise<void>((r) => {
           timer.current = setTimeout(r, ms);
         });
-      await wait(900); // let the hero entrance land first
+      await wait(1400); // let the hero entrance land first
       for (const line of lines) {
         for (let i = 1; i <= line.cmd.length; i++) {
           if (cancelled) return;
@@ -65,28 +65,28 @@ export default function Terminal({
   const finished = done.length === lines.length;
 
   return (
-    <div className={`border border-ink/20 bg-abyss/70 backdrop-blur-md ${className ?? ""}`}>
-      {/* Title bar */}
-      <div className="flex items-center justify-between border-b border-ink/15 px-4 py-2.5">
-        <span className="font-mono text-[11px] tracking-wide text-stone-400">{host}</span>
-        <span aria-hidden className="flex items-center gap-1.5">
-          <span className="w-2 h-2 bg-stone-300/50" />
-          <span className="w-2 h-2 bg-stone-300/35" />
-          <span className="w-2 h-2 bg-terracotta/70" />
+    <div className={className}>
+      {/* Caption + hairline — the only structure */}
+      <div className="flex items-baseline justify-between gap-4 pb-2.5">
+        <span className="label">{host}</span>
+        <span aria-hidden className="label text-stone-300">
+          {finished ? "idle" : "•••"}
         </span>
       </div>
-      {/* Body */}
-      <div className="px-4 py-4 font-mono text-[13px] leading-relaxed">
+      <div className="h-px bg-ink/12" />
+
+      <div className="pt-4 font-mono text-[12px] leading-[1.75]">
         {done.map((line, i) => (
-          <div key={i}>
-            <div>
-              <span className="text-terracotta">$ </span>
-              <span className="text-ink">{line.cmd}</span>
+          <div key={i} className="mb-2.5 last:mb-0">
+            <div className="text-stone-300">
+              <span className="text-rosegold/50">›&nbsp;</span>
+              {line.cmd}
             </div>
             {line.href ? (
               <a
                 href={line.href}
-                className="group inline-flex items-center gap-1.5 text-terracotta link-inline mb-2"
+                className="group mt-0.5 inline-flex items-center gap-1.5 text-stone-500 underline-grow
+                           transition-colors duration-300 hover:text-rosegold focus-visible:text-rosegold"
               >
                 {line.out}
                 <span
@@ -97,17 +97,17 @@ export default function Terminal({
                 </span>
               </a>
             ) : (
-              <div className="text-stone-500 mb-2">{line.out}</div>
+              <div className="mt-0.5 text-stone-500">{line.out}</div>
             )}
           </div>
         ))}
-        <div>
-          <span className="text-terracotta">$ </span>
-          {typing !== null && <span className="text-ink">{typing}</span>}
+        <div className="text-stone-300">
+          <span className="text-rosegold/50">›&nbsp;</span>
+          {typing !== null && <span>{typing}</span>}
           {(typing !== null || finished) && (
             <span
               aria-hidden
-              className="cursor-blink inline-block align-middle ml-px w-[0.5em] h-[1.05em] bg-ink/70"
+              className="cursor-blink ml-px inline-block h-[1em] w-px align-middle bg-stone-400"
             />
           )}
         </div>
