@@ -40,7 +40,10 @@ export function ThemeToggle() {
   const [dark, setDark] = useState<boolean | null>(null);
 
   useEffect(() => {
-    setDark(document.documentElement.classList.contains("dark"));
+    const update = () => setDark(document.documentElement.classList.contains("dark"));
+    update();
+    window.addEventListener(THEME_EVENT, update);
+    return () => window.removeEventListener(THEME_EVENT, update);
   }, []);
 
   const toggle = useCallback(() => {
@@ -71,7 +74,10 @@ export function MotionToggle() {
   const [reduced, setReduced] = useState<boolean | null>(null);
 
   useEffect(() => {
-    setReduced(document.documentElement.classList.contains("reduce-motion"));
+    const update = () => setReduced(document.documentElement.classList.contains("reduce-motion"));
+    update();
+    window.addEventListener(MOTION_EVENT, update);
+    return () => window.removeEventListener(MOTION_EVENT, update);
   }, []);
 
   const toggle = useCallback(() => {

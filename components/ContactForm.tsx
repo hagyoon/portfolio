@@ -87,13 +87,14 @@ export default function ContactForm({
     return Object.keys(next).length === 0;
   }
 
-  function copy(text: string) {
+  async function copy(text: string) {
     try {
-      navigator.clipboard?.writeText(text);
+      if (!navigator.clipboard) return;
+      await navigator.clipboard.writeText(text);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      /* clipboard blocked — the readonly box below is the fallback */
+      setCopied(false);
     }
   }
 
@@ -113,12 +114,13 @@ export default function ContactForm({
       <div role="status" className="border border-ink/15 bg-ivory p-8 text-left">
         <p className="font-serif text-2xl mb-2">Appreciate you reaching out!</p>
         <p className="text-stone-600">
-          Telegram should have opened with my chat. Your message is copied —
-          just <strong>paste</strong> it there and hit send.
+          Open my Telegram chat, copy the prepared message below, then
+          <strong> paste and send</strong> it when you’re ready.
         </p>
 
         {/* The composed message, ready to copy if the auto-copy was blocked */}
         <textarea
+          aria-label="Prepared message"
           readOnly
           value={composed}
           rows={6}

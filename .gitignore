@@ -1,5 +1,7 @@
 node_modules
 .next
+.next-redesign
+.next-preview
 out
 .env*.local
 .DS_Store

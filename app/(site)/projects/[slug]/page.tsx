@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Reveal from "@/components/Reveal";
 import SafeImage from "@/components/ui/SafeImage";
+import ProjectArt from "@/components/graphics/ProjectArt";
 import ImageCarousel from "@/components/motion/ImageCarousel";
 import { getProject, getProjects } from "@/lib/content";
 
@@ -127,13 +128,17 @@ export default async function ProjectPage({
         </div>
       </header>
 
-      {project.cover && (
+      {project.cover ? (
         <div className="container-edge mb-24 md:mb-32">
           <Reveal>
             <div className="relative w-full aspect-[16/9] bg-stone-100">
               <SafeImage src={project.cover} alt={project.title} sizes="100vw" />
             </div>
           </Reveal>
+        </div>
+      ) : (
+        <div className="container-edge mb-20">
+          <div className="case-study-art"><ProjectArt slug={project.slug} /></div>
         </div>
       )}
 

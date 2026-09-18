@@ -4,7 +4,6 @@
 
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import SmoothScroll from "@/components/SmoothScroll";
 import { getSite } from "@/lib/content";
 
 export default async function SiteLayout({
@@ -14,11 +13,10 @@ export default async function SiteLayout({
 }) {
   const site = await getSite();
   return (
-    <div className="grain">
+    <div className="portfolio-shell">
       <a href="#main" className="skip-link">
         Skip to content
       </a>
-      <SmoothScroll />
       <Nav />
       <main id="main">{children}</main>
       <Footer site={site} />

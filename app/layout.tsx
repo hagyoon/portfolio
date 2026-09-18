@@ -7,6 +7,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, EB_Garamond, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import "./redesign.css";
 import { getSite } from "@/lib/content";
 
 const SITE_URL = "https://hkryu.space";
@@ -57,7 +58,7 @@ const mono = JetBrains_Mono({
 // plaster theme applies only when the visitor picks it from the toggle.
 const bootstrap = `(function(){try{
 var t=localStorage.getItem('theme');
-if(t!=='light')document.documentElement.classList.add('dark');
+if(t==='dark')document.documentElement.classList.add('dark');
 if(localStorage.getItem('motion')==='reduced')document.documentElement.classList.add('reduce-motion');
 }catch(e){}})()`;
 

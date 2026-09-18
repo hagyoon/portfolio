@@ -10,13 +10,12 @@
  */
 
 import Hero from "@/components/sections/Hero";
-import Marquee from "@/components/sections/Marquee";
 import About from "@/components/sections/About";
 import Projects from "@/components/sections/Projects";
 import Explorations from "@/components/sections/Explorations";
 import Gallery from "@/components/sections/Gallery";
 import Writing from "@/components/sections/Writing";
-import Contact from "@/components/sections/Contact";
+import SystemPlayground from "@/components/sections/SystemPlayground";
 import { getSite, getProjects, getInterests, getEssays } from "@/lib/content";
 
 export default async function HomePage() {
@@ -45,15 +44,14 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Hero site={site} />
-      <Marquee words={site.marquee} />
-      <About site={site} />
       <Projects projects={projects} />
+      <SystemPlayground />
+      <About site={site} />
       <Explorations interests={interests} />
       <Gallery images={site.gallery} index="04" />
       {/* Gallery only renders once images exist, so the dial numerals close
           up behind it rather than leaving a gap in the sequence. */}
       <Writing essays={essays} index={site.gallery.length ? "05" : "04"} />
-      <Contact site={site} index={site.gallery.length ? "06" : "05"} />
     </>
   );
 }

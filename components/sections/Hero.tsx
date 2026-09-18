@@ -1,150 +1,48 @@
 "use client";
 
-/*
- * Hero — statement-led, no name. A quiet monospaced eyebrow and a large
- * light Garamond thesis. The whole block eases and fades as the visitor
- * scrolls (desktop only; on small screens it flows normally).
- *
- * Copy lives here rather than site.md so the hero can be composed line by
- * line. Edit STATEMENT / SPECS below.
- */
-
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import Guilloche from "@/components/graphics/Guilloche";
-import Terminal from "@/components/motion/Terminal";
+import { useRef, useState, type CSSProperties } from "react";
+import { useMotionPref } from "@/components/Preferences";
 import type { Site } from "@/lib/content";
 
-// The thesis — three lines, the middle one in italic
-const STATEMENT = {
-  a: "Systems that hold",
-  b: "attention",
-  c: "long after the novelty fades.",
-};
-
-// Console — the hero's only supporting type. Prints the practice's specs,
-// then leaves the studio entrance open on the last line.
-const CONSOLE = [
-  { cmd: "cat ~/field", out: "Agents · Markets · Horology" },
-  { cmd: "stat practice", out: "Independent · est. 2026" },
-  { cmd: "studio --unlock", out: "Sign in to the studio", href: "/admin" },
+const layers = [
+  { name: "Intent", detail: "Start with a question worth asking.", tint: "clay" },
+  { name: "Structure", detail: "Give the idea a system to live in.", tint: "sage" },
+  { name: "Craft", detail: "Make the details earn their place.", tint: "lilac" },
 ];
 
-const fade = (delay: number) => ({
-  initial: { opacity: 0, y: 14 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 1.2, delay, ease: [0.16, 1, 0.3, 1] as const },
-});
-
-export default function Hero({ site }: { site: Site }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  const progress = useSpring(scrollYProgress, { stiffness: 90, damping: 24 });
-
-  const scale = useTransform(progress, [0, 1], [1, 0.96]);
-  const opacity = useTransform(progress, [0, 0.75], [1, 0]);
-  const lift = useTransform(progress, [0, 1], ["0%", "-6%"]);
-
-  return (
-    <div ref={ref} className="relative lg:h-[150svh]">
-      <section className="lg:sticky top-0 min-h-[100svh] lg:h-[100svh] flex flex-col overflow-hidden">
-        {/* Tonal ground — a soft vertical wash, nothing figurative */}
-        <div
-          aria-hidden
-          className="absolute inset-0 -z-10 bg-gradient-to-b from-ivory via-paper to-paper"
-        />
-
-        {/* Exposed structural grid — four bays, hairline rules */}
-        <div aria-hidden className="pointer-events-none absolute inset-0 grid-lines" />
-
-        {/* Engine-turned ground — a dial catching light off to one side */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-[55%] -top-[60%] -z-10 h-[190svh] w-[190svh] text-stone-200 dark:text-stone-300
-                     [mask-image:radial-gradient(circle_at_30%_70%,black_0%,transparent_60%)]"
-        >
-          <Guilloche variant="soleil" opacity={0.28} className="h-full w-full" />
-        </div>
-
-        <motion.div
-          style={{ scale, opacity, y: lift }}
-          className="flex-1 flex flex-col justify-center origin-left pt-32 pb-16 lg:pt-28 lg:pb-6"
-        >
-          <div className="container-edge w-full">
-            <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-end">
-              {/* Statement */}
-              <div className="lg:col-span-8">
-                <motion.div {...fade(0.1)} className="flex items-center gap-4 mb-10 md:mb-14">
-                  <span aria-hidden className="h-1.5 w-1.5 bg-rosegold" />
-                  <span className="label">A creative practice, AI as the canvas — {site.location}</span>
-                </motion.div>
-
-                <motion.h1 {...fade(0.3)} className="display-hero max-w-[14ch]">
-                  <span className="block">{STATEMENT.a}</span>
-                  <span className="block">
-                    <em className="editorial-italic">{STATEMENT.b}</em>
-                  </span>
-                  <span className="block">{STATEMENT.c}</span>
-                </motion.h1>
-
-                <motion.p
-                  {...fade(0.55)}
-                  className="mt-10 md:mt-14 text-base md:text-lg leading-[1.65] text-stone-500 max-w-[44ch]"
-                >
-                  Agents, markets and mechanical watches — built, studied and
-                  written about from Singapore. Work that compounds quietly.
-                </motion.p>
-
-                <motion.div {...fade(0.7)} className="mt-9 flex flex-wrap gap-3">
-                  <a href="/#projects" className="btn-solid">
-                    Selected work <span aria-hidden>↓</span>
-                  </a>
-                  <a href="/#about" className="btn-outline">
-                    The practice <span aria-hidden>→</span>
-                  </a>
-                </motion.div>
-              </div>
-
-              {/* Console — frameless, printed onto the ground, ending at the studio */}
-              <motion.div {...fade(0.85)} className="hidden lg:block lg:col-span-4">
-                <Terminal host="studio — hkryu.space" lines={CONSOLE} />
-              </motion.div>
-            </div>
+export default function Hero({site}:{site:Site}) {
+  const [active,setActive]=useState(1);
+  const [spread,setSpread]=useState(55);
+  const scene=useRef<HTMLDivElement>(null);
+  const reduced=useMotionPref();
+  return <section className="new-hero">
+    <div className="container-edge hero-grid">
+      <div className="hero-copy">
+        <p className="hero-eyebrow"><span/> Independent practice · {site.location}</p>
+        <h1>Systems that<br/>hold <em>attention.</em></h1>
+        <p className="hero-subtitle">Long after the novelty fades.</p>
+        <p className="hero-description">Agents, markets, and mechanical watches.<br className="desktop-break"/> Building useful things. Studying what makes them tick.</p>
+        <div className="hero-actions"><a href="#projects" className="btn-solid">Explore the work <span aria-hidden="true">↗</span></a><a href="#about" className="text-link">Meet the builder <span aria-hidden="true">→</span></a></div>
+        <div className="hero-footnote"><span className="small-cross">+</span> Technology, with a considered point of view.</div>
+      </div>
+      <div className="hero-exhibit">
+        <div className="exhibit-topline"><span>ANATOMY OF A PRACTICE</span><span>OBJECT / 001</span></div>
+        <div ref={scene} className="sculpture-scene" style={{"--spread":spread+"px"} as CSSProperties}
+          onPointerMove={e=>{if(reduced||e.pointerType!=="mouse")return;const r=e.currentTarget.getBoundingClientRect();e.currentTarget.style.setProperty("--tilt",((e.clientX-r.left)/r.width*12-6)+"deg");}}
+          onPointerLeave={()=>scene.current?.style.setProperty("--tilt","0deg")}>
+          <div className="sculpture-shadow"/>
+          <div className="sculpture">
+            {layers.map((layer,i)=><div key={layer.name} className={`sculpture-layer layer-${i} ${active===i?"is-active":""}`} style={{"--layer":i} as CSSProperties} aria-hidden="true">
+              <span className="plate-index">0{i+1}</span><span className="plate-rings"/><span className="plate-core"/><span className="plate-line"/><span className="plate-name">{layer.name}</span>
+            </div>)}
           </div>
-        </motion.div>
-
-        {/* Meta rail */}
-        <motion.div style={{ opacity }} className="relative z-10 container-edge w-full pb-8 md:pb-10">
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 1.3, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            style={{ transformOrigin: "left" }}
-            className="h-px bg-ink/20 mb-5"
-          />
-          <motion.div {...fade(0.9)} className="flex items-center justify-between gap-6 label">
-            <span>{site.location}</span>
-            <span className="hidden md:flex gap-10">
-              <span>Builder</span>
-              <span>Collector</span>
-              <span>Systems thinker</span>
-            </span>
-            <span className="flex items-center gap-2">
-              Scroll
-              <motion.span
-                aria-hidden
-                animate={{ y: [0, 4, 0] }}
-                transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-              >
-                ↓
-              </motion.span>
-            </span>
-          </motion.div>
-        </motion.div>
-      </section>
+          <div className="sculpture-axis" aria-hidden="true"/><span className="axis-label" aria-hidden="true">A—A</span>
+        </div>
+        <div className="layer-selectors" role="group" aria-label="Inspect a layer">{layers.map((layer,i)=><button key={layer.name} type="button" aria-label={"Inspect "+layer.name} aria-pressed={active===i} onClick={()=>setActive(i)}><span className={"material-dot "+layer.tint}/>{layer.name}</button>)}</div>
+        <div className="exhibit-caption" aria-live="polite"><span className={"material-dot "+layers[active].tint}/><div><strong>{layers[active].name}</strong><span>{layers[active].detail}</span></div><span className="exhibit-index">0{active+1}/03</span></div>
+        <label className="assembly-control"><span>Assembled</span><input type="range" min="12" max="85" value={spread} onChange={e=>setSpread(Number(e.target.value))} aria-label="Separate the layers" aria-valuetext={spread<35?"Assembled":spread>65?"Exploded":"Partially separated"}/><span>Exploded</span></label>
+      </div>
     </div>
-  );
+    <div className="discipline-rail container-edge"><span className="rail-intro">A few connected obsessions</span><div>{["Agentic systems","Knowledge architecture","Financial markets","Independent horology"].map(v=><span key={v}><i/> {v}</span>)}</div><a href="#projects" aria-label="Scroll to selected work">↓</a></div>
+  </section>;
 }
