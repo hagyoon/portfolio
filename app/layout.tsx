@@ -71,6 +71,19 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s — ${BRAND}`,
     },
     description: SEO_DESCRIPTION,
+    robots: {
+      index: false,
+      follow: false,
+      nocache: true,
+      googleBot: {
+        index: false,
+        follow: false,
+        noimageindex: true,
+        "max-snippet": -1,
+        "max-image-preview": "none",
+        "max-video-preview": -1,
+      },
+    },
     alternates: { types: { "application/rss+xml": `${SITE_URL}/feed.xml` } },
     openGraph: {
       title: `${BRAND} — ${site.tagline}`,
